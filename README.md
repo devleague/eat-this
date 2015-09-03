@@ -7,6 +7,7 @@ An app that helps users decide what and where they "want" to eat in a specified 
 (as of Sept 2, 2015)
 
 Project Manager: Keahi Selhourst
+
 Team: 
   - Julia Bond
   - Sean Nakamura
