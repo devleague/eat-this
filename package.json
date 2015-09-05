@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/devleague/eat-this/issues"
   },
-  "homepage": "https://github.com/devleague/eat-this#readme"
+  "homepage": "https://github.com/devleague/eat-this#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
