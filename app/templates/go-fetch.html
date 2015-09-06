@@ -1,1 +1,10 @@
 <h2>{{ byline }}</h2>
+<div ng-show="position">
+  <h3>Latitude: </h3>
+  <p>{{ latitude }}</p>
+  <h3>Longitude: </h3>
+  <p>{{ longitude }}</p>
+</div>
+<div ng-hide="position">
+  <h2>{{ message }}</h2>
+</div>
