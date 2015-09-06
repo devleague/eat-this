@@ -2,21 +2,31 @@
 <html>
   <head>
     <title>Eat This</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
   </head>
   <body ng-app='eatApp'>
+    <div class="nav">
+      <a ui-sref="home">Home</a>
+      <a ui-sref="fetch">Fetch</a>
+      <a ui-sref="results">Results</a>
 
-    <div ng-controller='main'>
+    </div>
+
+    <div ng-controller='mainController'>
       <h1>{{ title }}</h1>
-      <p>This is the front page</p>
+      <p>This is the top page</p>
+
+      <div ui-view></div>
     </div>
 
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/values.js"></script>
 
-    <script type="text/javascript" src="/js/controllers.js"></script>
-
+    <script src="/js/controllers/mainController.js"></script>
+    <script src="/js/controllers/go-fetch.controller.js"></script>
+    <script src="/js/controllers/final-result.controller.js"></script>
   </body>
 </html>
