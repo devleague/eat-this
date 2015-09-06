@@ -1,5 +1,5 @@
 (function (){
-  var app = angular.module('eatApp', ['ui.router']);
+  var app = angular.module('eatApp', ['ui.router', 'ngResource']);
 
   app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
