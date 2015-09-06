@@ -6,7 +6,7 @@
       .otherwise('/');
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/'
       })
       .state('fetch', {
         url: '/fetch',
