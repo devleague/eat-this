@@ -1,0 +1,20 @@
+{
+  "name": "eat-this",
+  "version": "0.0.0",
+  "homepage": "https://github.com/devleague/eat-this",
+  "authors": [
+    "Sean Nakamura <seanenakamura@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "~0.2.15"
+  }
+}
