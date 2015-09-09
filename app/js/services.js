@@ -30,7 +30,7 @@
 
 function getLargeImg (obj){
   var imgUrl = obj.image_url;
-  obj.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/l.jpg");
+  obj.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/o.jpg");
   console.log(obj);
   return obj;
 }
