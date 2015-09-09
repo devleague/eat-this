@@ -10,7 +10,8 @@
         var queryOptions = {};
 
         // var Venues = $resource('/api/venues', queryOptions);
-
+        var temp = testData();
+        getLargeImg(temp);
         return testData();
 
         // return Venues.get().$promise;
@@ -25,6 +26,17 @@
 
     }]);
 })();
+
+
+function getLargeImg (obj){
+  // console.log('hellooo');
+  var imgUrl = obj.image_url;
+  var replace = imgUrl.replace(/(\/ms\.jpg$)/g, "/l.jpg");
+  obj.image_url = replace;
+  console.log(obj);
+  // (\/ms\.jpg$)
+}
+
 
 function testData (){
   return {
