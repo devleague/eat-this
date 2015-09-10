@@ -13,31 +13,32 @@ var yelp = require("yelp").createClient({
 app.use(express.static(__dirname + '/../app'));
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/locations', function (req, res) {
+app.get('/api/venues/:id', function (req, res) {
+
+  console.log(req.params.id);
+  yelp.business(req.params.id, function (error, data) {
+
+    // console.log(data);
+    res.json(data);
+  });
+
+});
+
+app.get('/api/venues', function (req, res) {
 
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var location = latitude + ',' + longitude;
 
-  console.log(location);
-
-  // yelp.search({term: "food", location: "Manoa", radius_filter: 3220}, function (error, data) {
-
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
-    // console.log(error);
-    // console.log(data);
 
     var yelpData = {
-      name: data.businesses[0].name
+      name: data.businesses[0]
     };
 
     res.json(yelpData);
   });
 
-});
-
-app.post('/locations', function (req, res) {
-  console.log(req.body.latitude);
 });
 
 var server = app.listen(8080, function (){

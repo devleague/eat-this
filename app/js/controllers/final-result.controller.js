@@ -10,6 +10,12 @@
   function finalResults ($scope, eatTitle, VenueService) {
     $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
-    $scope.returnVenue = VenueService.getVenues();
+
+    VenueService.displayVenue('andys-sandwiches-and-smoothies-honolulu')
+      .then(function(result) {
+        $scope.rating = result.rating;
+        $scope.name = result.name;
+        $scope.display_phone = result.display_phone;
+      });
   }
 })();
