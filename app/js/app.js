@@ -1,9 +1,5 @@
 (function (){
-<<<<<<< HEAD
-  var app = angular.module('eatApp', ['ui.router']);
-=======
   var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps']);
->>>>>>> development
 
   app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
