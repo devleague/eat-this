@@ -7,6 +7,7 @@
     $stateProvider
       .state('home', {
         url: '/',
+        templateUrl: '../templates/default.html'
       })
       .state('fetch', {
         url: '/fetch',
