@@ -11,6 +11,7 @@
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
+
     geolocation().then(function(position){
       $scope.position = position;
       $scope.latitude = position.coords.latitude;
@@ -24,19 +25,18 @@
       $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
       $scope.markers = [];
-
-      var createMarker = function() {
-        var marker = new google.maps.Marker({
-          map: $scope.map,
-          position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-        });
-        $scope.markers.push(marker);
-      };
-
-      createMarker();
+      createMarker(position.coords.latitude, position.coords.longitude);
 
     }, function(reason){
       $scope.message = "Could not be determined";
     });
   }
 })();
+
+function createMarker (x, y) {
+  var marker = new google.maps.Marker({
+    map: $scope.map,
+    position: new google.maps.LatLng(x, y)
+  });
+  $scope.markers.push(marker);
+}
