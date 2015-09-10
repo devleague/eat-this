@@ -5,21 +5,23 @@
     .module('eatApp')
     .service('VenueService', ['$resource' , function ($resource){
 
-      this.getVenues = function (lat, long, radius){
-        radius = radius || 2;
-        var queryOptions = {};
+      this.getVenues = function (latitude, longitude, radius){
+        radius = radius || 3220; //approx. 2 miles
 
-        // var Venues = $resource('/api/venues', queryOptions);
+        var queryOptions = {
+          latitude: latitude,
+          longitude: longitude,
+          radius: radius
+        };
 
-        var temp = testData();
-        return getLargeImg(temp);
+        var Venues = $resource('/api/venues', queryOptions);
 
-        // return Venues.get().$promise;
+        return Venues.get().$promise;
       };
 
-      this.displayVenue = function (venue){
+      this.displayVenue = function (venueId){
 
-        var Venue = $resource('/api/venues', venue);
+        var Venue = $resource('/api/venues/:id', { id: venueId });
         return Venue.get().$promise;
       };
 
