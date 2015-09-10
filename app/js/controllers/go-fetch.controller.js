@@ -15,6 +15,26 @@
       $scope.position = position;
       $scope.latitude = position.coords.latitude;
       $scope.longitude = position.coords.longitude;
+
+      var mapOptions = {
+        zoom: 15,
+        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+      };
+
+      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+      $scope.markers = [];
+
+      var createMarker = function() {
+        var marker = new google.maps.Marker({
+          map: $scope.map,
+          position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+        });
+        $scope.markers.push(marker);
+      };
+
+      createMarker();
+
     }, function(reason){
       $scope.message = "Could not be determined";
     });

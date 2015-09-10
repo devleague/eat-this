@@ -12,9 +12,6 @@ app.use(express.static(__dirname + '/../app'));
 
 app.get('/index/v2/business', function (req, res) {
   yelp.search({term: "food", location: "Manoa", radius_filter: 3220}, function (error, data) {
-    console.log(error);
-    console.log(data);
-
     var yelpData = {
       name: data.businesses[0].name
     };
