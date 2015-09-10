@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
 var yelp = require("yelp").createClient({
   consumer_key: process.env.YELP_CONSUMER_KEY,
@@ -10,21 +11,21 @@ var yelp = require("yelp").createClient({
 });
 
 app.use(express.static(__dirname + '/../app'));
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/locations', function (req, res) {
 
-  var latitude = req.body.latitude;
-  var longitude = req.body.longitude;
+  var latitude = req.query.latitude;
+  var longitude = req.query.longitude;
   var location = latitude + ',' + longitude;
 
   console.log(location);
 
-  yelp.search({term: "food", location: "Manoa", radius_filter: 3220}, function (error, data) {
+  // yelp.search({term: "food", location: "Manoa", radius_filter: 3220}, function (error, data) {
 
-  // yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
+  yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
     // console.log(error);
     // console.log(data);
-    console.log(location);
 
     var yelpData = {
       name: data.businesses[0].name
