@@ -2,7 +2,7 @@
   "name": "eat-this",
   "version": "1.0.0",
   "description": "Where should I eat?",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/devleague/eat-this#readme",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
