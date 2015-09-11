@@ -20,13 +20,6 @@ app.get('/api/venues/:id', function (req, res) {
 
     var venue = data;
 
-    function getLargeImg (venue){
-      var imgUrl = venue.image_url;
-      venue.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/o.jpg");
-      console.log(venue);
-      return venue;
-    }
-
     venue = getLargeImg(venue);
 
     res.json(venue);
@@ -45,12 +38,10 @@ app.get('/api/venues', function (req, res) {
     var venues = data.businesses;
 
     venues.forEach(function (venue){
-      var imgUrl = venue.image_url;
-      venue.image_url = imgUrl.replace(/(\ms\.jpg$)/g, "o.jpg");
-      // console.log(venue);
+      getLargeImg(venue);
     });
 
-    console.log(data.businesses[0]);
+    console.log(venues[0]);
 
     var yelpData = {
       name: data.businesses[0]
@@ -67,3 +58,10 @@ var server = app.listen(8080, function (){
 
   console.log('App running at http://%s%s', HOST, PORT);
 });
+
+
+function getLargeImg (obj){
+  var imgUrl = obj.image_url;
+  obj.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/o.jpg");
+  return obj;
+}
