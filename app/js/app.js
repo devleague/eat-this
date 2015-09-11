@@ -6,8 +6,12 @@
       .otherwise('/');
     $stateProvider
       .state('home', {
+<<<<<<< HEAD
+        url: '/'
+=======
         url: '/',
         templateUrl: '../templates/default.html'
+>>>>>>> development
       })
       .state('fetch', {
         url: '/fetch',
