@@ -15,11 +15,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/api/venues/:id', function (req, res) {
 
-  console.log(req.params.id);
+  // console.log(req.params.id);
   yelp.business(req.params.id, function (error, data) {
 
-    // console.log(data);
-    res.json(data);
+    var venue = data;
+
+    function getLargeImg (venue){
+      var imgUrl = venue.image_url;
+      venue.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/o.jpg");
+      console.log(venue);
+      return venue;
+    }
+
+    venue = getLargeImg(venue);
+
+    res.json(venue);
   });
 
 });
@@ -31,6 +41,16 @@ app.get('/api/venues', function (req, res) {
   var location = latitude + ',' + longitude;
 
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
+
+    var venues = data.businesses;
+
+    venues.forEach(function (venue){
+      var imgUrl = venue.image_url;
+      venue.image_url = imgUrl.replace(/(\ms\.jpg$)/g, "o.jpg");
+      // console.log(venue);
+    });
+
+    console.log(data.businesses[0]);
 
     var yelpData = {
       name: data.businesses[0]
