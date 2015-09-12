@@ -1,5 +1,3 @@
-
-
 (function (){
   angular
     .module('eatApp')
@@ -16,7 +14,7 @@
 
         var Venues = $resource('/api/venues', queryOptions);
 
-        return Venues.get().$promise;
+        return Venues.query().$promise;
       };
 
       this.displayVenue = function (venueId){
