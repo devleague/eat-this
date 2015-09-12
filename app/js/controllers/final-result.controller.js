@@ -13,6 +13,7 @@
 
     VenueService.displayVenue('andys-sandwiches-and-smoothies-honolulu')
       .then(function(result) {
+        console.log(result);
         $scope.rating = result.rating;
         $scope.name = result.name;
         $scope.display_phone = result.display_phone;
