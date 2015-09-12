@@ -1,5 +1,5 @@
 (function (){
-  var app = angular.module('eatApp', ['ui.router', 'ngResource']);
+  var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps']);
 
   app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
@@ -22,3 +22,5 @@
   }]);
 
 })();
+
+//AIzaSyDbLzOyIWC2aEMSSquh19owcsp4GjaPVTU
