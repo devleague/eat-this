@@ -2,6 +2,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+var config = require('../config/config.json');
+
+var PORT = config.port;
+
 var yelp = require("yelp").createClient({
   consumer_key: process.env.YELP_CONSUMER_KEY,
   consumer_secret: process.env.YELP_CONSUMER_SECRET,
@@ -15,11 +19,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/api/venues/:id', function (req, res) {
 
-  console.log(req.params.id);
+  // console.log(req.params.id);
   yelp.business(req.params.id, function (error, data) {
 
-    // console.log(data);
-    res.json(data);
+    var venue = data;
+
+    venue = getLargeImg(venue);
+
+    res.json(venue);
   });
 
 });
@@ -32,6 +39,14 @@ app.get('/api/venues', function (req, res) {
 
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
 
+    var venues = data.businesses;
+
+    venues.forEach(function (venue){
+      getLargeImg(venue);
+    });
+
+    console.log(venues[0]);
+
     var yelpData = {
       name: data.businesses[0]
     };
@@ -41,9 +56,15 @@ app.get('/api/venues', function (req, res) {
 
 });
 
-var server = app.listen(8080, function (){
+var server = app.listen(PORT, function (){
   var HOST = server.address().address;
-  var PORT = server.address().port;
 
   console.log('App running at http://%s%s', HOST, PORT);
 });
+
+
+function getLargeImg (obj){
+  var imgUrl = obj.image_url;
+  obj.image_url = imgUrl.replace(/(\/ms\.jpg$)/g, "/o.jpg");
+  return obj;
+}

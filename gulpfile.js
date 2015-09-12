@@ -19,7 +19,7 @@ gulp.task('sass', function () {
 gulp.task('livereload', function (){
   gulp.src('./app/**/*')
   .pipe(connect.reload());
-});asdfasdfas
+});
 
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
