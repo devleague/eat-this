@@ -18,7 +18,7 @@ app.get('/api/venues/:id', function (req, res) {
   console.log(req.params.id);
   yelp.business(req.params.id, function (error, data) {
 
-    // console.log(data);
+    console.log(data);
     res.json(data);
   });
 

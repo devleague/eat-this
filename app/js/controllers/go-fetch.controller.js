@@ -23,7 +23,7 @@
         center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
       };
 
-      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      $scope.map = new google.maps.Map(documet.getElementById('map'), mapOptions);
 
       $scope.markers = [];
       createMarker(position.coords.latitude, position.coords.longitude);
