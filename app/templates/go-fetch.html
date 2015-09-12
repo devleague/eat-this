@@ -16,11 +16,11 @@
   <img src="http://richthediabetic.com/wp-content/uploads/2013/07/Pizza.jpg">
 </div>
 
-<div class="angular-google-map-container">
-  <div id="map"></div>
-  <div id="class" ng-repeat="marker in markers"></div>
+<div id="map_canvas">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-google-map coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+    </ui-gmap-google-map>
+    <ui-gmap-markers models="markers" coords="'self'" fit="true">
+    </ui-gmap-markers>
+  </ui-gmap-google-map>
 </div>
-
-<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-<p>{{ sampleRestaurant }}</p>
-
