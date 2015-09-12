@@ -9,6 +9,7 @@
       ]);
 
   function goFetch ($scope, eatTitle, geolocation, VenueService) {
+
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";

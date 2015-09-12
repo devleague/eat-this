@@ -1,5 +1,5 @@
 (function (){
-  var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps']);
+  var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps', 'ngTouch']);
 
   app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
