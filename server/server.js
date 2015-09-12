@@ -40,18 +40,11 @@ app.get('/api/venues', function (req, res) {
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
 
     var venues = data.businesses;
-
     venues.forEach(function (venue){
       getLargeImg(venue);
     });
 
-    console.log(venues[0]);
-
-    var yelpData = {
-      name: data.businesses[0]
-    };
-
-    res.json(yelpData);
+    res.json(venues);
   });
 
 });

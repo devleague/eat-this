@@ -9,7 +9,18 @@
   <h2>{{ message }}</h2>
 </div>
 
+<div ng-show="!showActions" ng-swipe-left="showActions = true">
+  <img src="http://i.huffpost.com/gen/1100477/images/o-FAST-FOOD-AND-FLAVOR-facebook.jpg">
+</div>
+<div ng-show="showActions" ng-swipe-right="showActions = false">
+  <img src="http://richthediabetic.com/wp-content/uploads/2013/07/Pizza.jpg">
+</div>
+
 <div class="angular-google-map-container">
   <div id="map"></div>
   <div id="class" ng-repeat="marker in markers"></div>
 </div>
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+<p>{{ sampleRestaurant }}</p>
+
