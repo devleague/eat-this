@@ -23,10 +23,10 @@
         center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
       };
 
-      $scope.map = new google.maps.Map(documet.getElementById('map'), mapOptions);
+      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
       $scope.markers = [];
-      createMarker(position.coords.latitude, position.coords.longitude);
+      createMarker($scope, position.coords.latitude, position.coords.longitude);
 
     }, function(reason){
       $scope.message = "Could not be determined";
@@ -37,7 +37,7 @@
   }
 })();
 
-function createMarker (x, y) {
+function createMarker ($scope, x, y) {
   var marker = new google.maps.Marker({
     map: $scope.map,
     position: new google.maps.LatLng(x, y)
