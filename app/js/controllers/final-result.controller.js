@@ -5,12 +5,17 @@
         'eatTitle',
         'VenueService',
         '$stateParams',
+        '$state',
         finalResults
       ]);
 
-  function finalResults ($scope, eatTitle, VenueService, $stateParams) {
+  function finalResults ($scope, eatTitle, VenueService, $stateParams, $state) {
     $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
+
+    if ($stateParams.venue === null){
+      $state.go('home');
+    }
 
     var venueId = $stateParams.venue.id;
 
