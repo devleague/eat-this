@@ -1,17 +1,13 @@
 (function (){
-  var app = angular.module('eatApp', ['ui.router', 'ngResource']);
+  var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps', 'ngTouch']);
 
   app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
       .otherwise('/');
     $stateProvider
       .state('home', {
-<<<<<<< HEAD
-        url: '/'
-=======
         url: '/',
         templateUrl: '../templates/default.html'
->>>>>>> development
       })
       .state('fetch', {
         url: '/fetch',
@@ -26,3 +22,5 @@
   }]);
 
 })();
+
+//AIzaSyDbLzOyIWC2aEMSSquh19owcsp4GjaPVTU
