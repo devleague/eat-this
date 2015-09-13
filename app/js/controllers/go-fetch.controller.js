@@ -7,14 +7,17 @@ var deniedVenues = [];
         'eatTitle',
         'Geolocator',
         'VenueService',
+        '$state',
         goFetch
       ]);
 
-  function goFetch ($scope, eatTitle, geolocation, VenueService) {
+  function goFetch ($scope, eatTitle, geolocation, VenueService, $state) {
 
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
+
+    $scope.currentVenue;
 
     geolocation()
       .then(function(position){
@@ -50,9 +53,8 @@ var deniedVenues = [];
             $scope.venues = venues;
             runShuffle(venues);
 
-            $scope.name = venues[0].name;
-            $scope.image = venues[0].image_url;
-            createMarker(markers, venues[0].location.coordinate.latitude, venues[0].location.coordinate.longitude, 1);
+            $scope.currentVenue = venues.shift();
+            createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
             $scope.markers=markers;
 
             //directions to first venue
@@ -97,15 +99,15 @@ var deniedVenues = [];
             //swipe left, new venue
             $scope.getVenue = function(venues){
               console.log('YOU ARE SWIPING LEFT');
+                deniedVenues.push($scope.currentVenue);
+                markers.splice(1, 1);
+                $scope.currentVenue = venues.shift();
+                createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+                $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
+                request.destination = $scope.directions.destination;
+                console.log(deniedVenues);
+              };
 
-              deniedVenues.push(venues.shift());
-              markers.splice(1, 1);
-
-              $scope.name = venues[0].name;
-              $scope.image = venues[0].image_url;
-              createMarker(markers, venues[0].location.coordinate.latitude, venues[0].location.coordinate.longitude, 1);
-              $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-              request.destination = $scope.directions.destination;
 
               //get directions from google api
               directionsService.route(request, function(response, status){
@@ -120,9 +122,13 @@ var deniedVenues = [];
                 }
               });
 
-            };
+            });
           });
-      });
+    $scope.displayVenue = function (currentVenue){
+      console.log('displaying venue');
+      console.log(currentVenue);
+      $state.go('results', {venue: currentVenue});
+    };
   }
 })();
 
