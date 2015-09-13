@@ -4,12 +4,15 @@
         '$scope',
         'eatTitle',
         'VenueService',
+        '$stateParams',
         finalResults
       ]);
 
-  function finalResults ($scope, eatTitle, VenueService) {
+  function finalResults ($scope, eatTitle, VenueService, $stateParams) {
     $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
+
+    $scope.venue = $stateParams.venue;
 
     VenueService.displayVenue('andys-sandwiches-and-smoothies-honolulu')
       .then(function(result) {

@@ -56,7 +56,7 @@ var deniedVenues = [];
     $scope.displayVenue = function (currentVenue){
       console.log('displaying venue');
       console.log(currentVenue);
-      // $state.go('results');
+      $state.go('results', {venue: currentVenue});
     };
 
   }

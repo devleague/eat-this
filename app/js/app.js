@@ -17,7 +17,8 @@
       .state('results', {
         url: '/results',
         templateUrl: '../templates/results.html',
-        controller: 'resultsController'
+        controller: 'resultsController',
+        params: {venue: null}
       });
   }]);
 
