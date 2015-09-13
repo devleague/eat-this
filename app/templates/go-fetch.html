@@ -9,18 +9,18 @@
   <h2>{{ message }}</h2>
 </div>
 
-<div ng-show="!showActions" ng-swipe-left="showActions = true">
+<!-- <div ng-show="!showActions" ng-swipe-left="showActions = true">
   <img src="http://i.huffpost.com/gen/1100477/images/o-FAST-FOOD-AND-FLAVOR-facebook.jpg">
 </div>
 <div ng-show="showActions" ng-swipe-right="showActions = false">
   <img src="http://richthediabetic.com/wp-content/uploads/2013/07/Pizza.jpg">
-</div>
+</div> -->
 
 <div id="map_canvas">
-  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-    <ui-gmap-google-map coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-    </ui-gmap-google-map>
+  <ui-gmap-google-map control='map.control' center='map.center' zoom='map.zoom'>
     <ui-gmap-markers models="markers" coords="'self'" fit="true">
     </ui-gmap-markers>
   </ui-gmap-google-map>
 </div>
+
+<div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div>
