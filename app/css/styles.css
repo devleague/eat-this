@@ -1,6 +1,16 @@
+#map_canvas {
+  padding: 20px;
+}
+
 .angular-google-map-container {
   width: 600px;
   height: 400px;
+}
+
+.panel-primary {
+  padding: 20px;
+  width: 600px;
+  margin-bottom: 40px;
 }
 
 .clearfix:after {
