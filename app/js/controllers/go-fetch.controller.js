@@ -7,14 +7,17 @@ var deniedVenues = [];
         'eatTitle',
         'Geolocator',
         'VenueService',
+        '$state',
         goFetch
       ]);
 
-  function goFetch ($scope, eatTitle, geolocation, VenueService) {
+  function goFetch ($scope, eatTitle, geolocation, VenueService, $state) {
 
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
+
+    $scope.currentVenue;
 
     geolocation()
       .then(function(position){
@@ -37,8 +40,7 @@ var deniedVenues = [];
 
             $scope.venues = venues;
 
-            $scope.name = venues[0].name;
-            $scope.image = venues[0].image_url;
+            $scope.currentVenue = venues.shift();
 
           });
       });
@@ -46,11 +48,15 @@ var deniedVenues = [];
     $scope.getVenue = function(venues){
       console.log('YOU ARE SWIPING LEFT');
 
-      deniedVenues.push(venues.shift());
+      deniedVenues.push($scope.currentVenue);
+      $scope.currentVenue = venues.shift();
       console.log(deniedVenues);
+    };
 
-      $scope.name = venues[0].name;
-      $scope.image = venues[0].image_url;
+    $scope.displayVenue = function (currentVenue){
+      console.log('displaying venue');
+      console.log(currentVenue);
+      // $state.go('results');
     };
 
   }
