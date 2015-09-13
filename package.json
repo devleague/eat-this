@@ -18,10 +18,17 @@
   "homepage": "https://github.com/devleague/eat-this#readme",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "browser-sync": "^2.9.3",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
+    "gulp-minify": "0.0.5",
+    "gulp-minify-css": "^1.2.1",
     "gulp-sass": "^2.0.4",
     "yelp": "^0.2.0"
+  },
+  "devDependencies": {
+    "gulp-minify": "0.0.5",
+    "gulp-minify-css": "^1.2.1"
   }
 }
