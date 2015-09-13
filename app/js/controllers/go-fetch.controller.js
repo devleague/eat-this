@@ -1,3 +1,5 @@
+var deniedVenues = [];
+
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
@@ -31,10 +33,26 @@
       .then(function() {
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
-          .then(function(result){
-            $scope.sampleRestaurant = result[0].name;
+          .then(function(venues){
+
+            $scope.venues = venues;
+
+            $scope.name = venues[0].name;
+            $scope.image = venues[0].image_url;
+
           });
       });
+
+    $scope.getVenue = function(venues){
+      console.log('YOU ARE SWIPING LEFT');
+
+      deniedVenues.push(venues.shift());
+      console.log(deniedVenues);
+
+      $scope.name = venues[0].name;
+      $scope.image = venues[0].image_url;
+    };
+
   }
 })();
 
