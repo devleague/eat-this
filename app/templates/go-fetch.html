@@ -17,7 +17,7 @@
 <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
 <p>{{ sampleRestaurant }}</p>
 
-<div ng-swipe-left="getVenue(venues)">
-  <h1>{{name}}</h1>
-  <img ng-src="{{ image }}" />
+<div ng-swipe-left="getVenue(venues)" ng-swipe-right="displayVenue(currentVenue)">
+  <h1>{{currentVenue.name}}</h1>
+  <img ng-src="{{ currentVenue.image_url }}" />
 </div>

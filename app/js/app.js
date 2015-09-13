@@ -17,10 +17,9 @@
       .state('results', {
         url: '/results',
         templateUrl: '../templates/results.html',
-        controller: 'resultsController'
+        controller: 'resultsController',
+        params: {venue: null}
       });
   }]);
 
 })();
-
-//AIzaSyDbLzOyIWC2aEMSSquh19owcsp4GjaPVTU
