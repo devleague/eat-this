@@ -48,6 +48,12 @@ var deniedVenues = [];
           .then(function(venues){
             //first venue
             $scope.venues = venues;
+<<<<<<< HEAD
+
+            runShuffle(venues);
+
+=======
+>>>>>>> development
             $scope.name = venues[0].name;
             $scope.image = venues[0].image_url;
             createMarker(markers, venues[0].location.coordinate.latitude, venues[0].location.coordinate.longitude, 1);
@@ -130,4 +136,20 @@ function createMarker (arr, x, y, id, icon) {
     id: id
   };
   arr.push(marker);
+}
+
+function runShuffle (array){
+  var currentIndex = array.length;
+  var tempValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    tempValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = tempValue;
+  }
+  return array;
 }
