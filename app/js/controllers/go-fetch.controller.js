@@ -1,3 +1,5 @@
+var deniedVenues = [];
+
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
@@ -38,22 +40,17 @@
             $scope.name = venues[0].name;
             $scope.image = venues[0].image_url;
 
-            console.log(venues);
-
-            $scope.getVenue(venues);
           });
       });
 
     $scope.getVenue = function(venues){
       console.log('YOU ARE SWIPING LEFT');
 
-      var deniedVenues = [];
       deniedVenues.push(venues.shift());
       console.log(deniedVenues);
 
       $scope.name = venues[0].name;
       $scope.image = venues[0].image_url;
-
     };
 
   }
