@@ -74,11 +74,12 @@ var deniedVenues = [];
 
             //get directions from google api
             directionsService.route(request, function(response, status){
+              console.log(response);
               if (status === google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setPanel(document.getElementById('directionsList'));
                 $scope.path = {
-                  path: "",
+                  path: google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline),
                   stroke: {
                     color: "red",
                     opacity: 0.5
