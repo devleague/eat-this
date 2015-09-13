@@ -22,5 +22,3 @@
   }]);
 
 })();
-
-//AIzaSyDbLzOyIWC2aEMSSquh19owcsp4GjaPVTU
