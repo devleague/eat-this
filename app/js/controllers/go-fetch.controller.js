@@ -39,63 +39,73 @@ var deniedVenues = [];
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
-            // venues.forEach(function(venue, index){
-            //   var i = index + 1;
-            //   createMarker(markers, venue.location.coordinate.latitude, venue.location.coordinate.longitude, i);
-            // });
+            //first venue
+            $scope.venues = venues;
+            $scope.name = venues[0].name;
+            $scope.image = venues[0].image_url;
             createMarker(markers, venues[0].location.coordinate.latitude, venues[0].location.coordinate.longitude, 1);
             $scope.markers=markers;
 
+            //directions to first venue
             var directionsDisplay = new google.maps.DirectionsRenderer();
             var directionsService = new google.maps.DirectionsService();
 
             $scope.directions = {
-              origin: {
-                coords: markers[0].latitude + "," + markers[0].longitude,
-                name: "Your Location"
-              },
-              destination: {
-                coords: markers[1].latitude + "," + markers[1].longitude,
-                name: markers[1].id
-              },
+              origin: markers[0].latitude + "," + markers[0].longitude,
+              destination: markers[1].latitude + "," + markers[1].longitude,
               showList: false
             };
 
+            //define request to google maps directions api
             var request = {
-              origin: $scope.directions.origin.coords,
-              destination: $scope.directions.destination.coords,
+              origin: $scope.directions.origin,
+              destination: $scope.directions.destination,
               travelMode: google.maps.DirectionsTravelMode.DRIVING
             };
 
+            //get directions from google api
             directionsService.route(request, function(response, status){
               if (status === google.maps.DirectionsStatus.OK) {
-                console.log(response);
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setPanel(document.getElementById('directionsList'));
                 $scope.directions.showList = true;
+                $scope.distance = response.routes[0].legs[0].distance.text;
+                $scope.travelTime = response.routes[0].legs[0].duration.text;
               } else {
                 $scope.message = "Google route unsuccessful!";
               }
             });
 
-            $scope.venues = venues;
+            //swipe left, new venue
+            $scope.getVenue = function(venues){
+              console.log('YOU ARE SWIPING LEFT');
 
-            $scope.name = venues[0].name;
-            $scope.image = venues[0].image_url;
+              deniedVenues.push(venues.shift());
+              markers.splice(1, 1);
 
+              $scope.name = venues[0].name;
+              $scope.image = venues[0].image_url;
+              createMarker(markers, venues[0].location.coordinate.latitude, venues[0].location.coordinate.longitude, 1);
+              $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
+              request.destination = $scope.directions.destination;
+
+              //get directions from google api
+              directionsService.route(request, function(response, status){
+                if (status === google.maps.DirectionsStatus.OK) {
+                  console.log(response);
+                  directionsDisplay.setDirections(response);
+                  directionsDisplay.setPanel(document.getElementById('directionsList'));
+                  $scope.directions.showList = true;
+                  $scope.distance = response.routes[0].legs[0].distance.text;
+                  $scope.travelTime = response.routes[0].legs[0].duration.text;
+                } else {
+                  $scope.message = "Google route unsuccessful!";
+                }
+              });
+
+            };
           });
       });
-
-    $scope.getVenue = function(venues){
-      console.log('YOU ARE SWIPING LEFT');
-
-      deniedVenues.push(venues.shift());
-      console.log(deniedVenues);
-
-      $scope.name = venues[0].name;
-      $scope.image = venues[0].image_url;
-    };
-
   }
 })();
 
