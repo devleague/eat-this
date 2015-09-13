@@ -12,9 +12,9 @@
     $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
 
-    $scope.venue = $stateParams.venue;
+    var venueId = $stateParams.venue.id;
 
-    VenueService.displayVenue('andys-sandwiches-and-smoothies-honolulu')
+    VenueService.displayVenue(venueId)
       .then(function(result) {
         console.log(result);
         $scope.rating = result.rating;
