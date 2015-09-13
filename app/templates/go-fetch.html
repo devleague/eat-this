@@ -1,23 +1,24 @@
 <h2>{{ byline }}</h2>
 <div ng-show="position">
-  <h3>Latitude: </h3>
-  <p>{{ latitude }}</p>
-  <h3>Longitude: </h3>
-  <p>{{ longitude }}</p>
+  <h3>Your Coordinates: {{ latitude }}, {{ longitude }}</h3>
+
+  <div id="map_canvas">
+    <ui-gmap-google-map control='map.control' center='map.center' zoom='map.zoom'>
+      <ui-gmap-markers models="markers" coords="'self'" fit="true">
+      </ui-gmap-markers>
+    </ui-gmap-google-map>
+  </div>
+
+  <h2>Travel Time: {{ distance }} away, {{ travelTime }} by car</h2>
+
+  <div id="directionsList" ng-show="directions.showList" class="panel panel-primary"></div>
+
+  <div ng-swipe-left="getVenue(venues)">
+    <h1>{{name}}</h1>
+    <img ng-src="{{ image }}" />
+  </div>
+
 </div>
 <div ng-hide="position">
   <h2>{{ message }}</h2>
-</div>
-
-<div class="angular-google-map-container">
-  <div id="map"></div>
-  <div id="class" ng-repeat="marker in markers"></div>
-</div>
-
-<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-<p>{{ sampleRestaurant }}</p>
-
-<div ng-swipe-left="getVenue(venues)">
-  <h1>{{name}}</h1>
-  <img ng-src="{{ image }}" />
 </div>
