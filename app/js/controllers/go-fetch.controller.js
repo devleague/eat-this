@@ -37,6 +37,8 @@ var deniedVenues = [];
 
             $scope.venues = venues;
 
+            runShuffle(venues);
+
             $scope.name = venues[0].name;
             $scope.image = venues[0].image_url;
 
@@ -62,4 +64,21 @@ function createMarker ($scope, x, y) {
     position: new google.maps.LatLng(x, y)
   });
   $scope.markers.push(marker);
+}
+
+function runShuffle (array){
+  var currentIndex = array.length;
+  var tempValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    tempValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = tempValue;
+  }
+
+  return array;
 }
