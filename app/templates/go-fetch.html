@@ -3,9 +3,11 @@
   <h3>Your Coordinates: {{ latitude }}, {{ longitude }}</h3>
 
   <div id="map_canvas">
-    <ui-gmap-google-map control='map.control' center='map.center' zoom='map.zoom'>
+    <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
       <ui-gmap-markers models="markers" coords="'self'" fit="true">
       </ui-gmap-markers>
+      <ui-gmap-polyline path="path.path" stroke="path.stroke" visible="path.visible">
+      </ui-gmap-polyline>
     </ui-gmap-google-map>
   </div>
 

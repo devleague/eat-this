@@ -23,19 +23,26 @@ var deniedVenues = [];
         $scope.longitude = position.coords.longitude;
 
         //create map with user position as center
-        $scope.map = { center: { latitude: position.coords.latitude, longitude: position.coords.longitude }, zoom: 15, control: {} };
+        $scope.map = {
+          center: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          },
+          zoom: 15,
+          control: {}
+        };
 
         //create user position marker
         var markers = [];
         createMarker(markers, position.coords.latitude, position.coords.longitude, 0);
         $scope.markers = markers;
         return markers;
-
       }, function(reason){
         $scope.message = "Could not be determined";
       })
 
       .then(function(markers) {
+
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
@@ -68,6 +75,14 @@ var deniedVenues = [];
               if (status === google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
                 directionsDisplay.setPanel(document.getElementById('directionsList'));
+                $scope.path = {
+                  path: "",
+                  stroke: {
+                    color: "red",
+                    opacity: 0.5
+                  },
+                  visible: true
+                };
                 $scope.directions.showList = true;
                 $scope.distance = response.routes[0].legs[0].distance.text;
                 $scope.travelTime = response.routes[0].legs[0].duration.text;
@@ -92,7 +107,6 @@ var deniedVenues = [];
               //get directions from google api
               directionsService.route(request, function(response, status){
                 if (status === google.maps.DirectionsStatus.OK) {
-                  console.log(response);
                   directionsDisplay.setDirections(response);
                   directionsDisplay.setPanel(document.getElementById('directionsList'));
                   $scope.directions.showList = true;
