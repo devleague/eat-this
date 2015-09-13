@@ -18,14 +18,9 @@ app.use(express.static(__dirname + '/../app'));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/api/venues/:id', function (req, res) {
-
-  // console.log(req.params.id);
   yelp.business(req.params.id, function (error, data) {
-
     var venue = data;
-
     venue = getLargeImg(venue);
-
     res.json(venue);
   });
 
@@ -38,12 +33,10 @@ app.get('/api/venues', function (req, res) {
   var location = latitude + ',' + longitude;
 
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
-
     var venues = data.businesses;
     venues.forEach(function (venue){
       getLargeImg(venue);
     });
-
     res.json(venues);
   });
 
