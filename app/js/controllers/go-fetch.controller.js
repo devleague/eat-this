@@ -1,3 +1,5 @@
+var deniedVenues = [];
+
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
@@ -76,8 +78,24 @@
               }
             });
 
+            $scope.venues = venues;
+
+            $scope.name = venues[0].name;
+            $scope.image = venues[0].image_url;
+
           });
       });
+
+    $scope.getVenue = function(venues){
+      console.log('YOU ARE SWIPING LEFT');
+
+      deniedVenues.push(venues.shift());
+      console.log(deniedVenues);
+
+      $scope.name = venues[0].name;
+      $scope.image = venues[0].image_url;
+    };
+
   }
 })();
 
