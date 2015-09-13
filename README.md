@@ -11,6 +11,7 @@ An app that helps users decide what and where they "want" to eat in a specified 
   2. Run `env` (without a period).
   2. Start server at `nodemon`.
     3. Make sure nodemon is started in the same terminal window as the env file.
+1. To run browserSync for live refreshing of styling run `gulp` in another terminal session while nodemon is active to keep back-end resources running.
 1. Make sure location services are turned on in-browser or server will break (to be fixed).
 
 ### Members Include
