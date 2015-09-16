@@ -5,7 +5,12 @@ var connect = require('gulp-connect');
 var minify = require('gulp-minify');
 var minifyCss = require('gulp-minify-css');
 
+var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
+
+gulp.task('nodemon', function (){
+  nodemon(require('./nodemon.json'));
+});
 
 gulp.task('browserSync', function (){
   browserSync({
@@ -29,4 +34,4 @@ gulp.task('watch', ['sass', 'browserSync'], function () {
   });
 });
 
-gulp.task('default', ['watch']);
+gulp.task('default', ['nodemon', 'watch']);
