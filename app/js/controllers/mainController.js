@@ -3,7 +3,7 @@
     .controller('mainController', [
         '$scope',
         'eatTitle',
-        mainController
+         mainController
       ]);
 
   function mainController ($scope, eatTitle) {
