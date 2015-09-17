@@ -11,4 +11,3 @@ plugins
 *.log
 *.DS_Store
 .env
-.env2
