@@ -20,6 +20,6 @@ An app that helps users decide what and where they "want" to eat in a specified 
 Project Manager: ~~Keahi Selhourst~~ ~~Kelemete Seto~~ Sean Nakamura
 
 Team:
-  - Julia Bond
+  - Kelemete Seto
   - Sean Nakamura
   - Keahi Selhourst
