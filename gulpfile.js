@@ -8,13 +8,6 @@ var minifyCss = require('gulp-minify-css');
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
 
-var env = require('node-env-file');
-
-// gulp.task('source-env', function (){
-//   console.log('sourcing env file');
-//   env('./.env', {verbose: true, logger: console});
-// });
-
 gulp.task('nodemon', function (){
   nodemon(require('./nodemon.json'));
 });
