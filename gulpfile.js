@@ -7,38 +7,17 @@ var minifyCss = require('gulp-minify-css');
 
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
-var env = require('gulp-env');
 
-var exec = require('child_process').exec;
+var env = require('node-env-file');
 
-gulp.task('source-env', function (cb){
-  exec('source .env', function (err, stdout, stderr){
-    console.log(stdout);
-    console.log(stderr);
-    console.log('sourcing env file');
-    cb(err);
-  })
-})
-// var exec = require('child_process').exec, child;
-
-// gulp.task('set-env', function (){
-//   env({
-//     file: ".env"
-//   });
-// });
-
-// gulp.task('source-env', function (){
-//   child = exec('source .env', function (){
-//     console.log(child);
-//     console.log('sourcing env file');
-
-//   });
-// });
+gulp.task('source-env', function (){
+  console.log('sourcing env file');
+  env('./.env', {verbose: true, logger: console});
+});
 
 gulp.task('nodemon', function (){
   nodemon(require('./nodemon.json'));
 });
-
 
 gulp.task('browserSync', function (){
   browserSync({
