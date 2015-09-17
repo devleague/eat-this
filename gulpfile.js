@@ -10,10 +10,10 @@ var browserSync = require('browser-sync');
 
 var env = require('node-env-file');
 
-gulp.task('source-env', function (){
-  console.log('sourcing env file');
-  env('./.env', {verbose: true, logger: console});
-});
+// gulp.task('source-env', function (){
+//   console.log('sourcing env file');
+//   env('./.env', {verbose: true, logger: console});
+// });
 
 gulp.task('nodemon', function (){
   nodemon(require('./nodemon.json'));
@@ -41,4 +41,4 @@ gulp.task('watch', ['sass', 'browserSync'], function () {
   });
 });
 
-gulp.task('default', ['source-env', 'nodemon', 'watch']);
+gulp.task('default', ['nodemon', 'watch']);
