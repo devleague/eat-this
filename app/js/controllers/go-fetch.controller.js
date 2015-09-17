@@ -8,10 +8,11 @@ var deniedVenues = [];
         'Geolocator',
         'VenueService',
         '$state',
+        'uiGmapGoogleMapApi',
         goFetch
       ]);
 
-  function goFetch ($scope, eatTitle, geolocation, VenueService, $state) {
+  function goFetch ($scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
 
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
@@ -57,73 +58,72 @@ var deniedVenues = [];
             createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
             $scope.markers=markers;
 
-            //directions to first venue
-            var directionsDisplay = new google.maps.DirectionsRenderer();
-            var directionsService = new google.maps.DirectionsService();
+            googleMaps
+              .then(function(maps) {
 
-            $scope.directions = {
-              origin: markers[0].latitude + "," + markers[0].longitude,
-              destination: markers[1].latitude + "," + markers[1].longitude,
-              showList: false
-            };
-
-            //define request to google maps directions api
-            var request = {
-              origin: $scope.directions.origin,
-              destination: $scope.directions.destination,
-              travelMode: google.maps.DirectionsTravelMode.DRIVING
-            };
-
-            //get directions from google api
-            directionsService.route(request, function(response, status){
-              console.log(response);
-              if (status === google.maps.DirectionsStatus.OK) {
-                directionsDisplay.setDirections(response);
-                directionsDisplay.setPanel(document.getElementById('directionsList'));
-                $scope.path = {
-                  path: google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline),
-                  stroke: {
-                    color: "red",
-                    opacity: 0.5
-                  },
-                  visible: true
+                //directions to first venue
+                $scope.directions = {
+                  origin: markers[0].latitude + "," + markers[0].longitude,
+                  destination: markers[1].latitude + "," + markers[1].longitude,
+                  showList: false
                 };
-                $scope.directions.showList = true;
-                $scope.distance = response.routes[0].legs[0].distance.text;
-                $scope.travelTime = response.routes[0].legs[0].duration.text;
-              } else {
-                $scope.message = "Google route unsuccessful!";
-              }
-            });
 
-            //swipe left, new venue
-            $scope.getVenue = function(venues){
-              console.log('YOU ARE SWIPING LEFT');
-                deniedVenues.push($scope.currentVenue);
-                markers.splice(1, 1);
-                $scope.currentVenue = venues.shift();
-                createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-                $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-                request.destination = $scope.directions.destination;
-                console.log(deniedVenues);
-              };
+                var request = {
+                  origin: $scope.directions.origin,
+                  destination: $scope.directions.destination,
+                  travelMode: maps.DirectionsTravelMode.DRIVING
+                };
 
+                var directionsService = new maps.DirectionsService();
+                var directionsDisplay = new maps.DirectionsRenderer();
 
-              //get directions from google api
-              directionsService.route(request, function(response, status){
-                if (status === google.maps.DirectionsStatus.OK) {
-                  directionsDisplay.setDirections(response);
-                  directionsDisplay.setPanel(document.getElementById('directionsList'));
-                  $scope.directions.showList = true;
-                  $scope.distance = response.routes[0].legs[0].distance.text;
-                  $scope.travelTime = response.routes[0].legs[0].duration.text;
-                } else {
-                  $scope.message = "Google route unsuccessful!";
-                }
-              });
+                directionsService.route(request, function(response, status){
+                  if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                    directionsDisplay.setPanel(document.getElementById('directionsList'));
+                    // $scope.path = {
+                    //   path: google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline),
+                    //   stroke: {
+                    //     color: "red",
+                    //     opacity: 0.5
+                    //   },
+                    //   visible: true
+                    // };
+                    $scope.directions.showList = true;
+                    $scope.distance = response.routes[0].legs[0].distance.text;
+                    $scope.travelTime = response.routes[0].legs[0].duration.text;
+                  } else {
+                    $scope.message = "Google route unsuccessful!";
+                  }
+                });
 
+                //swipe left, new venue
+                $scope.getVenue = function(venues){
+                  console.log('YOU ARE SWIPING LEFT');
+                  deniedVenues.push($scope.currentVenue);
+                  $scope.currentVenue = venues.shift();
+                  markers.splice(1, 1);
+                  createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+                  $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
+                  request.destination = $scope.directions.destination;
+
+                  //get directions to new venue
+                  directionsService.route(request, function(response, status){
+                    if (status === google.maps.DirectionsStatus.OK) {
+                      directionsDisplay.setDirections(response);
+                      directionsDisplay.setPanel(document.getElementById('directionsList'));
+                      $scope.directions.showList = true;
+                      $scope.distance = response.routes[0].legs[0].distance.text;
+                      $scope.travelTime = response.routes[0].legs[0].duration.text;
+                    } else {
+                      $scope.message = "Google route unsuccessful!";
+                    }
+                  });
+                };
             });
           });
+        });
+
     $scope.displayVenue = function (currentVenue){
       console.log('displaying venue');
       console.log(currentVenue);
