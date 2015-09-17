@@ -1,7 +1,8 @@
 (function (){
-  var app = angular.module('eatApp', ['ui.router', 'ngResource']);
+  var app = angular.module('eatApp', ['ui.router', 'ngResource', 'uiGmapgoogle-maps', 'ngTouch']);
 
-  app.config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+  app
+  .config(['$stateProvider','$urlRouterProvider', function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
       .otherwise('/');
     $stateProvider
@@ -17,8 +18,16 @@
       .state('results', {
         url: '/results',
         templateUrl: '../templates/results.html',
-        controller: 'resultsController'
+        controller: 'resultsController',
+        params: {venue: null}
       });
-  }]);
+  }])
 
+  .config(function(uiGmapGoogleMapApiProvider) {
+      uiGmapGoogleMapApiProvider.configure({
+          // key: 'your api key',
+          v: '3.21', //defaults to latest 3.X anyhow
+          libraries: 'weather,geometry,visualization'
+      });
+  });
 })();

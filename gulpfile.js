@@ -2,10 +2,20 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var connect = require('gulp-connect');
 
-gulp.task('connect', function(){
-  connect.server({
-    root: 'app',
-    livereload: true
+var minify = require('gulp-minify');
+var minifyCss = require('gulp-minify-css');
+
+var nodemon = require('gulp-nodemon');
+var browserSync = require('browser-sync');
+
+gulp.task('nodemon', function (){
+  nodemon(require('./nodemon.json'));
+});
+
+gulp.task('browserSync', function (){
+  browserSync({
+    proxy: 'localhost:8080',
+    open: false
   });
 });
 
@@ -13,17 +23,15 @@ gulp.task('connect', function(){
 gulp.task('sass', function () {
   return gulp.src('./sass/*.scss')
       .pipe(sass({ errLogToConsole: true }))
+      .pipe(minifyCss())
       .pipe(gulp.dest('./app/css'));
 });
 
-gulp.task('livereload', function (){
-  gulp.src('./app/**/*')
-  .pipe(connect.reload());
-});asdfasdfas
-
-gulp.task('watch', function () {
+gulp.task('watch', ['sass', 'browserSync'], function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
-  gulp.watch('./app/**/*', ['livereload']);
+  gulp.watch('app/**/*', function (){
+    browserSync.reload();
+  });
 });
 
-gulp.task('default', ['connect`', 'watch', 'sass']);
+gulp.task('default', ['nodemon', 'watch']);
