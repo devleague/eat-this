@@ -15,7 +15,7 @@
         templateUrl: '../templates/help-me.html',
         controller: 'helpMeController'
       })
-      .state('fetch', {
+      .state('home.fetch', {
         url: '/fetch',
         templateUrl: '../templates/go-fetch.html',
         controller: 'goFetchController'
@@ -34,5 +34,9 @@
           v: '3.21', //defaults to latest 3.X anyhow
           libraries: 'weather,geometry,visualization'
       });
+  });
+
+  app.run(function ($rootScope, Geolocator){
+    $rootScope.userLocation = Geolocator();
   });
 })();
