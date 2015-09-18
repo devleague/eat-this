@@ -3,6 +3,7 @@ var deniedVenues = [];
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
+        '$rootScope',
         '$scope',
         'eatTitle',
         'Geolocator',
@@ -12,7 +13,7 @@ var deniedVenues = [];
         goFetch
       ]);
 
-  function goFetch ($scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
+  function goFetch ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
 
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
@@ -20,7 +21,7 @@ var deniedVenues = [];
 
     $scope.currentVenue;
 
-    geolocation()
+    $rootScope.userLocation
       .then(function(position){
         $scope.position = position;
         $scope.latitude = position.coords.latitude;
