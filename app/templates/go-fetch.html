@@ -19,7 +19,9 @@
 
   <div ng-swipe-left="getVenue(venues)" ng-swipe-right="displayVenue(currentVenue)">
     <h1>{{currentVenue.name}}</h1>
-    <img ng-src="{{ currentVenue.image_url }}" />
+    <div class="venue-img">
+      <img ng-src="{{ currentVenue.image_url }}" />
+    </div>
   </div>
 </div>
 

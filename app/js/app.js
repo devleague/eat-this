@@ -10,6 +10,11 @@
         url: '/',
         templateUrl: '../templates/default.html'
       })
+      .state('help-me', {
+        url: '/help-me',
+        templateUrl: '../templates/help-me.html',
+        controller: 'helpMeController'
+      })
       .state('home.fetch', {
         url: '/fetch',
         templateUrl: '../templates/go-fetch.html',
