@@ -14,11 +14,9 @@ var deniedVenues = [];
       ]);
 
   function goFetch ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
-
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
-
     $scope.currentVenue;
 
     $rootScope.userLocation
@@ -26,141 +24,104 @@ var deniedVenues = [];
         $scope.position = position;
         $scope.latitude = position.coords.latitude;
         $scope.longitude = position.coords.longitude;
-
-        //create map with user position as center
-        $scope.map = {
-          center: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          },
-          zoom: 15,
-          control: {}
-        };
-
-        //create user position marker
-        var markers = [];
-        createMarker(markers, position.coords.latitude, position.coords.longitude, 0);
-        $scope.markers = markers;
-        return markers;
+        return position;
       }, function(reason){
         $scope.message = "Could not be determined";
       })
 
-      .then(function(markers) {
-
+      .then(function(position) {
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
-            //first venue
+            $scope.venues = venues;
 
-
-            //fetching keywords for help me function
+            //Fetching keywords for help me function
             var foodCategories = [];
             var singleCategory;
-
             for (var i = 0; i < venues.length; i++){
-
               for (var j = 0; j < venues[i].categories.length; j++){
-
                 singleCategory = venues[i].categories[j][0];
                 if (foodCategories.indexOf(singleCategory) == -1){
                   foodCategories.push(singleCategory);
                 }
               }
             }
-            console.log(foodCategories);
             $scope.foodCategories = foodCategories;
-
             //End of foodCategories finder
 
-            $scope.venues = venues;
+            //Shuffle venues
             runShuffle(venues);
 
-            $scope.currentVenue = venues.shift();
-            createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-            $scope.markers=markers;
-
+            //Load maps
             googleMaps
               .then(function(maps) {
-
-                //directions to first venue
-                $scope.directions = {
-                  origin: markers[0].latitude + "," + markers[0].longitude,
-                  destination: markers[1].latitude + "," + markers[1].longitude,
-                  showList: false
-                };
-
-                var request = {
-                  origin: $scope.directions.origin,
-                  destination: $scope.directions.destination,
-                  travelMode: maps.DirectionsTravelMode.DRIVING
-                };
+                //Create map with user position as center
+                var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
+                var map = new maps.Map(document.getElementById('map_canvas'), {
+                  zoom: 15,
+                  center: latlng,
+                  control: {}
+                });
 
                 var directionsService = new maps.DirectionsService();
                 var directionsDisplay = new maps.DirectionsRenderer();
+                directionsDisplay.setPanel(document.getElementById('directionsList'));
+                directionsDisplay.setMap(map);
 
-                directionsService.route(request, function(response, status){
-                  if (status === google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                    directionsDisplay.setPanel(document.getElementById('directionsList'));
-                    // $scope.path = {
-                    //   path: google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline),
-                    //   stroke: {
-                    //     color: "red",
-                    //     opacity: 0.5
-                    //   },
-                    //   visible: true
-                    // };
-                    $scope.directions.showList = true;
-                    $scope.distance = response.routes[0].legs[0].distance.text;
-                    $scope.travelTime = response.routes[0].legs[0].duration.text;
-                  } else {
-                    $scope.message = "Google route unsuccessful!";
-                  }
-                });
-                //swipe left, new venue
+                //Create locations for user location and first venue
+                var locations = [];
+                createLocations(locations, position.coords.latitude, position.coords.longitude, 0);
+                $scope.currentVenue = venues.shift();
+                createLocations(locations, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+
+                var request = {
+                  origin: locations[0].latitude + "," + locations[0].longitude,
+                  destination: locations[1].latitude + "," + locations[1].longitude,
+                  travelMode: maps.DirectionsTravelMode.DRIVING
+                };
+
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+                //Swipe left, new venue
                 $scope.getVenue = function(venues){
                   console.log('YOU ARE SWIPING LEFT');
 
                   deniedVenues.push($scope.currentVenue);
+                  locations.splice(1, 1);
                   $scope.currentVenue = venues.shift();
-                  markers.splice(1, 1);
-                  createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-                  $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-                  request.destination = $scope.directions.destination;
+                  createLocations(locations, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+                  request.destination = locations[1].latitude + "," + locations[1].longitude;
 
-                  //get directions to new venue
+                  //Get directions to new venue
+                  calculateAndDisplayRoute(directionsService, directionsDisplay);
+                };
+
+                function calculateAndDisplayRoute(directionsService, directionsDisplay){
                   directionsService.route(request, function(response, status){
-                    if (status === google.maps.DirectionsStatus.OK) {
+                    if (status === maps.DirectionsStatus.OK) {
                       directionsDisplay.setDirections(response);
-                      directionsDisplay.setPanel(document.getElementById('directionsList'));
-                      $scope.directions.showList = true;
-                      $scope.distance = response.routes[0].legs[0].distance.text;
-                      $scope.travelTime = response.routes[0].legs[0].duration.text;
                     } else {
                       $scope.message = "Google route unsuccessful!";
                     }
                   });
-                };
+                }
             });
           });
         });
-
+    //Swipe right, select venue
     $scope.displayVenue = function (currentVenue){
-      console.log('displaying venue');
-      console.log(currentVenue);
       $state.go('results', {venue: currentVenue});
     };
   }
 })();
 
-function createMarker (arr, x, y, id, icon) {
-  var marker = {
+function createLocations (arr, x, y, id) {
+  var location = {
     latitude: x,
     longitude: y,
     id: id
   };
-  arr.push(marker);
+  arr.push(location);
 }
 
 function runShuffle (array){

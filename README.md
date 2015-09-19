@@ -23,3 +23,4 @@ Team:
   - Kelemete Seto
   - Sean Nakamura
   - Keahi Selhourst
+  - Julia Bond
