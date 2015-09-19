@@ -4,6 +4,7 @@ var connect = require('gulp-connect');
 
 var minify = require('gulp-minify');
 var minifyCss = require('gulp-minify-css');
+var rename = require('gulp-rename');
 
 var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
@@ -23,7 +24,11 @@ gulp.task('browserSync', function (){
 gulp.task('sass', function () {
   return gulp.src('./sass/*.scss')
       .pipe(sass({ errLogToConsole: true }))
+      .pipe(gulp.dest('./app/css'))
       .pipe(minifyCss())
+      .pipe(rename({
+        suffix: '.min'
+      }))
       .pipe(gulp.dest('./app/css'));
 });
 
