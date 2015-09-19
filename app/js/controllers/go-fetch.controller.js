@@ -3,6 +3,7 @@ var deniedVenues = [];
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
+        '$rootScope',
         '$scope',
         'eatTitle',
         'Geolocator',
@@ -12,7 +13,7 @@ var deniedVenues = [];
         goFetch
       ]);
 
-  function goFetch ($scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
+  function goFetch ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
 
     $scope.title = eatTitle;
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
@@ -20,7 +21,7 @@ var deniedVenues = [];
 
     $scope.currentVenue;
 
-    geolocation()
+    $rootScope.userLocation
       .then(function(position){
         $scope.position = position;
         $scope.latitude = position.coords.latitude;
@@ -51,6 +52,27 @@ var deniedVenues = [];
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
             //first venue
+
+
+            //fetching keywords for help me function
+            var foodCategories = [];
+            var singleCategory;
+
+            for (var i = 0; i < venues.length; i++){
+
+              for (var j = 0; j < venues[i].categories.length; j++){
+
+                singleCategory = venues[i].categories[j][0];
+                if (foodCategories.indexOf(singleCategory) == -1){
+                  foodCategories.push(singleCategory);
+                }
+              }
+            }
+            console.log(foodCategories);
+            $scope.foodCategories = foodCategories;
+
+            //End of foodCategories finder
+
             $scope.venues = venues;
             runShuffle(venues);
 
@@ -96,10 +118,10 @@ var deniedVenues = [];
                     $scope.message = "Google route unsuccessful!";
                   }
                 });
-
                 //swipe left, new venue
                 $scope.getVenue = function(venues){
                   console.log('YOU ARE SWIPING LEFT');
+
                   deniedVenues.push($scope.currentVenue);
                   $scope.currentVenue = venues.shift();
                   markers.splice(1, 1);

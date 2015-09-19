@@ -1,3 +1,5 @@
+<h1>THIS IS THE FETCH PAGE</h1>
+
 <h2>{{ byline }}</h2>
 <div ng-show="position">
   <h3>Your Coordinates: {{ latitude }}, {{ longitude }}</h3>
@@ -17,7 +19,9 @@
 
   <div ng-swipe-left="getVenue(venues)" ng-swipe-right="displayVenue(currentVenue)">
     <h1>{{currentVenue.name}}</h1>
-    <img ng-src="{{ currentVenue.image_url }}" />
+    <div class="venue-img">
+      <img ng-src="{{ currentVenue.image_url }}" />
+    </div>
   </div>
 </div>
 
