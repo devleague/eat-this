@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 (function (){
-  var app = angular.module('eatApp', ['ionic']);
+  var app = angular.module('eatApp', ['ionic', 'ngResource']);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
@@ -31,7 +31,15 @@
       })
       .state('fetch', {
         url: '/fetch',
-        templateUrl: '../templates/fetch.html'
+        templateUrl: '../templates/fetch.html',
+        controller: 'goFetchController'
+      })
+      .state('help-me', {
+        url: '/help-me',
+        templateUrl: '../templates/help-me.html'
+      })
+      .state('fetch.results', {
+        templateUrl: '../templates/results.html'
       });
 
     $urlRouterProvider.otherwise('/');
