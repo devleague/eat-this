@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "gulp-minify": "0.0.5",
-    "gulp-minify-css": "^1.2.1"
+    "gulp-minify-css": "^1.2.1",
+    "gulp-rename": "^1.2.2"
   }
 }
