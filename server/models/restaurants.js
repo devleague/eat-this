@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
+var Schema   = mongoose.Schema;
 
-var schema = {
+var restaurantSchema = new Schema({
   name: String,
   category: String,
   primary_image: String,
   secondary_image: String
-};
+});
 
-var Restaurants = mongoose.model("Restaurants", schema);
+var RestaurantsModel = mongoose.model("Restaurants", restaurantSchema);
 
-module.exports = Restaurants;
+module.exports = RestaurantsModel;
