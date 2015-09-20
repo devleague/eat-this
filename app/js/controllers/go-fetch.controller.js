@@ -24,12 +24,7 @@ var deniedVenues = [];
         $scope.position = position;
         $scope.latitude = position.coords.latitude;
         $scope.longitude = position.coords.longitude;
-        return position;
-      }, function(reason){
-        $scope.message = "Could not be determined";
-      })
 
-      .then(function(position) {
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
@@ -65,18 +60,13 @@ var deniedVenues = [];
 
                 var directionsService = new maps.DirectionsService();
                 var directionsDisplay = new maps.DirectionsRenderer();
-                directionsDisplay.setPanel(document.getElementById('directionsList'));
                 directionsDisplay.setMap(map);
 
-                //Create locations for user location and first venue
-                var locations = [];
-                createLocations(locations, position.coords.latitude, position.coords.longitude, 0);
                 $scope.currentVenue = venues.shift();
-                createLocations(locations, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
 
                 var request = {
-                  origin: locations[0].latitude + "," + locations[0].longitude,
-                  destination: locations[1].latitude + "," + locations[1].longitude,
+                  origin: position.coords.latitude + "," + position.coords.longitude,
+                  destination: $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude,
                   travelMode: maps.DirectionsTravelMode.DRIVING
                 };
 
@@ -87,10 +77,8 @@ var deniedVenues = [];
                   console.log('YOU ARE SWIPING LEFT');
 
                   deniedVenues.push($scope.currentVenue);
-                  locations.splice(1, 1);
                   $scope.currentVenue = venues.shift();
-                  createLocations(locations, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-                  request.destination = locations[1].latitude + "," + locations[1].longitude;
+                  request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
 
                   //Get directions to new venue
                   calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -100,6 +88,7 @@ var deniedVenues = [];
                   directionsService.route(request, function(response, status){
                     if (status === maps.DirectionsStatus.OK) {
                       directionsDisplay.setDirections(response);
+                      $scope.currentVenue.directions = response;
                     } else {
                       $scope.message = "Google route unsuccessful!";
                     }
@@ -107,6 +96,8 @@ var deniedVenues = [];
                 }
             });
           });
+        }, function(reason){
+          $scope.message = "Could not be determined";
         });
     //Swipe right, select venue
     $scope.displayVenue = function (currentVenue){
@@ -114,15 +105,6 @@ var deniedVenues = [];
     };
   }
 })();
-
-function createLocations (arr, x, y, id) {
-  var location = {
-    latitude: x,
-    longitude: y,
-    id: id
-  };
-  arr.push(location);
-}
 
 function runShuffle (array){
   var currentIndex = array.length;
