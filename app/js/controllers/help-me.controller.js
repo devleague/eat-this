@@ -1,16 +1,18 @@
 (function() {
   var restaurantService = function($http){
     var getRestaurants = function(){
-      return $http.get("/api/restaurants")
-                  .then(function(res){
-                    return res.data;
-                  });
+      console.log($http.get("/api/restaurants"));
+      return $http.get("/api/restaurants");
     };
-    return {
-      getRestaurants: getRestaurants
-    };
+    return getRestaurants();
   };
   angular
       .module("eatApp")
+      .controller('helpMeController', [
+        '$scope',
+        '$http'
+        ])
       .factory("restaurantService", restaurantService);
+
+
 }());

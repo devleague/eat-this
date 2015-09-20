@@ -52,19 +52,27 @@ var deniedVenues = [];
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
             //first venue
-
-
+            //console.log(venues);
+            ///////////////////////////////////////
             //fetching keywords for help me function
             var foodCategories = [];
             var singleCategory;
+            var categoryVenue;
+            var categoryObject = {};
 
             for (var i = 0; i < venues.length; i++){
 
               for (var j = 0; j < venues[i].categories.length; j++){
 
-                singleCategory = venues[i].categories[j][0];
+                venue = venues[i].categories[j][0];
+                categoryVenue = venues[i].id;
+
                 if (foodCategories.indexOf(singleCategory) == -1){
-                  foodCategories.push(singleCategory);
+                  categoryObject = {
+                  "category": singleCategory,
+                  "venue" : categoryVenue
+                };
+                  foodCategories.push(categoryObject);
                 }
               }
             }
@@ -72,6 +80,9 @@ var deniedVenues = [];
             $scope.foodCategories = foodCategories;
 
             //End of foodCategories finder
+            //////////////////////////////
+
+
 
             $scope.venues = venues;
             runShuffle(venues);
