@@ -14,7 +14,7 @@
     $rootScope.userLocation
         .then(function (position){
           console.log(position.coords);
-          $scope.location = position.coords.latitude;
+          $scope.location = position.coords.latitude + ',' + position.coords.longitude;
         });
   }
 })();

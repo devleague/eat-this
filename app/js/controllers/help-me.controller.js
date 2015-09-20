@@ -129,12 +129,6 @@
           });
         };
 
-      $scope.displayVenue = function (currentVenue){
-      console.log('displaying venue');
-      console.log(currentVenue);
-      $state.go('results', {venue: currentVenue});
-    };
-
 })();
 
 function createMarker (arr, x, y, id, icon) {

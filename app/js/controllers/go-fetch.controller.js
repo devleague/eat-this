@@ -54,6 +54,26 @@ var deniedVenues = [];
             //first venue
 
             $scope.venues = venues;
+            console.log('Starting array: ' + $scope.venues.length);
+            //fetching keywords for help me function
+            var foodCategories = [];
+            var singleCategory;
+
+            for (var i = 0; i < venues.length; i++){
+
+              for (var j = 0; j < venues[i].categories.length; j++){
+
+                singleCategory = venues[i].categories[j][0];
+                if (foodCategories.indexOf(singleCategory) === -1){
+                  foodCategories.push(singleCategory);
+                }
+              }
+            }
+            // console.log(foodCategories);
+            $scope.foodCategories = foodCategories;
+
+            //End of foodCategories finder
+
             runShuffle(venues);
 
             $scope.currentVenue = venues.shift();
@@ -102,12 +122,17 @@ var deniedVenues = [];
                 $scope.getVenue = function(venues){
                   console.log('YOU ARE SWIPING LEFT');
 
-                  deniedVenues.push($scope.currentVenue);
-                  $scope.currentVenue = venues.shift();
-                  markers.splice(1, 1);
-                  createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-                  $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-                  request.destination = $scope.directions.destination;
+                  if($scope.venues.length !== 0) {
+                    deniedVenues.push($scope.currentVenue);
+                    $scope.currentVenue = venues.shift();
+                    markers.splice(1, 1);
+                    createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+                    $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
+                    request.destination = $scope.directions.destination;
+                  }
+                  else {
+                    console.log('You have reached the end of the array ' + $scope.venues.length);
+                  }
 
                   //get directions to new venue
                   directionsService.route(request, function(response, status){
