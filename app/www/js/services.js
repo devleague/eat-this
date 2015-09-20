@@ -3,7 +3,7 @@
     .module('eatApp')
     .service('VenueService', ['$resource' , function ($resource){
 
-      var BASE_URL = 'localhost:8080';
+      var BASE_URL = 'http://10.0.1.7:8080';
 
       this.getVenues = function (latitude, longitude, radius){
         radius = radius || 3220; //approx. 2 miles

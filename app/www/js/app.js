@@ -5,7 +5,8 @@
 // the 2nd parameter is an array of 'requires'
 
 (function (){
-  var app = angular.module('eatApp', ['ionic', 'ngResource']);
+
+  var app = angular.module('eatApp', ['ionic', 'ngResource', 'uiGmapgoogle-maps']);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
@@ -38,10 +39,24 @@
         url: '/help-me',
         templateUrl: '../templates/help-me.html'
       })
-      .state('fetch.results', {
-        templateUrl: '../templates/results.html'
+      .state('results', {
+        url: '/results',
+        templateUrl: '../templates/results.html',
+        controller: 'resultsController',
+        params: {venue: null}
       });
 
     $urlRouterProvider.otherwise('/');
-  }]);
+  }])
+  .config(function(uiGmapGoogleMapApiProvider) {
+    uiGmapGoogleMapApiProvider.configure({
+        // key: 'your api key',
+        v: '3.21', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
+  });
+
+  app.run(function ($rootScope, Geolocator){
+    $rootScope.userLocation = Geolocator();
+  });
 })();

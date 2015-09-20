@@ -1,9 +1,15 @@
 <ion-view view-title="Fetch">
-  <ion-content class="padding">
+  <ion-content>
     <h1>This is Fetch!</h1>
 
     <div ng-show="position">
-      <h3>Your Coordinates: {{ latitude }}, {{ longitude }}</h3>
+
+      <h2>Travel Time: {{ distance }} away, {{ travelTime }} by car</h2>
+
+    <div class="card" on-swipe-left="getVenue(venues)" on-swipe-right="displayVenue(currentVenue)">
+      <div class="item item-divider">
+        <h1>{{currentVenue.name}}</h1>
+      </div>
 
       <div id="map_canvas">
         <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
@@ -14,13 +20,8 @@
         </ui-gmap-google-map>
       </div>
 
-      <h2>Travel Time: {{ distance }} away, {{ travelTime }} by car</h2>
-
-      <div ng-swipe-left="getVenue(venues)" ng-swipe-right="displayVenue(currentVenue)">
-        <h1>{{currentVenue.name}}</h1>
-        <div class="venue-wimg">
-          <img ng-src="{{ currentVenue.image_url }}" />
-        </div>
+      <div class="item item-image">
+        <img ng-src="{{ currentVenue.image_url }}" />
       </div>
     </div>
   </ion-content>
