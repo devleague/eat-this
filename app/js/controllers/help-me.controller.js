@@ -1,18 +1,21 @@
-(function() {
-  var restaurantService = function($http){
-    var getRestaurants = function(){
-      console.log($http.get("/api/restaurants"));
-      return $http.get("/api/restaurants");
-    };
-    return getRestaurants();
-  };
-  angular
-      .module("eatApp")
-      .controller('helpMeController', [
+(function (){
+  angular.module('eatApp')
+    .controller('helpMeController', [
         '$scope',
-        '$http'
-        ])
-      .factory("restaurantService", restaurantService);
+        'eatTitle',
+        '$http',
+        getRestaurantsByCategory
+      ]);
 
+  function getRestaurantsByCategory ($scope, eatTitle, $http) {
+    $scope.title = eatTitle;
+    $scope.byline = 'LETS GET SOMETHING TO EAT';
 
-}());
+    return $http.get("/api/restaurants")
+                .then(function(res){
+                  $scope.res = res.data;
+                  return $scope.res;
+                });
+  }
+})();
+

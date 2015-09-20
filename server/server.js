@@ -53,7 +53,7 @@ router.get('/api/restaurants', restaurant.getAll);
 // Create a restaurant
 router.post('/api/restaurant', restaurant.create);
 
-// Get on restaurant, update one restaurant, delete one restaurant
+// Get one restaurant, update one restaurant, delete one restaurant
 router.route('/api/restaurant/:id')
   .get(restaurant.read)
   .put(restaurant.update)
