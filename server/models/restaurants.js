@@ -8,6 +8,6 @@ var restaurantSchema = new Schema({
   secondary_image: String
 });
 
-var RestaurantsModel = mongoose.model("Restaurants", restaurantSchema);
+var RestaurantsModel = mongoose.model("Restaurant", restaurantSchema);
 
 module.exports = RestaurantsModel;
