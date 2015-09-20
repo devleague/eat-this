@@ -30,12 +30,12 @@ h1 {
 // Map Stuff
 
 #map_canvas {
-  padding: 20px;
+  // padding: 20px;
 }
 
 .angular-google-map-container {
   width: 100%; //Origin: 600px
-  height: 400px;
+  height: 12em;
 }
 
 .panel-primary {
@@ -56,4 +56,10 @@ h1 {
 .venue-img img {
   width: 100%;
   position: relative;
+}
+
+.item-img-box {
+  height: 20em;
+  background-size: cover;
+  background-position: center;
 }

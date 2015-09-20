@@ -7715,12 +7715,9 @@ h1 {
   margin: 0 auto;
   text-align: center; }
 
-#map_canvas {
-  padding: 20px; }
-
 .angular-google-map-container {
   width: 100%;
-  height: 400px; }
+  height: 12em; }
 
 .panel-primary {
   padding: 20px;
@@ -7736,3 +7733,8 @@ h1 {
 .venue-img img {
   width: 100%;
   position: relative; }
+
+.item-img-box {
+  height: 20em;
+  background-size: cover;
+  background-position: center; }
