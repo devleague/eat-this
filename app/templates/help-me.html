@@ -17,6 +17,11 @@
 
     </head>
   <body>
+
+  <div ng-swipe-left="getCategory" ng-swipe-right="displayVenue(foodCategories)">
+    <h1>{{categoryDataBase.category}}</h1>
+    <img ng-src="{{ categoryDataBase.primary_image }}" />
+  </div>
   <h2>{{ byline }}</h2>
   <h2>{{ res }}</h2>
 

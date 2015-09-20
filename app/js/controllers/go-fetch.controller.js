@@ -19,7 +19,7 @@ var deniedVenues = [];
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
 
-    $scope.currentVenue;
+    console.log($scope.currentVenue);
 
     $rootScope.userLocation
       .then(function(position){

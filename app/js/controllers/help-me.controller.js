@@ -5,29 +5,16 @@
         '$scope',
         'eatTitle',
         'Geolocator',
+        'CategoryService',
         'VenueService',
         '$state',
         'uiGmapGoogleMapApi',
-        '$http',
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps, $http) {
+  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
     $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
-
-    $http.get("/api/restaurants")
-      .then(function(res){
-        var categoryDataBase = res.data;
-        return categoryDataBase;
-      })
-      .then(function(categoryDataBase){
-
-
-
-        console.log(categoryDataBase);
-      });
-
 
     $scope.currentVenue;
 
@@ -58,6 +45,19 @@
 
       .then(function(markers) {
 
+        // CategoryService
+        //   .getCategory()
+        //   .then(function(categories){ // need to return categories above line
+        //     $scope.categories = categories;
+
+        //   console.log(categories);
+
+
+
+
+
+        //   });
+
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
@@ -77,75 +77,36 @@
                 singleCategory = venues[i].categories[j][0];
                 categoryVenue = venues[i].id;
 
-                if (foodCategories.indexOf(singleCategory) == -1){
+                // if (foodCategories.indexOf(singleCategory) == -1){
                   categoryObject = {
                   "category": singleCategory,
                   "venue" : categoryVenue
                 };
                   foodCategories.push(categoryObject);
-                }
+                //}
               }
             }
+
+            runShuffle(foodCategories);
             console.log(foodCategories);
-
+            debugger;
             $scope.foodCategories = foodCategories;
-
-            //End of foodCategories finder
-            //////////////////////////////
+          });
 
 
-
-            $scope.venues = venues;
-            runShuffle(venues);
-
-            $scope.currentVenue = venues.shift();
-            createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-            $scope.markers=markers;
+            //$scope.currentVenue = foodCategories.shift();
+            // createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+            // $scope.markers=markers;
 
             googleMaps
               .then(function(maps) {
 
-                //directions to first venue
-                $scope.directions = {
-                  origin: markers[0].latitude + "," + markers[0].longitude,
-                  destination: markers[1].latitude + "," + markers[1].longitude,
-                  showList: false
-                };
-
-                var request = {
-                  origin: $scope.directions.origin,
-                  destination: $scope.directions.destination,
-                  travelMode: maps.DirectionsTravelMode.DRIVING
-                };
-
-                var directionsService = new maps.DirectionsService();
-                var directionsDisplay = new maps.DirectionsRenderer();
-
-                directionsService.route(request, function(response, status){
-                  if (status === google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                    directionsDisplay.setPanel(document.getElementById('directionsList'));
-                    // $scope.path = {
-                    //   path: google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline),
-                    //   stroke: {
-                    //     color: "red",
-                    //     opacity: 0.5
-                    //   },
-                    //   visible: true
-                    // };
-                    $scope.directions.showList = true;
-                    $scope.distance = response.routes[0].legs[0].distance.text;
-                    $scope.travelTime = response.routes[0].legs[0].duration.text;
-                  } else {
-                    $scope.message = "Google route unsuccessful!";
-                  }
-                });
                 //swipe left, new venue
-                $scope.getVenue = function(venues){
+                $scope.getVenue = function(foodCategories){
                   console.log('YOU ARE SWIPING LEFT');
 
                   deniedVenues.push($scope.currentVenue);
-                  $scope.currentVenue = venues.shift();
+                  $scope.currentVenue = foodCategories.shift();
                   markers.splice(1, 1);
                   createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
                   $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
@@ -166,7 +127,7 @@
                 };
             });
           });
-        });
+        };
 
       $scope.displayVenue = function (currentVenue){
       console.log('displaying venue');
@@ -174,6 +135,29 @@
       $state.go('results', {venue: currentVenue});
     };
 
-  }
 })();
 
+function createMarker (arr, x, y, id, icon) {
+  var marker = {
+    latitude: x,
+    longitude: y,
+    id: id
+  };
+  arr.push(marker);
+}
+
+function runShuffle (array){
+  var currentIndex = array.length;
+  var tempValue, randomIndex;
+
+  while (0 !== currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    tempValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = tempValue;
+  }
+  return array;
+}
