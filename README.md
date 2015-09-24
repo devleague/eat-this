@@ -15,7 +15,7 @@ An app that helps users decide what and where they "want" to eat in a specified 
 1. Make sure location services are turned on in-browser or server will break (to be fixed).
 
 ### Members Include
-(as of Sept 16, 2015)
+(as of Sept 23, 2015)
 
 ~~Project Manager:~~
 ####THE Prime Minister: 
