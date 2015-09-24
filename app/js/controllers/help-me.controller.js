@@ -9,10 +9,11 @@
         'VenueService',
         '$state',
         'uiGmapGoogleMapApi',
+        '$http',
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
+  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps, $http) {
     $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
 
@@ -58,6 +59,12 @@
 
         //   });
 
+        // CategoryService
+        //   .displayCategory()
+        //   .then(function(categoryDataBase){
+        //     console.log(categoryDataBase);
+        //   });
+
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
@@ -77,20 +84,59 @@
                 singleCategory = venues[i].categories[j][0];
                 categoryVenue = venues[i].id;
 
-                // if (foodCategories.indexOf(singleCategory) == -1){
+
                   categoryObject = {
                   "category": singleCategory,
                   "venue" : categoryVenue
                 };
                   foodCategories.push(categoryObject);
-                //}
+
+
               }
             }
 
             runShuffle(foodCategories);
-            console.log(foodCategories);
-            debugger;
+
             $scope.foodCategories = foodCategories;
+
+            $http.get('/js/categories.json')
+              .success(function (data){
+                //$scope.categoryDB = data;
+                //console.log(data);
+                //console.log(foodCategories);
+
+                //loop through image array and check if is also present in other array
+                var dataCat;
+                var dataImage1, dataImage2;
+                var venueCat;
+                var venueName;
+                var displayObjectArray = [];
+                for (var x = 0; x < data.length; x++){
+                  dataCat = data[x].category;
+                  dataImage1 = data[x].primary_image;
+                  dataImage2 = data[x].secondary_image;
+
+                  for (var y = 0; y < foodCategories.length; y++){
+                    venueCat = foodCategories[y].category;
+                    venueName = foodCategories[y].venue;
+
+                    if (dataCat === venueCat){
+                      displayObjectArray.push({
+                        "category": dataCat,
+                        "venue": venueName,
+                        "primary_image": dataImage1,
+                        "secondary_image": dataImage2
+                      });
+                    }
+                  }
+
+                }
+                console.log(displayObjectArray);
+
+              });
+
+
+
           });
 
 
