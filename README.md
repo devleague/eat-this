@@ -17,7 +17,12 @@ An app that helps users decide what and where they "want" to eat in a specified 
 ### Members Include
 (as of Sept 16, 2015)
 
-Project Manager: ~~Keahi Selhourst~~ ~~Kelemete Seto~~ Sean Nakamura
+~~Project Manager:~~
+####THE Prime Minister: 
+Julia Bond
+
+Former: 
+~~Keahi Selhourst~~ ~~Kelemete Seto~~ ~~Sean Nakamura~~ 
 
 Team:
   - Kelemete Seto
