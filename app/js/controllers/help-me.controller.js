@@ -46,7 +46,7 @@
       .then(function(markers) {
 
         // CategoryService
-        //   .getCategory()
+        //   .getCategories()
         //   .then(function(categories){ // need to return categories above line
         //     $scope.categories = categories;
 
