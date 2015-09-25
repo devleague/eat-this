@@ -10,8 +10,7 @@ An app that helps users decide what and where they "want" to eat in a specified 
 
 ### Client (Ionic)
 1. Change directories into `app`.
-1. Run `npm install` for node module dependencies.
-1. Run `bower install` for bower dependencies.
+1. Run `npm install` for node module and bower dependencies.
 1. Start `ionic serve`.
 1. You can view the front-end at `localhost:8100`.
 
