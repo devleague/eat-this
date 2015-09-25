@@ -3,10 +3,10 @@
     .module('eatApp')
     .service('CategoryService', ['$resource' , function ($resource){
 
-      this.getCategories = function (){
+      // this.getCategories = function (){
 
-        return displayObjectArray;
-      };
+      //   return displayObjectArray;
+      // };
 
       this.displayCategory = function (catId){
 
