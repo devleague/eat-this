@@ -7715,6 +7715,9 @@ h1 {
   margin: 0 auto;
   text-align: center; }
 
+#map_canvas {
+  height: 10em; }
+
 .angular-google-map-container {
   width: 100%;
   height: 12em; }
