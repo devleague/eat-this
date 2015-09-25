@@ -4,28 +4,40 @@ Where should I eat?
 An app that helps users decide what and where they "want" to eat in a specified location near them.
 
 ## Instructions for startup
-1. Run `npm install` for node module and bower dependencies.
-1. Run `npm run dev` to start up project.
-  2. This will do `source .env` and `gulp` with one command and in one session!
-  2. No need to run two commands ever again!
-  2. Will improve upon this at another time.
-1. There are two urls you can visit for different purposes.
-  2. `localhost:8080` will run basic nodemon server with NO refreshing after changes.
-  2. `localhost:3000` will run a live-refreshing version of the project when saving changes.
-1. Make sure location services are turned on in-browser or server will break (to be fixed).
 
-### Members Include
+1. Do `npm install -g ionic cordova` for fresh installers.
+1. You'll need two seperate terminal sessions to run the server and the client side.
+
+### Client (Ionic)
+1. Change directories into `app`.
+1. Run `npm install` for node module dependencies.
+1. Run `bower install` for bower dependencies.
+1. Start `ionic serve`.
+1. You can view the front-end at `localhost:8100`.
+
+### Server
+1. Insure you are in the root directory of the project.
+1. Run `npm install` for node module dependencies.
+1. Start at `npm run dev`.
+  2. This will also take care of the `source .env` command.
+  2. Note that gulp will no longer run server side.
+1. Server will run at `localhost:8080`.
+  2. However you won't be needing to go there right now.
+
+Note: Please make sure location services are turned on in-browser or NO information will be returned on the client side.
+
+## Members Include
 (as of Sept 23, 2015)
 
 ~~Project Manager:~~
-####THE Prime Minister: 
+####THE Prime Minister:
 Julia Bond
 
-Former: 
-~~Keahi Selhourst~~ ~~Kelemete Seto~~ ~~Sean Nakamura~~ 
+Former:
+~~Keahi Selhourst~~ ~~Kelemete Seto~~ ~~Sean Nakamura~~
 
 Team:
-  - Kelemete Seto
+  - Julia Bond
   - Sean Nakamura
   - Keahi Selhourst
-  - Julia Bond
+  - Kelemete Seto
