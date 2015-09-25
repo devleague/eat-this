@@ -1,10 +1,15 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
 var bodyParser = require('body-parser');
 
 var config = require('../config/config.json');
 
 var PORT = config.port;
+
+var mongoose        = require('mongoose'),
+    databaseHelpMe  = 'helpme_mongodb',
+    restaurant      = require('./controllers/api/restaurant');
 
 var yelp = require("yelp").createClient({
   consumer_key: process.env.YELP_CONSUMER_KEY,
@@ -23,7 +28,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/api/venues/:id', function (req, res) {
+router.get('/api/venues/:id', function (req, res) {
   yelp.business(req.params.id, function (error, data) {
     var venue = data;
     venue = getLargeImg(venue);
@@ -32,7 +37,7 @@ app.get('/api/venues/:id', function (req, res) {
 
 });
 
-app.get('/api/venues', function (req, res) {
+router.get('/api/venues', function (req, res) {
 
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
@@ -48,12 +53,34 @@ app.get('/api/venues', function (req, res) {
 
 });
 
-var server = app.listen(PORT, function (){
-  var HOST = server.address().address;
+// Get all restaurants
+router.get('/api/restaurants', restaurant.getAll);
 
-  console.log('App running at http://%s%s', HOST, PORT);
-});
+// Create a restaurant
+router.post('/api/restaurant', restaurant.create);
 
+// Get one restaurant, update one restaurant, delete one restaurant
+router.route('/api/restaurant/:id')
+  .get(restaurant.read)
+  .put(restaurant.update)
+  .delete(restaurant.delete);
+
+// Register the routing
+app.use('/', router);
+
+mongoose.connect("mongodb://localhost/" + databaseHelpMe);
+
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', startServer);
+
+function startServer () {
+  var server = app.listen(PORT, function (){
+    var HOST = server.address().address;
+
+    console.log('App running at http://%s%s', HOST, PORT);
+  });
+}
 
 function getLargeImg (obj){
   var imgUrl = obj.image_url;

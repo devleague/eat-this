@@ -4,8 +4,8 @@
   "description": "Where should I eat?",
   "main": "server/server.js",
   "scripts": {
-    "postinstall": "bower install",
-    "dev": "source .env; gulp;",
+    "dev": "source .env; nodemon;",
+    "seed": "node server/seed/seedAllData.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "gulp-connect": "^2.2.0",
     "gulp-nodemon": "^2.0.4",
     "gulp-sass": "^2.0.4",
+    "mongoose": "^4.1.8",
     "yelp": "^0.2.0"
   },
   "devDependencies": {
