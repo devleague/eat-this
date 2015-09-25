@@ -4,7 +4,8 @@
   "description": "Where should I eat?",
   "main": "server/server.js",
   "scripts": {
-    "dev": "source .env;",
+    "dev": "source .env; nodemon;",
+    "seed": "node server/seed/seedAllData.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
