@@ -19,9 +19,9 @@
   <body>
 
 
-  <div ng-swipe-left="getCategories" ng-swipe-right="displayCategory(foodCategories)">
-    <h1>{{foodCategories}}</h1>
-    <img ng-src="{{ foodCategories.primary_image }}" />
+  <div ng-swipe-left="getCategory(displayObjectArray)" ng-swipe-right="displayCategory(currentCategory)">
+    <h1>{{}}</h1>
+    <img ng-src="{{ currentCategory.primary_image }}" />
   </div>
   <h2>{{ byline }}</h2>
   <h2>{{ res }}</h2>
