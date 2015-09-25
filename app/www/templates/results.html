@@ -1,0 +1,21 @@
+<ion-view title="{{venue.name}}">
+  <ion-content>
+    <h2>{{ venue.name }}</h2>
+    <div class="list">
+
+      <div class="item item-image item-img-box" style="background-image: url({{venue.image_url}});">
+      </div>
+
+      <a class="item item-icon-right" href="tel:{{venue.display_phone}}">
+        <i class="icon ion-ios-telephone"></i>
+        Call
+      </a>
+
+       <a class="item item-icon-right" href="#">
+        <i class="icon ion-beer"></i>
+        {{venue.rating}}
+      </a>
+    </div>
+
+  </ion-content>
+</ion-view>
