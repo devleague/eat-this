@@ -32,7 +32,7 @@
       uiGmapGoogleMapApiProvider.configure({
           // key: 'your api key',
           v: '3.21', //defaults to latest 3.X anyhow
-          libraries: 'weather,geometry,visualization'
+          libraries: 'weather,geometry,visualization,places'
       });
   });
 
