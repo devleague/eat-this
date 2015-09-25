@@ -4,7 +4,7 @@
   "description": "Where should I eat?",
   "main": "server/server.js",
   "scripts": {
-    "dev": "source .env; gulp;",
+    "dev": "source .env;",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
