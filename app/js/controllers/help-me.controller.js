@@ -131,7 +131,9 @@
                   }
 
                 }
+                $scope.displayObjectArray = displayObjectArray;
                 console.log(displayObjectArray);
+                $scope.currentCategory = displayObjectArray.shift();
 
               });
 

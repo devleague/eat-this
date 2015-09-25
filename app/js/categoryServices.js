@@ -3,19 +3,16 @@
     .module('eatApp')
     .service('CategoryService', ['$resource' , function ($resource){
 
-      // this.getCategories = function (){
+      this.getCategories = function (){
 
-      //   //var catOptions = {}
+        return displayObjectArray;
+      };
 
-      //   var categoryDataBase = $resource('/server/seed/categories.json');
-      //   return categoryDataBase.query().$promise;
-      // };
+      this.displayCategory = function (catId){
 
-      // this.displayCategory = function (cat){
-
-      //   var Category = $resource('/api/restaurants/:category', { category: cat });
-      //   return Category.get().$promise;
-      // };
+        var Category = displayObjectArray;
+        return Category.get().$promise;
+      };
 
     }]);
 })();
