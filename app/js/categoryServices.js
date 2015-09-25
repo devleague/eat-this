@@ -5,17 +5,14 @@
 
       // this.getCategories = function (){
 
-      //   //var catOptions = {}
-
-      //   var categoryDataBase = $resource('/server/seed/categories.json');
-      //   return categoryDataBase.query().$promise;
+      //   return displayObjectArray;
       // };
 
-      // this.displayCategory = function (cat){
+      this.displayCategory = function (catId){
 
-      //   var Category = $resource('/api/restaurants/:category', { category: cat });
-      //   return Category.get().$promise;
-      // };
+        var Category = displayObjectArray;
+        return Category.get().$promise;
+      };
 
     }]);
 })();
