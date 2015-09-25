@@ -19,7 +19,7 @@ var deniedVenues = [];
     $scope.byline = 'LETS FETCH SOMETHING AWESOME';
     $scope.message = "Determining your location...";
 
-    $scope.currentVenue;
+    console.log($scope.currentVenue);
 
     $rootScope.userLocation
       .then(function(position){
@@ -74,7 +74,6 @@ var deniedVenues = [];
 
             //End of foodCategories finder
 
-            $scope.venues = venues;
             runShuffle(venues);
 
             $scope.currentVenue = venues.shift();

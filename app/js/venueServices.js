@@ -23,6 +23,5 @@
         return Venue.get().$promise;
       };
 
-
     }]);
 })();
