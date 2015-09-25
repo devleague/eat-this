@@ -143,7 +143,7 @@
             //   .then(function(maps) {
 
             //     //swipe left, new venue
-            var emptyArray = []
+            var emptyArray = [];
             $scope.getCategory = function(displayObjectArray){
 
               emptyArray.push($scope.currentCategory);
