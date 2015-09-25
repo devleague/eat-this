@@ -131,47 +131,58 @@
                   }
 
                 }
+                $scope.displayObjectArray = displayObjectArray;
                 console.log(displayObjectArray);
+                $scope.currentCategory = displayObjectArray.shift();
 
               });
 
-
-
           });
 
+            // googleMaps
+            //   .then(function(maps) {
 
-            //$scope.currentVenue = foodCategories.shift();
-            // createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-            // $scope.markers=markers;
+            //     //swipe left, new venue
+            var emptyArray = []
+            $scope.getCategory = function(displayObjectArray){
 
-            googleMaps
-              .then(function(maps) {
+              emptyArray.push($scope.currentCategory);
+              $scope.currentCategory = displayObjectArray.shift();
+              console.log('YOU ARE SWIPING LEFT');
 
-                //swipe left, new venue
-                $scope.getVenue = function(foodCategories){
-                  console.log('YOU ARE SWIPING LEFT');
+            }
+            //     $scope.getVenue = function(foodCategories){
+            //       console.log('YOU ARE SWIPING LEFT');
 
-                  deniedVenues.push($scope.currentVenue);
-                  $scope.currentVenue = foodCategories.shift();
-                  markers.splice(1, 1);
-                  createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-                  $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-                  request.destination = $scope.directions.destination;
+            //       deniedVenues.push($scope.currentVenue);
+            //       $scope.currentVenue = foodCategories.shift();
+            //       markers.splice(1, 1);
+            //       createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
+            //       $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
+            //       request.destination = $scope.directions.destination;
 
                   //get directions to new venue
-                  directionsService.route(request, function(response, status){
-                    if (status === google.maps.DirectionsStatus.OK) {
-                      directionsDisplay.setDirections(response);
-                      directionsDisplay.setPanel(document.getElementById('directionsList'));
-                      $scope.directions.showList = true;
-                      $scope.distance = response.routes[0].legs[0].distance.text;
-                      $scope.travelTime = response.routes[0].legs[0].duration.text;
-                    } else {
-                      $scope.message = "Google route unsuccessful!";
-                    }
-                  });
-                };
-            });
+                  // directionsService.route(request, function(response, status){
+                  //   if (status === google.maps.DirectionsStatus.OK) {
+                  //     directionsDisplay.setDirections(response);
+                  //     directionsDisplay.setPanel(document.getElementById('directionsList'));
+                  //     $scope.directions.showList = true;
+                  //     $scope.distance = response.routes[0].legs[0].distance.text;
+                  //     $scope.travelTime = response.routes[0].legs[0].duration.text;
+                  //   } else {
+                  //     $scope.message = "Google route unsuccessful!";
+                  //   }
+                  // });
+
+
+            //     };
+            // });
+            $scope.displayCategory = function (currentCategory){
+              console.log('adding 1');
+              console.log(currentCategory);
+              // $state.go('results', {venue: currentCategory});
+            };
+
           });
         };
 

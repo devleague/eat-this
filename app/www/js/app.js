@@ -37,7 +37,8 @@
       })
       .state('help-me', {
         url: '/help-me',
-        templateUrl: '../templates/help-me.html'
+        templateUrl: '../templates/help-me.html',
+        controller: 'helpMeController'
       })
       .state('results', {
         url: '/results',
