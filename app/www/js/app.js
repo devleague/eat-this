@@ -20,44 +20,44 @@
   });
 
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider ){
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
+    // $locationProvider.html5Mode({
+    //   enabled: true,
+    //   requireBase: false
+    // });
 
     $stateProvider
       .state('app', {
         url: '/',
-        templateUrl: '../templates/default.html'
+        templateUrl: 'templates/default.html'
       })
       .state('fetch', {
         url: '/fetch',
-        templateUrl: '../templates/fetch.html',
+        templateUrl: 'templates/fetch.html',
         controller: 'goFetchController'
       })
       .state('help-me', {
         url: '/help-me',
-        templateUrl: '../templates/help-me.html',
+        templateUrl: 'templates/help-me.html',
         controller: 'helpMeController'
       })
       .state('results', {
         url: '/results',
-        templateUrl: '../templates/results.html',
+        templateUrl: 'templates/results.html',
         controller: 'resultsController',
         params: {venue: null}
       });
 
     $urlRouterProvider.otherwise('/');
-  }])
-  .config(function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
-        // key: 'your api key',
-        v: '3.21', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization'
-    });
-  });
+  }]);
+  // .config(function(uiGmapGoogleMapApiProvider) {
+  //   uiGmapGoogleMapApiProvider.configure({
+  //       // key: 'your api key',
+  //       v: '3.21', //defaults to latest 3.X anyhow
+  //       libraries: 'weather,geometry,visualization'
+  //   });
+  // });
 
-  app.run(function ($rootScope, Geolocator){
-    $rootScope.userLocation = Geolocator();
-  });
+  // app.run(function ($rootScope, Geolocator){
+  //   $rootScope.userLocation = Geolocator();
+  // });
 })();
