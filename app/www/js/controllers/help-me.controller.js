@@ -46,25 +46,6 @@
 
       .then(function(markers) {
 
-        // CategoryService
-        //   .getCategories()
-        //   .then(function(categories){ // need to return categories above line
-        //     $scope.categories = categories;
-
-        //   console.log(categories);
-
-
-
-
-
-        //   });
-
-        // CategoryService
-        //   .displayCategory()
-        //   .then(function(categoryDataBase){
-        //     console.log(categoryDataBase);
-        //   });
-
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
@@ -125,63 +106,73 @@
                         "category": dataCat,
                         "venue": venueName,
                         "primary_image": dataImage1,
-                        "secondary_image": dataImage2
+                        "secondary_image": dataImage2,
+                        "used_image": null
                       });
                     }
                   }
 
                 }
                 $scope.displayObjectArray = displayObjectArray;
-                console.log(displayObjectArray);
                 $scope.currentCategory = displayObjectArray.shift();
-
+                $scope.categoryImage = $scope.currentCategory.primary_image;
+                $scope.currentCategory.used_image = $scope.categoryImage;
               });
 
           });
 
-            // googleMaps
-            //   .then(function(maps) {
-
             //     //swipe left, new venue
-            var emptyArray = [];
-            $scope.getCategory = function(displayObjectArray){
+            var leftSwipeArray = [];
+            var rightSwipeArray = [];
+            var usedImage, index, obj;
 
-              emptyArray.push($scope.currentCategory);
+
+            $scope.leftSwipeShift = function(displayObjectArray){
+
+              leftSwipeArray.push($scope.currentCategory);
               $scope.currentCategory = displayObjectArray.shift();
-              console.log('YOU ARE SWIPING LEFT');
+              console.log(leftSwipeArray, "left");
+              for (var s = 0; s < leftSwipeArray.length; s++){
+
+                if ($scope.currentCategory.primary_image === leftSwipeArray[s].used_image){
+                $scope.categoryImage = $scope.currentCategory.secondary_image;
+
+
+                } else if ($scope.currentCategory.secondary_image === leftSwipeArray[s].used_image){
+
+
+                }
+                $scope.currentCategory.used_image = $scope.categoryImage;
+
+
+              }
 
             }
-            //     $scope.getVenue = function(foodCategories){
-            //       console.log('YOU ARE SWIPING LEFT');
 
-            //       deniedVenues.push($scope.currentVenue);
-            //       $scope.currentVenue = foodCategories.shift();
-            //       markers.splice(1, 1);
-            //       createMarker(markers, $scope.currentVenue.location.coordinate.latitude, $scope.currentVenue.location.coordinate.longitude, 1);
-            //       $scope.directions.destination = markers[1].latitude + "," + markers[1].longitude;
-            //       request.destination = $scope.directions.destination;
+            $scope.rightSwipeShift = function (displayObjectArray){
+              rightSwipeArray.push($scope.currentCategory);
+              $scope.currentCategory = displayObjectArray.shift();
+              console.log(rightSwipeArray, "right");
+              //console.log(usedImage);
+              if ($scope.currentCategory.primary_image === usedImage){
+                $scope.categoryImage = $scope.currentCategory.secondary_image;
+              } else {
+                $scope.categoryImage = $scope.currentCategory.primary_image;
+              }
 
-                  //get directions to new venue
-                  // directionsService.route(request, function(response, status){
-                  //   if (status === google.maps.DirectionsStatus.OK) {
-                  //     directionsDisplay.setDirections(response);
-                  //     directionsDisplay.setPanel(document.getElementById('directionsList'));
-                  //     $scope.directions.showList = true;
-                  //     $scope.distance = response.routes[0].legs[0].distance.text;
-                  //     $scope.travelTime = response.routes[0].legs[0].duration.text;
-                  //   } else {
-                  //     $scope.message = "Google route unsuccessful!";
-                  //   }
-                  // });
+              // for (var s = 0; s < rightSwipeArray.length; s++){
+
+              //   if ($scope.currentCategory.primary_image === rightSwipeArray[s].primary_image){
+              //     $scope.categoryImage = $scope.currentCategory.secondary_image;
+
+              //   } else if ($scope.currentCategory.secondary_image === rightSwipeArray[s].secondary_image){
+
+              //   }
+              // }
 
 
-            //     };
-            // });
-            $scope.displayCategory = function (currentCategory){
-              console.log('adding 1');
-              console.log(currentCategory);
-              // $state.go('results', {venue: currentCategory});
-            };
+            }
+
 
           });
         };
