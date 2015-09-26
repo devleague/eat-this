@@ -84,17 +84,6 @@ var deniedVenues = [];
                   //Get directions to new venue
                   calculateAndDisplayRoute(directionsService, directionsDisplay);
                 };
-
-                function calculateAndDisplayRoute(directionsService, directionsDisplay){
-                  directionsService.route(request, function(response, status){
-                    if (status === maps.DirectionsStatus.OK) {
-                      directionsDisplay.setDirections(response);
-                      $scope.currentVenue.directions = response;
-                    } else {
-                      $scope.message = "Google route unsuccessful!";
-                    }
-                  });
-                }
             });
           });
         }, function(reason){
@@ -106,6 +95,17 @@ var deniedVenues = [];
     };
   }
 })();
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay){
+  directionsService.route(request, function(response, status){
+    if (status === maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      $scope.currentVenue.directions = response;
+    } else {
+      $scope.message = "Google route unsuccessful!";
+    }
+  });
+}
 
 function runShuffle (array){
   var currentIndex = array.length;

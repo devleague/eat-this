@@ -10,9 +10,9 @@
       ]);
 
   function mainController ($rootScope, $scope, eatTitle, geolocation, googleMaps) {
-    $scope.title = eatTitle;
+     $scope.title = eatTitle;
 
-    geolocation()
+    $rootScope.userLocation()
       .then(function (position){
         $scope.position = position;
         $scope.location = position.coords.latitude;
