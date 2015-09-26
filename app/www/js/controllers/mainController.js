@@ -18,17 +18,9 @@
         $scope.location = position.coords.latitude;
       }, function(reason){
         $scope.message = reason.message;
-
-        googleMaps
-          .then(function(maps){
-            var placeSearch, autocomplete;
-            console.log(maps);
-
-            function initAutocomplete(){
-              autocomplete = new maps.places.Autocomplete((document.getElementById('autocomplete')), {types: ['geocode']});
-              autocomplete.addListener('place_changed', fillInAddress);
-            }
-          });
-      });
+        $scope.place = null;
+      }), function(reason){
+          $scope.message = "Could not be determined";
+      };
   }
 })();

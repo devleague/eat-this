@@ -9,5 +9,12 @@
       Help Me
    </button>
 
+   <form class="form">
+    <input class="form-control" g-places-autocomplete ng-model="place">
+   </form>
+
+   <h5>Result:</h5>
+   <pre>{{place | json}}</pre>
+
   </ion-content>
 </ion-view>
