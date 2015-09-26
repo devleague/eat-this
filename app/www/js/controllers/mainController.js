@@ -12,7 +12,7 @@
   function mainController ($rootScope, $scope, eatTitle, geolocation, googleMaps) {
      $scope.title = eatTitle;
 
-    $rootScope.userLocation()
+    $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
         $scope.location = position.coords.latitude;
