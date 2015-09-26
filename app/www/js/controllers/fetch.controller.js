@@ -62,7 +62,7 @@ var deniedVenues = [];
                   calculateAndDisplayRoute(directionsService, directionsDisplay);
                 };
 
-                function calculateAndDisplayRoute(request, directionsService, directionsDisplay){
+                function calculateAndDisplayRoute(directionsService, directionsDisplay){
                   directionsService.route(request, function(response, status){
                     if (status === maps.DirectionsStatus.OK) {
                       directionsDisplay.setDirections(response);
