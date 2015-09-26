@@ -30,6 +30,11 @@
         url: '/',
         templateUrl: '../templates/default.html'
       })
+      .state('set-location', {
+        url: '/set-location',
+        templateUrl: '../templates/set-location.html',
+        controller: 'setLocationController'
+      })
       .state('fetch', {
         url: '/fetch',
         templateUrl: '../templates/fetch.html',

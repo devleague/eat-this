@@ -1,0 +1,23 @@
+<ion-view view-title="Choose a Location">
+  <ion-content>
+    <div class="set-location">
+      <h1>Enter any address</h1>
+      <h4>Format: Street, City, State OR Zip Code</h4>
+      <form class="form">
+        <input class="form-control" g-places-autocomplete ng-model="place" placeholder="Address">
+      </form>
+
+    <br>
+
+     <button class="button button-balanced">
+      Submit
+    </button>
+
+     <h5>Result:</h5>
+     <pre>{{place | json}}</pre>
+
+    </div>
+  </ion-content>
+</ion-view>
+
+
