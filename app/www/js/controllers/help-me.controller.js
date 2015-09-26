@@ -117,6 +117,7 @@
                 $scope.currentCategory = displayObjectArray.shift();
                 $scope.categoryImage = $scope.currentCategory.primary_image;
                 $scope.currentCategory.used_image = $scope.categoryImage;
+                usedImage = $scope.currentCategory.used_image;
               });
 
           });
@@ -128,47 +129,68 @@
 
 
             $scope.leftSwipeShift = function(displayObjectArray){
+              if (displayObjectArray.length > 0){
 
-              leftSwipeArray.push($scope.currentCategory);
-              $scope.currentCategory = displayObjectArray.shift();
-              console.log(leftSwipeArray, "left");
-              for (var s = 0; s < leftSwipeArray.length; s++){
+                leftSwipeArray.push($scope.currentCategory);
+                $scope.currentCategory = displayObjectArray.shift();
+                //console.log(leftSwipeArray, "left");
+                for (var s = 0; s < leftSwipeArray.length; s++){
 
-                if ($scope.currentCategory.primary_image === leftSwipeArray[s].used_image){
-                $scope.categoryImage = $scope.currentCategory.secondary_image;
+                  if ($scope.currentCategory.primary_image === leftSwipeArray[s].used_image || usedImage === leftSwipeArray[s].used_image){
+                    $scope.categoryImage = $scope.currentCategory.secondary_image;
+                    $scope.currentCategory.used_image = $scope.categoryImage;
+                    //console.log("first if");
 
 
-                } else if ($scope.currentCategory.secondary_image === leftSwipeArray[s].used_image){
+                  } else if ($scope.currentCategory.secondary_image === leftSwipeArray[s].used_image){
+                    leftSwipeArray.push($scope.currentCategory);
+                      $scope.currentCategory = displayObjectArray.shift();
+                      $scope.categoryImage = $scope.currentCategory.secondary_image;
+                      $scope.currentCategory.used_image = $scope.categoryImage;
+                      //console.log("second if");
 
-
+                  } else {
+                    $scope.categoryImage = $scope.currentCategory.primary_image;
+                    $scope.currentCategory.used_image = $scope.categoryImage;
+                    usedImage = $scope.currentCategory.used_image;
+                  }
                 }
-                $scope.currentCategory.used_image = $scope.categoryImage;
-
-
+              } else {
+                console.log("END OF ARRAY");
               }
-
             }
 
             $scope.rightSwipeShift = function (displayObjectArray){
-              rightSwipeArray.push($scope.currentCategory);
-              $scope.currentCategory = displayObjectArray.shift();
-              console.log(rightSwipeArray, "right");
-              //console.log(usedImage);
-              if ($scope.currentCategory.primary_image === usedImage){
-                $scope.categoryImage = $scope.currentCategory.secondary_image;
+              if (displayObjectArray.length > 0){
+                rightSwipeArray.push($scope.currentCategory);
+                $scope.currentCategory = displayObjectArray.shift();
+                console.log(rightSwipeArray, "right");
+                for (var t = 0; t < rightSwipeArray.length; t++){
+
+                  if ($scope.currentCategory.primary_image === rightSwipeArray[t].used_image || usedImage === rightSwipeArray[t].used_image){
+                    $scope.categoryImage = $scope.currentCategory.secondary_image;
+                    $scope.currentCategory.used_image = $scope.categoryImage;
+                    console.log("first if");
+
+                  } else if ($scope.currentCategory.secondary_image === rightSwipeArray[t].used_image){
+                      leftSwipeArray.push($scope.currentCategory);
+                      $scope.currentCategory = displayObjectArray.shift();
+                      $scope.categoryImage = $scope.currentCategory.secondary_image;
+                      $scope.currentCategory.used_image = $scope.categoryImage;
+                      console.log("second if");
+
+                  } else {
+                    $scope.categoryImage = $scope.currentCategory.primary_image;
+                    $scope.currentCategory.used_image = $scope.categoryImage;
+                    usedImage = $scope.currentCategory.used_image;
+                  }
+                }
               } else {
-                $scope.categoryImage = $scope.currentCategory.primary_image;
+                console.log("AT THE END");
               }
 
-              // for (var s = 0; s < rightSwipeArray.length; s++){
 
-              //   if ($scope.currentCategory.primary_image === rightSwipeArray[s].primary_image){
-              //     $scope.categoryImage = $scope.currentCategory.secondary_image;
 
-              //   } else if ($scope.currentCategory.secondary_image === rightSwipeArray[s].secondary_image){
-
-              //   }
-              // }
 
 
             }
