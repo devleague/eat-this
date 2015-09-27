@@ -77,9 +77,15 @@ var deniedVenues = [];
                 $scope.getVenue = function(venues){
                   console.log('YOU ARE SWIPING LEFT');
 
-                  deniedVenues.push($scope.currentVenue);
-                  $scope.currentVenue = venues.shift();
-                  request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
+                  if (venues.length > 0) {
+                    deniedVenues.push($scope.currentVenue);
+                    $scope.currentVenue = venues.shift();
+                    console.log(venues.length);
+                    request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
+                  }
+                  else {
+                    console.log('END OF ARRAY');
+                  }
 
                   //Get directions to new venue
                   calculateAndDisplayRoute(directionsService, directionsDisplay);

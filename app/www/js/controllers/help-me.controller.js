@@ -9,11 +9,10 @@
         'VenueService',
         '$state',
         'uiGmapGoogleMapApi',
-        '$http',
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps, $http) {
+  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
     $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
 
@@ -99,44 +98,43 @@
 
             $scope.foodCategories = foodCategories;
 
-            $http.get('/js/categories.json')
-              .success(function (data){
-                //$scope.categoryDB = data;
-                //console.log(data);
-                //console.log(foodCategories);
+            CategoryService
+            .getCategories()
+            .then(function (data){
+              //$scope.categoryDB = data;
+              // console.log(data);
+              //console.log(foodCategories);
 
-                //loop through image array and check if is also present in other array
-                var dataCat;
-                var dataImage1, dataImage2;
-                var venueCat;
-                var venueName;
-                var displayObjectArray = [];
-                for (var x = 0; x < data.length; x++){
-                  dataCat = data[x].category;
-                  dataImage1 = data[x].primary_image;
-                  dataImage2 = data[x].secondary_image;
+              //loop through image array and check if is also present in other array
+              var dataCat;
+              var dataImage1, dataImage2;
+              var venueCat;
+              var venueName;
+              var displayObjectArray = [];
+              for (var x = 0; x < data.length; x++){
+                dataCat = data[x].category;
+                dataImage1 = data[x].primary_image;
+                dataImage2 = data[x].secondary_image;
 
-                  for (var y = 0; y < foodCategories.length; y++){
-                    venueCat = foodCategories[y].category;
-                    venueName = foodCategories[y].venue;
+                for (var y = 0; y < foodCategories.length; y++){
+                  venueCat = foodCategories[y].category;
+                  venueName = foodCategories[y].venue;
 
-                    if (dataCat === venueCat){
-                      displayObjectArray.push({
-                        "category": dataCat,
-                        "venue": venueName,
-                        "primary_image": dataImage1,
-                        "secondary_image": dataImage2
-                      });
-                    }
+                  if (dataCat === venueCat){
+                    displayObjectArray.push({
+                      "category": dataCat,
+                      "venue": venueName,
+                      "primary_image": dataImage1,
+                      "secondary_image": dataImage2
+                    });
                   }
-
                 }
-                $scope.displayObjectArray = displayObjectArray;
-                console.log(displayObjectArray);
-                $scope.currentCategory = displayObjectArray.shift();
 
-              });
-
+              }
+              $scope.displayObjectArray = displayObjectArray;
+              console.log(displayObjectArray);
+              $scope.currentCategory = displayObjectArray.shift();
+            });
           });
 
             // googleMaps
@@ -146,11 +144,17 @@
             var emptyArray = [];
             $scope.getCategory = function(displayObjectArray){
 
-              emptyArray.push($scope.currentCategory);
-              $scope.currentCategory = displayObjectArray.shift();
-              console.log('YOU ARE SWIPING LEFT');
+              if (displayObjectArray.length > 0) {
+                emptyArray.push($scope.currentCategory);
+                $scope.currentCategory = displayObjectArray.shift();
+                console.log(displayObjectArray.length);
+                console.log('YOU ARE SWIPING LEFT');
+              }
+              else {
+                console.log('END OF ARRAY');
+              }
 
-            }
+            };
             //     $scope.getVenue = function(foodCategories){
             //       console.log('YOU ARE SWIPING LEFT');
 
