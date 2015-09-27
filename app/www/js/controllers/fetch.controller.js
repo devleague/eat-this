@@ -18,17 +18,14 @@ var deniedVenues = [];
 
     if ($rootScope.selectedLocation) {
       loadVenues($rootScope.selectedLocation)
-    } else if ($rootScope.userLocation.status == 1) {
-      $rootScope
-        .userLocation
+    } else {
+      $rootScope.userLocation
         .then(function(position){
           loadVenues(position)
         }, function(reason){
           $scope.message = "Geolocation could not be determined";
         });
-    } else {
-      console.log("No location data");
-    }
+    };
 
     function loadVenues(position) {
       $scope.position = true;
