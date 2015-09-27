@@ -51,10 +51,13 @@
           .then(function(venues){
             //first venue
             //console.log(venues);
+            // debugger;
+            $scope.venues = venues;
+            //console.log($scope.venues);
             ///////////////////////////////////////
             //fetching keywords for help me function
             var foodCategories = [];
-            var singleCategory;
+            var singleCategory, name, rating, phone;
             var categoryVenue;
             var categoryObject = {};
 
@@ -64,11 +67,19 @@
 
                 singleCategory = venues[i].categories[j][0];
                 categoryVenue = venues[i].id;
+                name = venues[i].name;
+                rating = venues[i].rating;
+                phone = venues[i].phone;
+                image = venues[i].image_url
 
 
                   categoryObject = {
                   "category": singleCategory,
-                  "venue" : categoryVenue
+                  "venue" : categoryVenue,
+                  "name": name,
+                  "rating": rating,
+                  "phone": phone,
+                  "image": image
                 };
                   foodCategories.push(categoryObject);
 
@@ -107,7 +118,8 @@
                         "venue": venueName,
                         "primary_image": dataImage1,
                         "secondary_image": dataImage2,
-                        "used_image": null
+                        "used_image": null,
+                        "count": 0
                       });
                     }
                   }
@@ -156,7 +168,8 @@
                   }
                 }
               } else {
-                console.log("END OF ARRAY");
+
+                produceResult(rightSwipeArray);
               }
             }
 
@@ -170,14 +183,14 @@
                   if ($scope.currentCategory.primary_image === rightSwipeArray[t].used_image || usedImage === rightSwipeArray[t].used_image){
                     $scope.categoryImage = $scope.currentCategory.secondary_image;
                     $scope.currentCategory.used_image = $scope.categoryImage;
-                    console.log("first if");
+                    //console.log("first if");
 
                   } else if ($scope.currentCategory.secondary_image === rightSwipeArray[t].used_image){
                       leftSwipeArray.push($scope.currentCategory);
                       $scope.currentCategory = displayObjectArray.shift();
                       $scope.categoryImage = $scope.currentCategory.secondary_image;
                       $scope.currentCategory.used_image = $scope.categoryImage;
-                      console.log("second if");
+                      //console.log("second if");
 
                   } else {
                     $scope.categoryImage = $scope.currentCategory.primary_image;
@@ -186,20 +199,41 @@
                   }
                 }
               } else {
-                console.log("AT THE END");
+                produceResult(rightSwipeArray);
               }
-
-
-
-
-
             }
 
 
+            var resultsObject, resultsCategory, resultsVenue, resultsArray, resultsIndex, num;
+
+            function produceResult (rightSwipeArray){
+              num = Math.floor(Math.random() * (rightSwipeArray.length));
+              resultsObject = rightSwipeArray[num];
+
+              resultsVenue = resultsObject.venue;
+              resultsIndex = getIndexOfObjectWithAttribute($scope.foodCategories, "venue", resultsVenue);
+              resultsCategory = $scope.foodCategories[resultsIndex];
+              console.log(resultsCategory);
+              $scope.displayVenue = function (resultsCategory){
+                $state.go('results', resultsCategory);
+              };
+            }
+
           });
+
         };
 
 })();
+
+function getIndexOfObjectWithAttribute (array, attr, value){
+  for (var m = 0; m < array.length; m++){
+    if (array[m][attr] === value) {
+            return m;
+    }
+  }
+  return -1;
+}
+
 
 function createMarker (arr, x, y, id, icon) {
   var marker = {

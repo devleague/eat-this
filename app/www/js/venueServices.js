@@ -15,12 +15,17 @@
         };
 
         var Venues = $resource(BASE_URL + '/api/venues', queryOptions);
-
+        // console.log(Venues);
+        // console.log(Venues.query().$promise);
+        // debugger;
         return Venues.query().$promise;
       };
 
-      this.displayVenue = function (venueId){
 
+
+
+
+      this.displayVenue = function (venueId){
         var Venue = $resource(BASE_URL + '/api/venues/:id', { id: venueId });
         return Venue.get().$promise;
       };
