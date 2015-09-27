@@ -44,7 +44,7 @@
         url: '/results',
         templateUrl: 'templates/results.html',
         controller: 'resultsController',
-        params: {venue: null}
+        // params: {venue: null}
       });
 
     $urlRouterProvider.otherwise('/');
