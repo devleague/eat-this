@@ -3,6 +3,7 @@
     .controller('mainController', [
         '$rootScope',
         '$scope',
+        '$state',
         '$ionicModal',
         'eatTitle',
         'Geolocator',
@@ -10,7 +11,7 @@
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $ionicModal, eatTitle, geolocation, googleMaps) {
+  function mainController ($rootScope, $scope, $state, $ionicModal, eatTitle, geolocation, googleMaps) {
     $scope.title = eatTitle;
     $scope.place = null;
     // $ionicModal
@@ -39,7 +40,7 @@
         $scope.position = position;
         console.log(position);
       }, function(reason){
-        $scope.message = "Could not be determined";
+        $state.go('set-location');
       });
   }
 })();

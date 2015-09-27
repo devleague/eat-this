@@ -6,7 +6,13 @@
 
 (function (){
 
-  var app = angular.module('eatApp', ['ionic', 'ngResource', 'google.places', 'uiGmapgoogle-maps']);
+  var app = angular.module(
+    'eatApp',
+    ['ionic',
+    'ngResource',
+    'google.places',
+    'uiGmapgoogle-maps'
+  ]);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
