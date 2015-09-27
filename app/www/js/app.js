@@ -10,6 +10,7 @@
     'eatApp',
     ['ionic',
     'ngResource',
+    'ngCordova',
     'google.places',
     'uiGmapgoogle-maps'
   ]);
@@ -22,19 +23,29 @@
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
+      if(ionic.Platform.isWebView()){
+        console.log('is web broswer');
+      }
+      if(ionic.Platform.isIOS()){
+        console.log('this is iOS');
+      }
+      if(ionic.Platform.isAndroid()){
+        console.log('is android');
+      }
+      console.log(ionic.Platform.device());
     });
   });
 
   app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider ){
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
+    // $locationProvider.html5Mode({
+    //   enabled: true,
+    //   requireBase: false
+    // });
 
     $stateProvider
       .state('app', {
         url: '/',
-        templateUrl: '../templates/default.html'
+        templateUrl: 'templates/default.html'
       })
       .state('set-location', {
         url: '/set-location',
@@ -43,32 +54,47 @@
       })
       .state('fetch', {
         url: '/fetch',
-        templateUrl: '../templates/fetch.html',
+        templateUrl: 'templates/fetch.html',
         controller: 'goFetchController'
       })
       .state('help-me', {
         url: '/help-me',
-        templateUrl: '../templates/help-me.html',
+        templateUrl: 'templates/help-me.html',
         controller: 'helpMeController'
       })
       .state('results', {
         url: '/results',
-        templateUrl: '../templates/results.html',
+        templateUrl: 'templates/results.html',
         controller: 'resultsController',
         params: {venue: null}
       });
 
     $urlRouterProvider.otherwise('/');
-  }])
-  .config(function(uiGmapGoogleMapApiProvider) {
-    uiGmapGoogleMapApiProvider.configure({
-        // key: 'your api key',
-        v: '3.21',
-        libraries: 'weather,geometry,visualization,places'
-    });
-  });
+  }]);
+
+  // .config(function(uiGmapGoogleMapApiProvider) {
+  //   uiGmapGoogleMapApiProvider.configure({
+  //       // key: 'your api key',
+  //       v: '3.21', //defaults to latest 3.X anyhow
+  //       libraries: 'weather,geometry,visualization'
+  //   });
+  // });
 
   app.run(function ($rootScope, Geolocator){
     $rootScope.userLocation = Geolocator();
   });
+
+  // app.run(function ($rootScope, $cordovaGeolocation){
+  //   var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  //   $cordovaGeolocation
+  //     .getCurrentPosition(posOptions)
+  //     .then(function (position) {
+  //       var lat  = position.coords.latitude;
+  //       var long = position.coords.longitude;
+  //       $rootScope.mobileGeo = lat + ' & ' + long;
+  //       console.log(lat + ' AND ' + long);
+  //     }, function(err) {
+  //       // error
+  //     });
+  // });
 })();
