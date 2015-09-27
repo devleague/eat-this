@@ -17,15 +17,19 @@ var deniedVenues = [];
     $scope.currentVenue;
 
     if ($rootScope.selectedLocation) {
-      loadVenues($rootScope.selectedLocation)
+      loadVenues($rootScope.selectedLocation);
     } else {
       $rootScope.userLocation
         .then(function(position){
-          loadVenues(position)
+          loadVenues(position);
         }, function(reason){
           $scope.message = "Geolocation could not be determined";
+        })
+        .catch(function(err){
+          console.log(err);
         });
-    };
+    }
+
 
     function loadVenues(position) {
       $scope.position = true;

@@ -13,6 +13,7 @@
 
   function mainController ($rootScope, $scope, $state, $ionicModal, eatTitle, geolocation, googleMaps) {
     $scope.title = eatTitle;
+
     $scope.place = null;
     // $ionicModal
     //   .fromTemplateUrl('templates/set-location.html', {
