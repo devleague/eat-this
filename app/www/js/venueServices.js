@@ -3,7 +3,7 @@
     .module('eatApp')
     .service('VenueService', ['$resource' , function ($resource){
 
-      var BASE_URL = 'https://qswepvblto.localtunnel.me';
+      var BASE_URL = 'http://localhost:8080';
 
       this.getVenues = function (latitude, longitude, radius){
         radius = radius || 3220; //approx. 2 miles
