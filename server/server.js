@@ -42,6 +42,7 @@ router.get('/api/venues', function (req, res) {
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var location = latitude + ',' + longitude;
+  console.log(location);
 
   yelp.search({ term: "food", ll: location, radius_filter: 3220 }, function (error, data) {
     var venues = data.businesses;
