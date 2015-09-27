@@ -6,7 +6,14 @@
 
 (function (){
 
-  var app = angular.module('eatApp', ['ionic', 'ngCordova', 'ngResource', 'uiGmapgoogle-maps']);
+  var app = angular.module(
+    'eatApp',
+    ['ionic',
+    'ngResource',
+    'ngCordova',
+    'google.places',
+    'uiGmapgoogle-maps'
+  ]);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
@@ -40,6 +47,11 @@
         url: '/',
         templateUrl: 'templates/default.html'
       })
+      .state('set-location', {
+        url: '/set-location',
+        templateUrl: '../templates/set-location.html',
+        controller: 'setLocationController as setLocation'
+      })
       .state('fetch', {
         url: '/fetch',
         templateUrl: 'templates/fetch.html',
@@ -59,6 +71,7 @@
 
     $urlRouterProvider.otherwise('/');
   }]);
+
   // .config(function(uiGmapGoogleMapApiProvider) {
   //   uiGmapGoogleMapApiProvider.configure({
   //       // key: 'your api key',

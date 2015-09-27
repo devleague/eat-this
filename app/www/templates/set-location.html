@@ -1,0 +1,16 @@
+<ion-view view-title="Choose a Location">
+  <ion-content>
+    <div class="set-location">
+      <h1>Enter any address</h1>
+      <form class="form" ng-submit="submit()">
+        <input class="form-control" g-places-autocomplete force-selection="true" ng-model="setLocation.place" placeholder="City, State OR Zip">
+        <input type="submit" id="submit" value="Submit">
+      </form>
+     <h5>Result:</h5>
+     <pre>{{setLocation.place | json}}</pre>
+
+    </div>
+  </ion-content>
+</ion-view>
+
+

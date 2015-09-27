@@ -1,8 +1,6 @@
 <ion-view view-title="Fetch">
   <ion-content>
-    <!-- <div ng-show="position"> -->
-    <h1> {{ location }} </h1>
-
+    <div ng-show="position">
       <div id="map_canvas">
         <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
           <ui-gmap-markers models="markers" coords="'self'" fit="true">
