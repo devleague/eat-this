@@ -19,6 +19,8 @@ var deniedVenues = [];
     $scope.message = "Determining your location...";
     $scope.currentVenue;
 
+    $scope.location = $rootScope.mobileGeo;
+
     // $rootScope.userLocation
       // .then(function(position){
       //   $scope.position = position;

@@ -6,7 +6,7 @@
 
 (function (){
 
-  var app = angular.module('eatApp', ['ionic', 'ngResource', 'uiGmapgoogle-maps']);
+  var app = angular.module('eatApp', ['ionic', 'ngCordova', 'ngResource', 'uiGmapgoogle-maps']);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
@@ -60,4 +60,18 @@
   // app.run(function ($rootScope, Geolocator){
   //   $rootScope.userLocation = Geolocator();
   // });
+
+  app.run(function ($rootScope, $cordovaGeolocation){
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        $rootScope.mobileGeo = lat + ' & ' + long;
+        console.log(lat + ' AND ' + long);
+      }, function(err) {
+        // error
+      });
+  });
 })();
