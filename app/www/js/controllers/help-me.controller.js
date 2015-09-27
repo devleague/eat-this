@@ -214,8 +214,10 @@
               resultsIndex = getIndexOfObjectWithAttribute($scope.foodCategories, "venue", resultsVenue);
               resultsCategory = $scope.foodCategories[resultsIndex];
               console.log(resultsCategory);
+
+              // Send object to Route
               $scope.displayVenue = function (resultsCategory){
-                $state.go('results', resultsCategory);
+                $state.go('results', {venue: resultsCategory});
               };
             }
 
