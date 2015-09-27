@@ -21,19 +21,19 @@ gulp.task('browserSync', function (){
 });
 
 // keeps gulp from crashing for scss errors
-gulp.task('sass', function () {
-  return gulp.src('./sass/*.scss')
-      .pipe(sass({ errLogToConsole: true }))
-      .pipe(gulp.dest('./app/css'))
-      .pipe(minifyCss())
-      .pipe(rename({
-        suffix: '.min'
-      }))
-      .pipe(gulp.dest('./app/css'));
-});
+// gulp.task('sass', function () {
+//   return gulp.src('./sass/*.scss')
+//       .pipe(sass({ errLogToConsole: true }))
+//       .pipe(gulp.dest('./app/css'))
+//       .pipe(minifyCss())
+//       .pipe(rename({
+//         suffix: '.min'
+//       }))
+//       .pipe(gulp.dest('./app/css'));
+// });
 
-gulp.task('watch', ['sass', 'browserSync'], function () {
-  gulp.watch('./sass/**/*.scss', ['sass']);
+gulp.task('watch', ['browserSync'], function () {
+  // gulp.watch('./sass/**/*.scss', ['sass']);
   gulp.watch('app/**/*', function (){
     browserSync.reload();
   });
