@@ -18,7 +18,8 @@ var deniedVenues = [];
 
     $rootScope.userLocation
       .then(function(position){
-        $scope.position = position;
+        position = $rootScope.selectedLocation || position;
+        $scope.position = true;
 
         VenueService
           .getVenues(position.coords.latitude, position.coords.longitude)

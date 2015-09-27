@@ -13,7 +13,6 @@
   function mainController ($rootScope, $scope, $ionicModal, eatTitle, geolocation, googleMaps) {
     $scope.title = eatTitle;
     $scope.place = null;
-
     // $ionicModal
     //   .fromTemplateUrl('templates/set-location.html', {
     //     scope: $scope,
@@ -40,9 +39,7 @@
         $scope.position = position;
         console.log(position);
       }, function(reason){
-        $scope.message = reason.message;
-      }), function(reason){
-          $scope.message = "Could not be determined";
-      };
+        $scope.message = "Could not be determined";
+      });
   }
 })();
