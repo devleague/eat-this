@@ -2,20 +2,15 @@
   <ion-content>
     <div class="set-location">
       <h1>Enter any address</h1>
-      <h4>Format: Street, City, State OR Zip Code</h4>
-      <form class="form">
-        <input class="form-control" g-places-autocomplete ng-model="place" placeholder="Address">
+      <form class="form" ng-submit="submit()">
+        <input class="form-control" g-places-autocomplete force-selection="true" ng-model="setLocation.place" placeholder="City, State OR Zip">
+        <input type="submit" id="submit" value="Submit">
       </form>
-
-    <br>
-
-     <button class="button button-balanced">
-      Submit
-    </button>
-
-     <h5>Result:</h5>
-     <pre>{{place | json}}</pre>
-
+<!--     <br>
+ -->
+<!--      <h5>Result:</h5>
+     <pre>{{setLocation.place | json}}</pre>
+ -->
     </div>
   </ion-content>
 </ion-view>

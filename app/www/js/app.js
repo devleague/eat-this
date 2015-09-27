@@ -33,7 +33,7 @@
       .state('set-location', {
         url: '/set-location',
         templateUrl: '../templates/set-location.html',
-        controller: 'setLocationController'
+        controller: 'setLocationController as setLocation'
       })
       .state('fetch', {
         url: '/fetch',

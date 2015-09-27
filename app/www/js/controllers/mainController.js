@@ -38,7 +38,7 @@
     $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
-        $scope.location = position.coords.latitude;
+        console.log(position);
       }, function(reason){
         $scope.message = reason.message;
       }), function(reason){
