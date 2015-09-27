@@ -7741,3 +7741,7 @@ h1 {
   height: 20em;
   background-size: cover;
   background-position: center; }
+
+.set-location {
+  margin: 40px;
+}

@@ -6,7 +6,7 @@
 
 (function (){
 
-  var app = angular.module('eatApp', ['ionic', 'ngResource', 'uiGmapgoogle-maps']);
+  var app = angular.module('eatApp', ['ionic', 'ngResource', 'google.places', 'uiGmapgoogle-maps']);
 
   app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function(){
@@ -30,6 +30,11 @@
         url: '/',
         templateUrl: '../templates/default.html'
       })
+      .state('set-location', {
+        url: '/set-location',
+        templateUrl: '../templates/set-location.html',
+        controller: 'setLocationController as setLocation'
+      })
       .state('fetch', {
         url: '/fetch',
         templateUrl: '../templates/fetch.html',
@@ -52,8 +57,8 @@
   .config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         // key: 'your api key',
-        v: '3.21', //defaults to latest 3.X anyhow
-        libraries: 'weather,geometry,visualization'
+        v: '3.21',
+        libraries: 'weather,geometry,visualization,places'
     });
   });
 
