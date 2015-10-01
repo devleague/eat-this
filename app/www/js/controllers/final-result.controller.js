@@ -40,7 +40,6 @@
             var directionsDisplay = new maps.DirectionsRenderer();
             directionsDisplay.setMap(map);
             directionsDisplay.setDirections($stateParams.venue.directions);
-            directionsDisplay.setPanel(document.getElementById('directionsList'));
           });
       }, function(reason){
         $scope.message = "Could not be determined";
