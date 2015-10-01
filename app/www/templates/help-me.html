@@ -2,9 +2,9 @@
   <ion-content class="padding">
     <h1>This is Help Me!</h1>
 
-      <div class="card" on-swipe-left="getCategory(displayObjectArray)" on-swipe-right="displayCategory(currentCategory)">
+      <div class="card" on-swipe-left="leftSwipeShift(displayObjectArray)" on-swipe-right="rightSwipeShift(displayObjectArray)">
 
-        <div class="item item-image item-img-box" style="background-image: url({{ currentCategory.primary_image }});"></div>
+        <div class="item item-image item-img-box" style="background-image: url({{ categoryImage }});"></div>
 
         <div class="item item-text-wrap">
           {{ byline }}
