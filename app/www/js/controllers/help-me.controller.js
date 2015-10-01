@@ -86,7 +86,7 @@
             $scope.foodCategories = foodCategories;
 
           CategoryService
-            //.getCategories()
+            .getCategories()
             .then(function (data){
 
                 //loop through image array and check if is also present in other array
