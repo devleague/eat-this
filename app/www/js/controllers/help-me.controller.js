@@ -9,11 +9,10 @@
         'VenueService',
         '$state',
         'uiGmapGoogleMapApi',
-        '$http',
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps, $http) {
+  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
     $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
 
@@ -50,11 +49,7 @@
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
             //first venue
-            //console.log(venues);
-            // debugger;
             $scope.venues = venues;
-            //console.log($scope.venues);
-            ///////////////////////////////////////
             //fetching keywords for help me function
             var foodCategories = [];
             var singleCategory, name, rating, phone;
@@ -71,7 +66,6 @@
                 rating = venues[i].rating;
                 phone = venues[i].phone;
                 image = venues[i].image_url
-
 
                   categoryObject = {
                   "category": singleCategory,
@@ -91,11 +85,9 @@
 
             $scope.foodCategories = foodCategories;
 
-            $http.get('/js/categories.json')
-              .success(function (data){
-                //$scope.categoryDB = data;
-                //console.log(data);
-                //console.log(foodCategories);
+          CategoryService
+            //.getCategories()
+            .then(function (data){
 
                 //loop through image array and check if is also present in other array
                 var dataCat;
