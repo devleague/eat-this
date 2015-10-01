@@ -74,6 +74,7 @@ var deniedVenues = [];
 
                 //Get directions to new venue
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
+
               };
 
               function calculateAndDisplayRoute(directionsService, directionsDisplay){
