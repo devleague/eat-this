@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "angular-google-maps": "~2.2.1",
-    "angular-resource": "~1.4.6"
+    "angular-resource": "~1.4.6",
+    "ngCordova": "~0.1.20-alpha",
+    "angular-google-places-autocomplete": "~0.2.7"
   }
 }
