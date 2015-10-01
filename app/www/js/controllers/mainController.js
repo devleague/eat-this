@@ -40,7 +40,8 @@
       .then(function (position){
         $scope.position = position;
         console.log(position);
-      }, function(reason){
+      })
+      .catch(function(error){
         $state.go('set-location');
       });
   }
