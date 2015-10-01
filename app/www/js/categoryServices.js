@@ -1,13 +1,23 @@
 (function (){
   angular
     .module('eatApp')
-    .service('CategoryService', ['$resource' , function ($resource){
+    .service('CategoryService', ['$resource', '$http' , function ($resource, $http){
 
-      this.displayCategory = function (catId){
+      var BASE_URL = 'http://localhost:8080';
 
-        var Category = displayObjectArray;
-        return Category.get().$promise;
+      this.getCategories = function () {
+
+        var Categories = $resource(BASE_URL + "/api/restaurants");
+
+        return Categories.query().$promise;
+
       };
+
+      // this.displayCategory = function (catId){
+
+      //   var Category = displayObjectArray;
+      //   return Category.get().$promise;
+      // };
 
     }]);
 })();
