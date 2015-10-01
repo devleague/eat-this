@@ -15,26 +15,6 @@
     $scope.title = eatTitle;
 
     $scope.place = null;
-    // $ionicModal
-    //   .fromTemplateUrl('templates/set-location.html', {
-    //     scope: $scope,
-    //     animation: 'slide-in-up'
-    //   })
-    //   .then(function(modal){
-    //     $scope.modal = modal;
-    //   })
-
-    // $scope.openModal = function(){
-    //   $scope.modal.show();
-    // }
-
-    // $scope.closeModal = function(){
-    //   $scope.modal.hide();
-    // }
-
-    // $scope.$on('destroy', function(){
-    //   $scope.modal.remove();
-    // })
 
     $rootScope.userLocation
       .then(function (position){
@@ -42,7 +22,18 @@
         console.log(position);
       })
       .catch(function(error){
-        $state.go('set-location');
+        console.log(error);
+        $scope.modal.show();
+
+      });
+
+    $ionicModal
+      .fromTemplateUrl('templates/set-location.html', {
+        scope: $scope,
+        anmiation: 'slide-in-up'
+      })
+      .then(function (modal){
+        $scope.modal = modal;
       });
   }
 })();
