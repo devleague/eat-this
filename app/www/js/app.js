@@ -33,11 +33,6 @@
         url: '/',
         templateUrl: 'templates/default.html'
       })
-      .state('set-location', {
-        url: '/set-location',
-        templateUrl: '../templates/set-location.html',
-        controller: 'setLocationController as setLocation'
-      })
       .state('fetch', {
         url: '/fetch',
         templateUrl: 'templates/fetch.html',
@@ -64,6 +59,12 @@
 
   app.run(function ($rootScope, Geolocator){
     $rootScope.userLocation = Geolocator();
+  });
+
+  app.run(function ($rootScope){
+    $rootScope.$on('openModal', function (){
+      $rootScope.$broadcast('showModal');
+    });
   });
 
 })();
