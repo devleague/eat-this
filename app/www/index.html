@@ -33,6 +33,7 @@
     <script type="text/javascript" src="/js/venueServices.js"></script>
     <script type="text/javascript" src="/js/categoryServices.js"></script>
     <script src="/js/controllers/mainController.js"></script>
+    <script src="/js/controllers/location.modal.controller.js"></script>
     <script src="/js/controllers/fetch.controller.js"></script>
     <script src="/js/controllers/final-result.controller.js"></script>
     <script src="/js/controllers/help-me.controller.js"></script>
@@ -41,6 +42,7 @@
 
   </head>
   <body ng-app="eatApp">
+    <div ng-controller="locationModalController as locationModal"></div>
 
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
