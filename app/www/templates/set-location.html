@@ -6,16 +6,17 @@
     <ion-content>
       <div class="set-location">
         <h1>Enter any address</h1>
+        {{ message }}
         <form class="form" ng-submit="submit()">
-          <input class="form-control" g-places-autocomplete force-selection="true" ng-model="setLocation.place" placeholder="City, State OR Zip">
+          <input class="form-control" g-places-autocomplete force-selection="true" ng-model="locationModal.setLocation" placeholder="City, State OR Zip">
           <input type="submit" id="submit" value="Submit">
         </form>
+      <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
        <h5>Result:</h5>
-       <pre>{{setLocation.place | json}}</pre>
+       <pre>{{locationModal.setLocation | json}}</pre>
 
       </div>
 
-      <button class="button button-full button-energized" ng-click="closeModal()">Done</button>
     </ion-content>
 </ion-modal-view>
 
