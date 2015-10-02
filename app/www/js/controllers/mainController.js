@@ -15,6 +15,10 @@
 
     $scope.place = null;
 
+    $scope.openModal = function (){
+      $rootScope.$emit('openModal');
+    };
+
     $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
