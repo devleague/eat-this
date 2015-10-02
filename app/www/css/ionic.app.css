@@ -7715,7 +7715,7 @@ h1 {
   margin: 0 auto;
   text-align: center; }
 
-#map_canvas {
+#map_canvas, #venue_directions {
   height: 10em; }
 
 .angular-google-map-container {

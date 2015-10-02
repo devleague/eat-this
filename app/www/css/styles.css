@@ -21,8 +21,9 @@ h1 {
 
 // Map Stuff
 
-#map_canvas {
+#map_canvas, #venue_directions {
   padding: 20px;
+  height: 400px;
 }
 
 .angular-google-map-container {

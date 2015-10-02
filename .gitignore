@@ -1,5 +1,6 @@
 node_modules
 app/www/lib/
+app/plugins/
 .tmp
 .sass-cache
 app/bower_components
