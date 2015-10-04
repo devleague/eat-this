@@ -18,6 +18,7 @@
     $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
+
         googleMaps
         .then(function(maps){
           console.log(maps);
@@ -26,7 +27,8 @@
           geocoder.geocode({'location': latlng}, function(results, status) {
             if (status === google.maps.GeocoderStatus.OK) {
               if (results[1]) {
-                console.log(results);
+                $rootScope.userLocation.country = results[results.length - 1].formatted_address;
+                console.log($rootScope.userLocationCountry);
               } else {
                 window.alert('No results found');
               }
