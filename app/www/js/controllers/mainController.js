@@ -18,7 +18,23 @@
     $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
-        console.log(position);
+        googleMaps
+        .then(function(maps){
+          console.log(maps);
+          var geocoder = new maps.Geocoder();
+          var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
+          geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                console.log(results);
+              } else {
+                window.alert('No results found');
+              }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });
+        });
       })
       .catch(function(error){
         console.log(error);
