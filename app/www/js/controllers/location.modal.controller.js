@@ -20,16 +20,14 @@
 
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
-        var country = $scope.locationModal.setLocation.formatted_address.split(",");
-        country = country[country.length - 1];
         $rootScope.selectedLocation = {
           address_components: $scope.locationModal.setLocation.address_components,
-          country: country,
           coords: {
             latitude: $scope.locationModal.setLocation.geometry.location.H,
             longitude: $scope.locationModal.setLocation.geometry.location.L,
           }
         };
+        console.log($rootScope.selectedLocation);
         $scope.modal.hide();
       } else {
         console.log('no location');
