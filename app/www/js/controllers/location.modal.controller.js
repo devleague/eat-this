@@ -24,9 +24,10 @@
           address_components: $scope.locationModal.setLocation.address_components,
           coords: {
             latitude: $scope.locationModal.setLocation.geometry.location.H,
-            longitude: $scope.locationModal.setLocation.geometry.location.L
+            longitude: $scope.locationModal.setLocation.geometry.location.L,
           }
         };
+        console.log($rootScope.selectedLocation);
         $scope.modal.hide();
       } else {
         console.log('no location');
