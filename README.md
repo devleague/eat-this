@@ -8,6 +8,8 @@ An app that helps users decide what and where they "want" to eat in a specified 
 1. Do `npm install -g ionic cordova` for fresh installers.
 1. You'll need at least three (optimally 4) seperate terminal sessions to run both the server and the client side.
 
+Do NOT edit the styles.css file in www/css. Instead please work in the SCSS folder styles file. 
+
 ### Client (Ionic)
 1. Change directories into `app`.
 1. Run `npm install` for node module and bower dependencies.
