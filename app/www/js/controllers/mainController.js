@@ -10,7 +10,6 @@
       ]);
 
   function mainController ($rootScope, $scope, $state, geolocation, googleMaps) {
-    $scope.title = eatTitle;
 
     $scope.place = null;
 
