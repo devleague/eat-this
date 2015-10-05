@@ -3,7 +3,6 @@
     .controller('resultsController', [
         '$rootScope',
         '$scope',
-        'eatTitle',
         'VenueService',
         '$stateParams',
         '$state',
@@ -11,7 +10,7 @@
         finalResults
       ]);
 
-  function finalResults ($rootScope, $scope, eatTitle, VenueService, $stateParams, $state, googleMaps) {
+  function finalResults ($rootScope, $scope, VenueService, $stateParams, $state, googleMaps) {
     $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
     if ($stateParams.venue === null){
