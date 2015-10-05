@@ -12,7 +12,6 @@
       ]);
 
   function getRestaurantsByCategory ($rootScope, $scope, geolocation, CategoryService, VenueService, $state, googleMaps) {
-    $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
 
     $scope.currentVenue;
