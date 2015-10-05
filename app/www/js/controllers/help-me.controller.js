@@ -3,7 +3,6 @@
     .controller('helpMeController', [
         '$rootScope',
         '$scope',
-        'eatTitle',
         'Geolocator',
         'CategoryService',
         'VenueService',
@@ -12,7 +11,7 @@
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
+  function getRestaurantsByCategory ($rootScope, $scope, geolocation, CategoryService, VenueService, $state, googleMaps) {
     $scope.title = eatTitle;
     $scope.byline = 'LETS GET SOMETHING TO EAT';
 

@@ -4,14 +4,12 @@
         '$rootScope',
         '$scope',
         '$state',
-        'eatTitle',
         'Geolocator',
         'uiGmapGoogleMapApi',
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $state, eatTitle, geolocation, googleMaps) {
-    $scope.title = eatTitle;
+  function mainController ($rootScope, $scope, $state, geolocation, googleMaps) {
 
     $scope.place = null;
 
