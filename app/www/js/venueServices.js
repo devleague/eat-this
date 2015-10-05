@@ -1,7 +1,7 @@
 (function (){
   angular
     .module('eatApp')
-    .service('VenueService', ['$resource', 'BASE_URL',  function ($resourcem, BASE_URL){
+    .service('VenueService', ['$resource', 'BASE_URL',  function ($resource, BASE_URL){
 
       var BASE_URL = BASE_URL;
 

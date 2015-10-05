@@ -11,7 +11,6 @@
       ]);
 
   function finalResults ($rootScope, $scope, VenueService, $stateParams, $state, googleMaps) {
-    $scope.title = eatTitle;
     $scope.byline = 'This is the final results';
     if ($stateParams.venue === null){
       $state.go('home');
