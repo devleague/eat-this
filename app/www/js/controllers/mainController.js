@@ -30,7 +30,7 @@
             if (status === google.maps.GeocoderStatus.OK) {
               if (results[1]) {
                 $rootScope.userLocation.country = results[results.length - 1].formatted_address;
-                console.log($rootScope.userLocationCountry);
+                console.log($rootScope.userLocation.country);
               } else {
                 window.alert('No results found');
               }
