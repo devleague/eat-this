@@ -5,7 +5,6 @@ var deniedVenues = [];
     .controller('goFetchController', [
         '$rootScope',
         '$scope',
-        'eatTitle',
         'Geolocator',
         'VenueService',
         '$state',
@@ -13,7 +12,7 @@ var deniedVenues = [];
         goFetch
       ]);
 
-  function goFetch ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
+  function goFetch ($rootScope, $scope, geolocation, VenueService, $state, googleMaps) {
     $scope.currentVenue;
 
     if ($rootScope.selectedLocation) {

@@ -1,5 +1,5 @@
 (function (){
   angular
     .module('eatApp')
-    .value('eatTitle', 'Eat This');
+    .value('BASE_URL', 'http://localhost:8080');
 })();

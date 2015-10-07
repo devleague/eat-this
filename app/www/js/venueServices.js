@@ -1,9 +1,9 @@
 (function (){
   angular
     .module('eatApp')
-    .service('VenueService', ['$resource' , function ($resource){
+    .service('VenueService', ['$resource', 'BASE_URL',  function ($resource, BASE_URL){
 
-      var BASE_URL = 'http://localhost:8080';
+      var BASE_URL = BASE_URL;
 
       this.getVenues = function (latitude, longitude, radius){
         radius = radius || 3220; //approx. 2 miles
