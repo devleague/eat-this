@@ -15,9 +15,6 @@
         };
 
         var Venues = $resource(BASE_URL + '/api/venues', queryOptions);
-        // console.log(Venues);
-        // console.log(Venues.query().$promise);
-        // debugger;
         return Venues.query().$promise;
       };
 

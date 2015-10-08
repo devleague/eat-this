@@ -8,7 +8,9 @@
 
         <div class="item item-text-wrap">
           {{ byline }}
-          {{ res }}
+          <ul ng-controller="helpMeController">
+            <li ng-repeat="swipe in rightSwipArray">{{swipe.venue}}</li>
+          </ul>
         </div>
       </div>
 

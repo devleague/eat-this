@@ -90,11 +90,9 @@
             .then(function (data){
 
                 //loop through image array and check if is also present in other array
-                var dataCat;
-                var dataImage1, dataImage2;
-                var venueCat;
-                var venueName;
+                var dataCat, dataImage1, dataImage2, venueCat, venueName;
                 var displayObjectArray = [];
+
                 for (var x = 0; x < data.length; x++){
                   dataCat = data[x].category;
                   dataImage1 = data[x].primary_image;
@@ -117,6 +115,7 @@
                   }
 
                 }
+                //need to shuffle array
                 $scope.displayObjectArray = displayObjectArray;
                 $scope.currentCategory = displayObjectArray.shift();
                 $scope.categoryImage = $scope.currentCategory.primary_image;
@@ -196,24 +195,29 @@
             }
 
 
-            var resultsObject, resultsCategory, resultsVenue, resultsArray, resultsIndex, num;
+            var resultsObject, resultsCategory, resultsVenue, resultsArray, resultsIndex, num, highRating;
 
             function produceResult (rightSwipeArray){
+
               num = Math.floor(Math.random() * (rightSwipeArray.length));
               resultsObject = rightSwipeArray[num];
 
               resultsVenue = resultsObject.venue;
               resultsIndex = getIndexOfObjectWithAttribute($scope.foodCategories, "venue", resultsVenue);
               resultsCategory = $scope.foodCategories[resultsIndex];
+              $scope.resultsCategory = resultsCategory;
               console.log(resultsCategory);
+              //return $scope.resultsCategory;
 
               // Send object to Route
-              $scope.displayVenue = function (resultsCategory){
-                $state.go('results', {venue: resultsCategory});
-              };
+              // $scope.displayVenue = function (resultsCategory){
+              //   console.log("XXXX");
+              //   $state.go('results', {params: {venue: resultsCategory}});
+              // }();
             }
 
           });
+
 
         };
 
