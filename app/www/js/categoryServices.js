@@ -1,9 +1,9 @@
 (function (){
   angular
     .module('eatApp')
-    .service('CategoryService', ['$resource', '$http' , function ($resource, $http){
+    .service('CategoryService', ['$resource', 'BASE_URL', '$http' , function ($resource, BASE_URL, $http){
 
-      var BASE_URL = 'http://localhost:8080';
+      var BASE_URL = BASE_URL;
 
       this.getCategories = function () {
 
