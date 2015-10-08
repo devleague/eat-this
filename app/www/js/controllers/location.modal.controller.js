@@ -20,7 +20,7 @@
             longitude: $scope.locationModal.setLocation.geometry.location.M
           }
         };
-        console.log($scope.locationModal.setLocation);
+        // console.log($scope.locationModal.setLocation);
         $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {

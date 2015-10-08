@@ -47,7 +47,6 @@ router.get('/api/venues', function (req, res) {
 
     if (error) {
       var errData = JSON.parse(error.data);
-
       return res.json({ message: errData.error.text });
     }
 
