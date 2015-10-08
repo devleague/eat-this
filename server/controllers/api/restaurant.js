@@ -1,5 +1,3 @@
-console.log(__dirname);
-
 var Restaurants = require('../../models/restaurants');
 
 var Restaurant = {
