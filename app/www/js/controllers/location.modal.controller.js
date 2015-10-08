@@ -10,23 +10,18 @@
 
   function locationModal ($rootScope, $scope, $state, $ionicModal) {
 
-    console.log($rootScope.userLocation);
-
-    $scope.setLocation = "blah";
-
-    $scope.place = null;
-
-    $scope.message = "this is location modal controller";
 
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
         $rootScope.selectedLocation = {
           address_components: $scope.locationModal.setLocation.address_components,
           coords: {
-            latitude: $scope.locationModal.setLocation.geometry.location.H,
-            longitude: $scope.locationModal.setLocation.geometry.location.L
+            latitude: $scope.locationModal.setLocation.geometry.location.J,
+            longitude: $scope.locationModal.setLocation.geometry.location.M
           }
         };
+        console.log($scope.locationModal.setLocation);
+        $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {
         console.log('no location');

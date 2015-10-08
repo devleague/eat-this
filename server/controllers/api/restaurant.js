@@ -1,4 +1,6 @@
-var Restaurants = require('../../models/Restaurants');
+console.log(__dirname);
+
+var Restaurants = require('../../models/restaurants');
 
 var Restaurant = {
   read: function(req, res, next) {

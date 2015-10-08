@@ -1,6 +1,6 @@
 var mongoose         = require('mongoose'),
     dbname           = "helpme_mongodb",
-    RestaurantsModel = require('../models/Restaurants');
+    RestaurantsModel = require('../models/restaurants');
 
 var Restaurant = mongoose.model("Restaurant", RestaurantsModel);
 

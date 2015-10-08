@@ -5,7 +5,6 @@ var deniedVenues = [];
     .controller('goFetchController', [
         '$rootScope',
         '$scope',
-        'eatTitle',
         'Geolocator',
         'VenueService',
         '$state',
@@ -13,7 +12,7 @@ var deniedVenues = [];
         goFetch
       ]);
 
-  function goFetch ($rootScope, $scope, eatTitle, geolocation, VenueService, $state, googleMaps) {
+  function goFetch ($rootScope, $scope, geolocation, VenueService, $state, googleMaps) {
     $scope.currentVenue;
 
     if ($rootScope.selectedLocation) {
@@ -68,13 +67,15 @@ var deniedVenues = [];
 
               //Swipe left, new venue
               $scope.getVenue = function(venues){
-                deniedVenues.push($scope.currentVenue);
-                $scope.currentVenue = venues.shift();
-                request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
-
-                //Get directions to new venue
-                calculateAndDisplayRoute(directionsService, directionsDisplay);
-
+                if (venues.length !== 0){
+                  deniedVenues.push($scope.currentVenue);
+                  $scope.currentVenue = venues.shift();
+                  request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
+                  //Get directions to new venue
+                  calculateAndDisplayRoute(directionsService, directionsDisplay);
+                } else {
+                  $state.go('help-me');
+                }
               };
 
               function calculateAndDisplayRoute(directionsService, directionsDisplay){
