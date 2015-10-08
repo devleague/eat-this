@@ -4,44 +4,43 @@
         '$rootScope',
         '$scope',
         '$state',
-        '$ionicModal',
-        'eatTitle',
         'Geolocator',
         'uiGmapGoogleMapApi',
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $state, $ionicModal, eatTitle, geolocation, googleMaps) {
-    $scope.title = eatTitle;
+  function mainController ($rootScope, $scope, $state, geolocation, googleMaps) {
 
     $scope.place = null;
-    // $ionicModal
-    //   .fromTemplateUrl('templates/set-location.html', {
-    //     scope: $scope,
-    //     animation: 'slide-in-up'
-    //   })
-    //   .then(function(modal){
-    //     $scope.modal = modal;
-    //   })
 
-    // $scope.openModal = function(){
-    //   $scope.modal.show();
-    // }
-
-    // $scope.closeModal = function(){
-    //   $scope.modal.hide();
-    // }
-
-    // $scope.$on('destroy', function(){
-    //   $scope.modal.remove();
-    // })
+    $scope.openModal = function (){
+      $rootScope.$emit('openModal');
+    };
 
     $rootScope.userLocation
       .then(function (position){
         $scope.position = position;
-        console.log(position);
-      }, function(reason){
-        $state.go('set-location');
+
+        googleMaps
+        .then(function(maps){
+          var geocoder = new maps.Geocoder();
+          var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
+          geocoder.geocode({'location': latlng}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                $rootScope.userLocation.country = results[results.length - 1].formatted_address;
+              } else {
+                window.alert('No results found');
+              }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });
+        });
+      })
+      .catch(function(error){
+        console.log(error);
+        $rootScope.$emit('openModal');
       });
   }
 })();
