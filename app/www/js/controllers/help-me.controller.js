@@ -46,7 +46,7 @@
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
-            //first venue
+            //console.log(venues);
             $scope.venues = venues;
             //fetching keywords for help me function
             var foodCategories = [];
@@ -83,10 +83,29 @@
 
             $scope.foodCategories = foodCategories;
 
+            // var resultsObject, resultsCategory, num;
+
+            // function produceResult (rightSwipeArray){
+
+            //   num = Math.floor(Math.random() * (rightSwipeArray.length));
+            //   resultsObject = rightSwipeArray[num];
+
+            //   //console.log(resultsObject);
+            //   //return $scope.resultsCategory;
+            //   // Send object to Route
+            //   displayVenue = function (resultsObject){
+            //     console.log(resultsObject.id);
+            //     $state.go('results', {venue: resultsObject.id});
+            //   }();
+            // }
+
+            // $scope.produceResult = produceResult;
+
           CategoryService
             .getCategories()
             .then(function (data){
-
+                console.log(data);
+                console.log($scope.venues);
                 //loop through image array and check if is also present in other array
                 var dataCat, dataImage1, dataImage2, venueCat, venueName;
                 var displayObjectArray = [];
@@ -96,6 +115,7 @@
                   dataImage1 = data[x].primary_image;
                   dataImage2 = data[x].secondary_image;
 
+                  //hasOwnProperty function
                   for (var y = 0; y < foodCategories.length; y++){
                     venueCat = foodCategories[y].category;
                     venueName = foodCategories[y].venue;
@@ -119,11 +139,12 @@
                 $scope.categoryImage = $scope.currentCategory.primary_image;
                 $scope.currentCategory.used_image = $scope.categoryImage;
                 usedImage = $scope.currentCategory.used_image;
+                //currentCategory is restaurant object with cat, venue, and images
               });
 
           });
 
-            //     //swipe left, new venue
+            //swipe left, new venue
             var leftSwipeArray = [];
             var rightSwipeArray = [];
             var usedImage, index, obj;
@@ -164,7 +185,13 @@
 
             $scope.rightSwipeShift = function (displayObjectArray){
               if (displayObjectArray.length > 0){
-                rightSwipeArray.push($scope.currentCategory);
+
+                //get complete $scope.venues info
+                var aaa = $scope.currentCategory.venue;
+                var bIndex = getIndexOfObjectWithAttribute($scope.venues, "id", aaa);
+                var ccc = $scope.venues[bIndex];
+                rightSwipeArray.push(ccc);
+
                 $scope.currentCategory = displayObjectArray.shift();
                 console.log(rightSwipeArray, "right");
                 for (var t = 0; t < rightSwipeArray.length; t++){
@@ -193,24 +220,20 @@
             }
 
 
-            var resultsObject, resultsCategory, resultsVenue, resultsArray, resultsIndex, num, highRating;
+            var resultsObject, resultsCategory, num;
 
             function produceResult (rightSwipeArray){
 
               num = Math.floor(Math.random() * (rightSwipeArray.length));
               resultsObject = rightSwipeArray[num];
 
-              resultsVenue = resultsObject.venue;
-              resultsIndex = getIndexOfObjectWithAttribute($scope.foodCategories, "venue", resultsVenue);
-              resultsCategory = $scope.foodCategories[resultsIndex];
-              $scope.resultsCategory = resultsCategory;
-              console.log(resultsCategory);
+              console.log(resultsObject);
               //return $scope.resultsCategory;
 
               // Send object to Route
-              // $scope.displayVenue = function (resultsCategory){
+              // $scope.displayVenue = function (resultsObject){
               //   console.log("XXXX");
-              //   $state.go('results', {params: {venue: resultsCategory}});
+              //   $state.go('results', {venue: resultsObject.id});
               // }();
             }
 
