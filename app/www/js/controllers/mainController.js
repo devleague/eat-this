@@ -36,25 +36,12 @@
           $scope.showAlert = function (){
             var myPopup = $ionicPopup.alert({
               title: '<b>UH OH!</b>',
-              template: 'Our app does not work in your location yet.',
-              // scope: $scope,
-              // buttons:[{
-              //   text: 'Give Up Now' },
-              //   {
-              //   text: 'Set Another Location',
-              //   type: 'button-positive',
-              //   onTap: function() {
-              //     myPopup.close();
-              //     return $rootScope.$emit('openModal');
-              //   }
-              // }]
+              template: 'Sorry. Our app does not work in your location yet.',
             });
             myPopup.then(function(res){
-              if(res){
-                console.log('You clicked Set Location!');
-              } else {
-                console.log('You gave up');
-              }
+              console.log('You clicked Set Location!');
+              myPopup.close();
+              return $rootScope.$emit('openModal');
             });
           };
           $scope.showAlert();

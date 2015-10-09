@@ -16,6 +16,10 @@
       $state.go('home');
     }
 
+    $scope.venue = $stateParams;
+
+    console.log($scope.venue);
+
     VenueService
       .displayVenue($stateParams.venue.id)
       .then(function(venue) {
