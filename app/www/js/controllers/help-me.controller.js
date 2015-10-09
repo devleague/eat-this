@@ -46,7 +46,7 @@
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
-            //first venue
+
             $scope.venues = venues;
             //fetching keywords for help me function
             var foodCategories = [];
@@ -74,30 +74,26 @@
                   "image": image
                 };
                   foodCategories.push(categoryObject);
-
-
               }
             }
 
             runShuffle(foodCategories);
-
             $scope.foodCategories = foodCategories;
 
           CategoryService
             .getCategories()
             .then(function (data){
-
                 //loop through image array and check if is also present in other array
-                var dataCat;
-                var dataImage1, dataImage2;
-                var venueCat;
-                var venueName;
+
+                var dataCat, dataImage1, dataImage2, venueCat, venueName;
                 var displayObjectArray = [];
+
                 for (var x = 0; x < data.length; x++){
                   dataCat = data[x].category;
                   dataImage1 = data[x].primary_image;
                   dataImage2 = data[x].secondary_image;
 
+                  //hasOwnProperty function
                   for (var y = 0; y < foodCategories.length; y++){
                     venueCat = foodCategories[y].category;
                     venueName = foodCategories[y].venue;
@@ -113,18 +109,19 @@
                       });
                     }
                   }
-
                 }
+                //need to shuffle array
                 $scope.displayObjectArray = displayObjectArray;
                 $scope.currentCategory = displayObjectArray.shift();
                 $scope.categoryImage = $scope.currentCategory.primary_image;
                 $scope.currentCategory.used_image = $scope.categoryImage;
                 usedImage = $scope.currentCategory.used_image;
+                //currentCategory is restaurant object with cat, venue, and images
               });
 
           });
 
-            //     //swipe left, new venue
+            //swipe left, new venue
             var leftSwipeArray = [];
             var rightSwipeArray = [];
             var usedImage, index, obj;
@@ -165,7 +162,12 @@
 
             $scope.rightSwipeShift = function (displayObjectArray){
               if (displayObjectArray.length > 0){
-                rightSwipeArray.push($scope.currentCategory);
+
+                //get complete $scope.venues info
+                var aaa = $scope.currentCategory.venue;
+                var bIndex = getIndexOfObjectWithAttribute($scope.venues, "id", aaa);
+                var ccc = $scope.venues[bIndex];
+                rightSwipeArray.push(ccc);
                 $scope.currentCategory = displayObjectArray.shift();
                 console.log(rightSwipeArray, "right");
                 for (var t = 0; t < rightSwipeArray.length; t++){
@@ -190,29 +192,26 @@
                 }
               } else {
                 produceResult(rightSwipeArray);
-              }
+               }
             }
 
 
-            var resultsObject, resultsCategory, resultsVenue, resultsArray, resultsIndex, num;
+            var resultsObject, resultsCategory, num;
 
             function produceResult (rightSwipeArray){
+
               num = Math.floor(Math.random() * (rightSwipeArray.length));
               resultsObject = rightSwipeArray[num];
 
-              resultsVenue = resultsObject.venue;
-              resultsIndex = getIndexOfObjectWithAttribute($scope.foodCategories, "venue", resultsVenue);
-              resultsCategory = $scope.foodCategories[resultsIndex];
-              console.log(resultsCategory);
+              console.log(resultsObject);
 
               // Send object to Route
-              $scope.displayVenue = function (resultsCategory){
-                $state.go('results', {venue: resultsCategory});
-              };
+              $scope.venue = resultsObject;
+
+              $state.go('results', {venue: $scope.venue});
+
             }
-
           });
-
         };
 
 })();

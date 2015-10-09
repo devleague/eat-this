@@ -7,8 +7,9 @@
         <div class="item item-image item-img-box" style="background-image: url({{ categoryImage }});"></div>
 
         <div class="item item-text-wrap">
-          {{ byline }}
-          {{ res }}
+          <ul ng-controller="helpMeController">
+            <li ng-repeat="swipe in rightSwipArray">{{swipe.venue}}</li>
+          </ul>
         </div>
       </div>
 
