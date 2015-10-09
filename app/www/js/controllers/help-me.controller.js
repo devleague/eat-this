@@ -63,7 +63,7 @@
                 name = venues[i].name;
                 rating = venues[i].rating;
                 phone = venues[i].phone;
-                image = venues[i].image_url
+                image = venues[i].image_url;
 
                   categoryObject = {
                   "category": singleCategory,
