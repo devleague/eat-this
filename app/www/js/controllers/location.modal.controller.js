@@ -7,10 +7,11 @@
         '$ionicPopup',
         '$ionicModal',
         'VenueService',
+        'uiGmapGoogleMapApi',
          locationModal
       ]);
 
-  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, VenueService) {
+  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, VenueService, googleMaps) {
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
         $rootScope.selectedLocation = {
