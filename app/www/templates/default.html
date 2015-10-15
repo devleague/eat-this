@@ -2,14 +2,35 @@
   <ion-nav-buttons side="secondary">
     <div class="button button-clear" ng-click="openModal()"><span class="icon ion-search"></span></div>
   </ion-nav-buttons>
-  <ion-content class="padding">
+  <ion-content class="wrapper vertical-flex">
 
-    <button class="button button-full button-positive" ui-sref="fetch">
+<!--     <button class="button button-full button-orange" ui-sref="fetch">
       Fetch
    </button>
-   <button class="button button-full button-positive" ui-sref="help-me">
+   <button class="button button-full button-orange" ui-sref="help-me">
       Help Me
-   </button>
+   </button> -->
+
+   <div class="mappy">
+     SOME MAP SHIT
+   </div>
+
+     <h3 class="starving">I'm Starving!</h3>
+   <div class="action-area">
+
+     <button class="action" ui-sref="fetch">
+      <img src="img/food.svg">
+        <div class="clear"></div>
+      <p>FETCH ME FOOD</p>
+     </button>
+
+     <button class="action" ui-sref="help-me">
+      <img src="img/restaurants.svg">
+        <div class="clear"></div>
+      <p>HELP ME SHIT</p>
+     </button>
+
+   </div>
 
   </ion-content>
 </ion-view>
