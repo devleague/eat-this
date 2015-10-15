@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="123.932px"
+	 height="120.042px" viewBox="0 0 123.932 120.042" enable-background="new 0 0 123.932 120.042" xml:space="preserve">
+<title>restaurants</title>
+<desc>Created with Sketch.</desc>
+<def>
+  <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+      <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+      <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+      <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+      <feMerge>
+          <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+  </filter>
+  <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+      <feGaussianBlur stdDeviation="0.5" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+      <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+      <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+      <feMerge>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+          <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+      </feMerge>
+  </filter>
+  <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
+      <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+      <feGaussianBlur stdDeviation="0.5" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+      <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+      <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+      <feMerge>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+          <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+      </feMerge>
+  </filter>
+</def>
+<g id="All-Pages" sketch:type="MSPage">
+	<g id="Homepage" transform="translate(-192.000000, -427.000000)" sketch:type="MSArtboardGroup">
+		<g id="restaurants" transform="translate(196.000000, 429.000000)" sketch:type="MSLayerGroup">
+			<ellipse id="Oval" sketch:type="MSShapeGroup" fill="#F15523" cx="57.966" cy="58.021" rx="61.966" ry="60.021">
+			</ellipse>
+			<g id="Group" transform="translate(19.454305, 15.005249)" sketch:type="MSShapeGroup">
+				<path id="Shape" fill="#333333" d="M76.7,16.948c-0.541-0.14-1.081-0.279-1.55-0.558L42.222-1.093
+					c-1.945-1.047-4.322-1.047-6.304,0L2.737,16.425c-0.504,0.244-1.01,0.419-1.549,0.559c-1.189,0.279-2.091,1.326-2.091,2.582
+					V49.82v14.446v7.154c0,1.047,0.865,1.885,1.945,1.885h26.299V49.96c0-0.559,0.469-0.978,1.009-0.978h20.536
+					c0.576,0,1.008,0.454,1.008,0.978v23.346h26.912c1.081,0,1.945-0.838,1.945-1.885v-7.154V49.82V19.531
+					C78.79,18.275,77.888,17.227,76.7,16.948L76.7,16.948z"/>
+				<g id="Shape_1_" transform="translate(0.000000, 18.843801)">
+					<path fill="#FFFFFF" d="M1.296,17.961h-2.594c-1.479,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.188-2.583,2.666-2.583h2.594
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C3.962,16.808,2.773,17.961,1.296,17.961L1.296,17.961z"/>
+					<path fill="#F15523" d="M9.006,17.961H6.412c-1.478,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.188-2.583,2.666-2.583h2.594
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C11.672,16.808,10.483,17.961,9.006,17.961L9.006,17.961z"/>
+					<path fill="#FFFFFF" d="M16.679,17.961h-2.594c-1.477,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.189-2.583,2.666-2.583h2.594
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C19.382,16.808,18.156,17.961,16.679,17.961L16.679,17.961z"/>
+					<path fill="#F15523" d="M24.389,17.961h-2.594c-1.477,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.189-2.583,2.666-2.583h2.594
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C27.091,16.808,25.866,17.961,24.389,17.961L24.389,17.961z"/>
+					<path fill="#FFFFFF" d="M32.099,17.961h-2.594c-1.477,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.189-2.583,2.666-2.583h2.594
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C34.765,16.808,33.576,17.961,32.099,17.961L32.099,17.961z"/>
+					<path fill="#F15523" d="M39.808,17.961h-2.594c-1.477,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.189-2.583,2.666-2.583h2.594
+						c1.479,0,2.666,1.152,2.666,2.583v14.761C42.474,16.808,41.286,17.961,39.808,17.961L39.808,17.961z"/>
+					<path fill="#FFFFFF" d="M47.482,17.961h-2.596c-1.477,0-2.665-1.152-2.665-2.583V0.617c0-1.431,1.188-2.583,2.665-2.583h2.596
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C50.184,16.808,48.96,17.961,47.482,17.961L47.482,17.961z"/>
+					<path fill="#F15523" d="M55.192,17.961h-2.595c-1.478,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.188-2.583,2.666-2.583h2.595
+						c1.477,0,2.666,1.152,2.666,2.583v14.761C57.893,16.808,56.669,17.961,55.192,17.961L55.192,17.961z"/>
+					<path fill="#FFFFFF" d="M62.901,17.961h-2.595c-1.477,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.189-2.583,2.666-2.583h2.595
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C65.567,16.808,64.379,17.961,62.901,17.961L62.901,17.961z"/>
+					<path fill="#F15523" d="M70.611,17.961h-2.595c-1.478,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.188-2.583,2.666-2.583h2.595
+						c1.478,0,2.666,1.152,2.666,2.583v14.761C73.277,16.808,72.089,17.961,70.611,17.961L70.611,17.961z"/>
+					<path fill="#FFFFFF" d="M78.321,17.961h-2.595c-1.478,0-2.666-1.152-2.666-2.583V0.617c0-1.431,1.188-2.583,2.666-2.583h2.595
+						c1.477,0,2.666,1.152,2.666,2.583v14.761C80.987,16.808,79.762,17.961,78.321,17.961L78.321,17.961z"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
