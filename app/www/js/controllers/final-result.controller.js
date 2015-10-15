@@ -1,7 +1,6 @@
 (function (){
   angular.module('eatApp')
     .controller('resultsController', [
-        '$rootScope',
         '$scope',
         'VenueService',
         '$stateParams',
@@ -10,7 +9,7 @@
         finalResults
       ]);
 
-  function finalResults ($rootScope, $scope, VenueService, $stateParams, $state, googleMaps) {
+  function finalResults ($scope, VenueService, $stateParams, $state, googleMaps) {
     if ($stateParams.venue === null){
       $state.go('home');
     }
