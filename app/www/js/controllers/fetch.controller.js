@@ -1,5 +1,3 @@
-var deniedVenues = [];
-
 (function (){
   angular.module('eatApp')
     .controller('goFetchController', [
@@ -13,6 +11,7 @@ var deniedVenues = [];
       ]);
 
   function goFetch ($rootScope, $scope, geolocation, VenueService, $state, googleMaps) {
+    var deniedVenues = [];
     $scope.currentVenue;
 
     if ($rootScope.selectedLocation) {
