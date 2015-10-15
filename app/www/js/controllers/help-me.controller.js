@@ -46,7 +46,7 @@
         VenueService
           .getVenues($scope.latitude, $scope.longitude)
           .then(function(venues){
-
+            console.log(venues);
             $scope.venues = venues;
             //fetching keywords for help me function
             var foodCategories = [];
@@ -102,6 +102,7 @@
                       displayObjectArray.push({
                         "category": dataCat,
                         "venue": venueName,
+                        "directions": null,
                         "primary_image": dataImage1,
                         "secondary_image": dataImage2,
                         "used_image": null,
