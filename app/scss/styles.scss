@@ -2,14 +2,23 @@
 
 // Variables
 
+$orange: #F15523;
+$dark: #333333;
+$light: #FFFFFF;
+
 // Media Query Ranges
 
 // Mixins
 
 // Styles
 
+.clear {
+  clear: both;
+}
+
 h1, h2, h3, h4 {
-  font-family: 'Helvetica'; //temporary
+  font-family: 'montserrat'; //temporary
+  color: $orange;
 }
 
 h1 {
@@ -25,6 +34,67 @@ h1 {
   width: 80%;
   margin: 0 auto;
   text-align: center;
+}
+
+.wrapper {
+  background-color: $dark;
+}
+
+.button-orange {
+  background-color: $orange;
+  color: $light;
+  border-color: transparent;
+  font-family: 'montserrat';
+
+}
+
+.float {
+  float: left;
+}
+
+.starving {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.top-text {
+  font-size: 1rem;
+  line-height: 2.1;
+  margin-left: .5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+//Front Page
+
+.vertical-flex {
+  flex-direction: column;
+}
+
+.mappy {
+  height: 20em;
+  background-color: skyblue;
+}
+
+.action-area {
+  width: 100%;
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: pink;
+}
+
+.action-area h1, .action p {
+  text-align: center;
+}
+
+.action {
+  float: left;
+  background-color: transparent;
+  border-color: transparent;
 }
 
 // Map Stuff
