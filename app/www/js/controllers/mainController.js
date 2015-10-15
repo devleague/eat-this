@@ -18,7 +18,6 @@
         loadVenues(position);
       })
       .catch(function(error){
-        console.log(error);
         $rootScope.$emit('openModal');
       });
 
@@ -60,10 +59,9 @@
     function showAlert(){
       var myPopup = $ionicPopup.alert({
         title: '<b>UH OH!</b>',
-        template: 'Sorry. Our app does not work in your location yet.',
+        template: 'Sorry. Our app does not work in your current location yet. Please select another location.',
       });
       myPopup.then(function(res){
-        console.log('You clicked Set Location!');
         myPopup.close();
         return $rootScope.$emit('openModal');
       });
