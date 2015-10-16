@@ -82,6 +82,7 @@
                   if (status === maps.DirectionsStatus.OK) {
                     directionsDisplay.setDirections(response);
                     $scope.currentVenue.directions = response;
+                    $scope.duration = $scope.currentVenue.directions.routes[0].legs[0].duration.text;
                   } else {
                     $scope.message = "Google route unsuccessful!";
                   }
