@@ -1,18 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="133px" height="129px" viewBox="0 0 133 129" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
-    <title>food</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="Homepage" sketch:type="MSArtboardGroup" transform="translate(-34.000000, -427.000000)">
-            <g id="food" sketch:type="MSLayerGroup" transform="translate(38.000000, 429.000000)">
-                <ellipse id="Oval" fill="#F15523" sketch:type="MSShapeGroup" cx="62.2177483" cy="60.2652663" rx="61.9655629" ry="60.0209948"></ellipse>
-                <g id="Group" transform="translate(32.063576, 19.890679)" fill="#333333" sketch:type="MSShapeGroup">
-                    <path d="M52.562649,0.209375563 L49.9687417,0.209375563 C45.7176159,0.209375563 42.2230464,3.5942805 42.2230464,7.71199991 L42.2230464,50.6688863 L51.7700662,50.6688863 L51.7700662,77.0153114 C51.7700662,78.9694833 53.4272848,80.5746959 55.4447682,80.5746959 L56.6696689,80.5746959 C58.6871523,80.5746959 60.3443709,78.9694833 60.3443709,77.0153114 L60.3443709,50.6688863 L60.3443709,31.8250856 L60.3443709,7.71199991 C60.3083444,3.55938458 56.8137748,0.209375563 52.562649,0.209375563 L52.562649,0.209375563 Z" id="Shape"></path>
-                    <path d="M20.4630464,0.977085962 L20.4630464,21.7401627 L18.085298,21.7401627 L18.085298,0.977085962 L13.6900662,0.977085962 L13.6900662,21.7401627 L11.3123179,21.7401627 L11.3123179,0.977085962 L6.91708609,0.977085962 L6.91708609,21.7401627 L4.53933775,21.7401627 L4.53933775,0.977085962 L8.17124146e-14,0.977085962 L8.17124146e-14,24.3573572 C8.17124146e-14,29.3125789 3.60264901,33.4651942 8.3581457,34.5818639 L8.3581457,77.0153114 C8.3581457,78.9694833 10.0153642,80.5746959 12.0328477,80.5746959 L13.2577483,80.5746959 C15.2752318,80.5746959 16.9324503,78.9694833 16.9324503,77.0153114 L16.9324503,34.5469679 C21.7239735,33.4651942 25.290596,29.2776829 25.290596,24.3224613 L25.290596,0.942190035 L20.4630464,0.942190035 L20.4630464,0.977085962 Z" id="Shape"></path>
-                </g>
-            </g>
-        </g>
-    </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-239 332 133 129"
+	 style="enable-background:new -239 332 133 129;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F15523;}
+	.st1{fill:#333333;}
+</style>
+<title>food</title>
+<desc>Created with Sketch.</desc>
+<g id="All-Pages" sketch:type="MSPage">
+	<g id="Homepage" transform="translate(-34.000000, -427.000000)" sketch:type="MSArtboardGroup">
+		<g id="food" transform="translate(38.000000, 429.000000)" sketch:type="MSLayerGroup">
+			<ellipse id="Oval" sketch:type="MSShapeGroup" class="st0" cx="-176.5" cy="394.5" rx="60" ry="60">
+			</ellipse>
+			<g id="Group" transform="translate(32.063576, 19.890679)" sketch:type="MSShapeGroup">
+				<path id="Shape" class="st1" d="M-186.9,334.5h-2.5c-4.1,0-7.5,3.4-7.5,7.5v42.9h9.2v26.3c0,2,1.6,3.6,3.6,3.6h1.2
+					c2,0,3.6-1.6,3.6-3.6v-26.3v-18.8V342C-179.4,337.8-182.7,334.5-186.9,334.5L-186.9,334.5z"/>
+				<path id="Shape_1_" class="st1" d="M-217.9,335.2V356h-2.3v-20.8h-4.3V356h-2.3v-20.8h-4.3V356h-2.3v-20.8h-4.4v23.4
+					c0,5,3.5,9.1,8.1,10.2v42.4c0,2,1.6,3.6,3.6,3.6h1.2c2,0,3.6-1.6,3.6-3.6v-42.5c4.6-1.1,8.1-5.3,8.1-10.2v-23.4L-217.9,335.2
+					L-217.9,335.2z"/>
+			</g>
+		</g>
+	</g>
+</g>
 </svg>
