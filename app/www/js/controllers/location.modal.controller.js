@@ -21,7 +21,9 @@
             longitude: $scope.locationModal.setLocation.geometry.location.lng()
           }
         };
+
         loadVenues($rootScope.selectedLocation);
+
         $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {
