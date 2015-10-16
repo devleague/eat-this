@@ -30,6 +30,7 @@
 
     $stateProvider
       .state('app', {
+        cache: false,
         url: '/',
         templateUrl: 'templates/default.html'
       })
