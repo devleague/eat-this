@@ -107,8 +107,18 @@
           var rightSwipeArray = [];
           var usedImage, index, obj;
 
+          var counter = 0;
+
           $scope.leftSwipeShift = function(displayObjectArray){
+
             if (displayObjectArray.length > 0){
+              counter++;
+                if (counter === 10 && rightSwipeArray.length > 0){
+                  produceResult(rightSwipeArray);
+                } else if (counter >= 15 && rightSwipeArray.length > 0){
+                  produceResult(rightSwipeArray);
+                }
+
               leftSwipeArray.push($scope.currentCategory);
               $scope.currentCategory = displayObjectArray.shift();
               for (var s = 0; s < leftSwipeArray.length; s++){
