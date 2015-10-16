@@ -3,8 +3,6 @@
     <div ng-show="position">
       <div id="map_canvas">
         <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
-          <ui-gmap-markers models="markers" coords="'self'" fit="true">
-          </ui-gmap-markers>
         </ui-gmap-google-map>
       </div>
     <div class="card" on-swipe-left="getVenue(venues)" on-swipe-right="displayVenue(currentVenue)">
