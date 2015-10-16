@@ -47,7 +47,8 @@
               var map = new maps.Map(document.getElementById('map_canvas'), {
                 zoom: 15,
                 center: latlng,
-                control: {}
+                control: {},
+                options: {disableDefaultUI: true}
               });
 
               var directionsService = new maps.DirectionsService();
