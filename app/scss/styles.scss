@@ -123,6 +123,14 @@ h1 {
   position: relative;
 }
 
+.front-map, .front-map .angular-google-map-container {
+  height: 22em;
+}
+
+.small-map, .small-map .angular-google-map-container {
+  height: 12em !important;
+}
+
 .angular-google-map-container {
   width: 100%; //Origin: 600px
   height: 12em;
