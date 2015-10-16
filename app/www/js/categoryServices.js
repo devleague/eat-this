@@ -13,11 +13,11 @@
 
       };
 
-      // this.displayCategory = function (catId){
+      this.displayRestaurant = function (object){
 
-      //   var Category = displayObjectArray;
-      //   return Category.get().$promise;
-      // };
+        var Category = displayObjectArray;
+        return Category.get().$promise;
+      };
 
     }]);
 })();

@@ -47,7 +47,7 @@ router.get('/api/venues', function (req, res) {
 
     if (error) {
       var errData = JSON.parse(error.data);
-      return res.json({ message: errData.error.text });
+      return res.status(400).json({ message: errData.error.text });
     }
 
     var venues = data.businesses;
