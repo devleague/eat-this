@@ -13,13 +13,19 @@
 
   function mainController ($rootScope, $scope, $state, $ionicPopup, VenueService, geolocation, googleMaps) {
     $scope.place = null;
-    $rootScope.userLocation
-      .then(function(position){
-        loadVenues(position);
-      })
-      .catch(function(error){
-        $rootScope.$emit('openModal');
-      });
+    $scope.markers = [];
+
+    if($rootScope.selectedLocation){
+      loadVenues($rootScope.selectedLocation);
+    } else {
+      $rootScope.userLocation
+        .then(function(position){
+          loadVenues(position);
+        })
+        .catch(function(error){
+          $rootScope.$emit('openModal');
+        });
+    }
 
     $scope.openModal = function (){
       $rootScope.$emit('openModal');
@@ -27,33 +33,32 @@
 
     function loadVenues(position) {
       $scope.position = true;
-      VenueService
-        .getVenues(position.coords.latitude, position.coords.longitude)
-        .then(function(venues){
-          if(venues.length !== 0){
-            googleMaps
-            .then(function(maps){
-              var geocoder = new maps.Geocoder();
-              var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
-              geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                  if (results[1]) {
-                    $rootScope.userLocation.country = results[results.length - 1].formatted_address;
-                  } else {
-                    window.alert('No results found');
-                  }
-                } else {
-                  window.alert('Geocoder failed due to: ' + status);
+      googleMaps
+        .then(function(maps){
+          var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
+          var map = new maps.Map(document.getElementById('map_canvas'), {
+            zoom: 15,
+            center: latlng,
+            control: {}
+          });
+
+          VenueService
+            .getVenues(position.coords.latitude, position.coords.longitude)
+            .then(function(venues){
+              if(venues.length !== 0){
+                var markers=[];
+                for (var i = 0; i < venues.length; i++){
+                  createMarker(markers, venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i);
                 }
-              });
-            });
-          } else {
+                $scope.markers = markers;
+              } else {
+                showAlert();
+              }
+          })
+          .catch(function(error){
             showAlert();
-          }
-      })
-      .catch(function(error){
-        showAlert();
-      });
+          });
+        });
     }
 
     function showAlert(){
@@ -65,6 +70,15 @@
         myPopup.close();
         return $rootScope.$emit('openModal');
       });
+    }
+
+    function createMarker (arr, x, y, id) {
+      var marker = {
+        latitude: x,
+        longitude: y,
+        id: id
+      };
+      arr.push(marker);
     }
 
   }
