@@ -16,6 +16,10 @@
 
     $scope.venue = $stateParams.venue;
 
+    $scope.goTo = function (url) {
+      window.open(url,'_system');
+    };
+
     var cuisine = [];
     $stateParams.venue.categories.forEach(function(category){
       cuisine.push(category[0]);
