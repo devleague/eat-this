@@ -49,11 +49,12 @@
         directionsDisplay.setDirections($stateParams.venue.directions);
       });
     }
-})();
 
-function convertToIntArr(str){
-  str = str.split(",");
-  for (var i = 0; i < str.length; i++){
-    str[i] = parseInt(str[i]);
+  function convertToIntArr(str){
+    str = str.split(",");
+    for (var i = 0; i < str.length; i++){
+      str[i] = parseInt(str[i]);
+    }
   }
-}
+
+})();
