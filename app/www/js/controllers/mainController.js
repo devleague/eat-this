@@ -46,7 +46,8 @@
                   longitude: position.coords.longitude
                 },
                 zoom: 15,
-                control: {}
+                options: {disableDefaultUI: true},
+                control: {},
               };
               var markers=[];
               for (var i = 0; i < venues.length; i++){

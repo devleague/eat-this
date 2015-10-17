@@ -1,16 +1,13 @@
 <ion-modal-view>
 
-<!--   <ion-header-bar>
-    <h1 class="title">Choose a Location</h1>
+  <ion-header-bar class="nav-dark">
+    <img class="float" src="../img/orange-gear.svg">
+    <h1 class="title">Set Your Location</h1>
 
-      <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close"></span></div>
-  </ion-header-bar> -->
+    <div class="button button-clear" ng-click="closeModal()"><span class="icon ion-close orangeify-text"></span></div>
+  </ion-header-bar>
 
-    <ion-content class="padding wrapper">
-      <div class="inline-text">
-        <img class="float" src="../img/orange-gear.svg"><h3 class="float top-text">Set Your Location</h3>
-      </div>
-      <div class="clear"></div>
+    <ion-content class="padding wrapper" scroll="false">
       <div class="set-location">
         <form ng-submit="submit()">
           <div class="list list-inset" ng-submit="submit()">
