@@ -6,13 +6,13 @@
         '$state',
         '$ionicPopup',
         '$ionicModal',
-        'counter',
+        'MarkerService',
         'VenueService',
         'uiGmapGoogleMapApi',
          locationModal
       ]);
 
-  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, counter, VenueService, googleMaps) {
+  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, MarkerService, VenueService, googleMaps) {
 
     $scope.count = function() {
       $scope.total = counter.incrementCount();
@@ -36,6 +36,7 @@
     };
 
     function loadVenues(position) {
+      MarkerService.deleteMarkers();
       $scope.position = true;
       VenueService
         .getVenues(position.coords.latitude, position.coords.longitude)
@@ -57,6 +58,9 @@
                 }
               });
             });
+            for (var i = 0; i < venues.length; i++){
+              MarkerService.createMarkers(venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i+1);
+            }
           } else {
             showAlert();
           }
@@ -91,6 +95,7 @@
       };
 
       $scope.closeModal = function (){
+
         $scope.modal.hide();
       };
 

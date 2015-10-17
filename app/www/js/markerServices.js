@@ -1,12 +1,20 @@
 (function(){
   angular
     .module('eatApp')
-    .factory('counter', function(){
+    .factory('MarkerService', function(){
       return {
-        count: 1,
-        incrementCount: function(){
-          this.count++;
-          return this.count;
+        markers: [],
+        createMarkers: function(x, y, id){
+          var marker = {
+            latitude: x,
+            longitude: y,
+            id: id,
+            title: "m" + id,
+          };
+          this.markers.push(marker);
+        },
+        deleteMarkers: function() {
+          this.markers.splice(0, this.markers.length);
         }
       };
     });

@@ -28,7 +28,6 @@
         });
     }
 
-
     function loadVenues(position) {
       $scope.position = true;
 
