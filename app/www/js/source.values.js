@@ -1,5 +1,7 @@
 (function (){
+  var LOCAL = 'localhost';
+  var IP = '';
   angular
     .module('eatApp')
-    .value('BASE_URL', 'http://localhost:8080');
+    .value('BASE_URL', 'http://' + LOCAL + ':8080');
 })();

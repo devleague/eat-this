@@ -2,14 +2,23 @@
 
 // Variables
 
+$orange: #F15523;
+$dark: #333333;
+$light: #FFFFFF;
+
 // Media Query Ranges
 
 // Mixins
 
 // Styles
 
+.clear {
+  clear: both;
+}
+
 h1, h2, h3, h4 {
-  font-family: 'Helvetica'; //temporary
+  font-family: 'montserrat'; //temporary
+  color: $orange;
 }
 
 h1 {
@@ -27,11 +36,86 @@ h1 {
   text-align: center;
 }
 
+.scroll-content {
+  background-color: $dark;
+}
+
+.nav-dark {
+  background-color: $dark !important;
+}
+
+.orangeify-text {
+  color: $orange !important;
+}
+
+.title {
+  color: $orange !important;
+}
+
+.buttons-right span, .back-text {
+  color: $orange !important;
+}
+
+.button-orange {
+  background-color: $orange;
+  color: $light;
+  border-color: transparent;
+  font-family: 'montserrat';
+
+}
+
+.back-button i {
+  color: $orange !important;
+}
+
+.float {
+  float: left;
+}
+
+.starving {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.top-text {
+  font-size: 1rem;
+  line-height: 2.1;
+  margin-left: .5em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+//Front Page
+
+.action p {
+  text-align: center;
+  color: $orange;
+  font-family: 'montserrat';
+  font-weight: bold;
+
+}
+
+.action {
+  width: 12em;
+  background-color: transparent;
+  border-color: transparent;
+}
+
 // Map Stuff
 
 #map_canvas, #venue_directions {
-  height: 10em;
-  // padding: 20px;
+  height: 300px;
+  position: relative;
+}
+
+.front-map, .front-map .angular-google-map-container {
+  height: 22em;
+}
+
+.small-map, .small-map .angular-google-map-container {
+  height: 12em !important;
 }
 
 .angular-google-map-container {
@@ -46,6 +130,12 @@ h1 {
 }
 
 //Fetch Styles
+
+.duration-text {
+  float: right;
+  color: $orange;
+  font-size: .8rem;
+}
 
 .venue-img {
   width: 100%;
@@ -63,4 +153,12 @@ h1 {
   height: 20em;
   background-size: cover;
   background-position: center;
+}
+
+//Help Me
+
+//Results
+
+.no-padding {
+  padding: 0;
 }

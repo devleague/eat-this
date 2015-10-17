@@ -12,10 +12,7 @@
         getRestaurantsByCategory
       ]);
 
-  function getRestaurantsByCategory ($rootScope, $scope, eatTitle, geolocation, CategoryService, VenueService, $state, googleMaps) {
-    $scope.title = eatTitle;
-    $scope.byline = 'LETS GET SOMETHING TO EAT';
-
+  function getRestaurantsByCategory ($rootScope, $scope, geolocation, CategoryService, VenueService, $state, googleMaps) {
     $scope.currentVenue;
 
     $rootScope.userLocation
@@ -76,8 +73,6 @@
                   "image": image
                 };
                   foodCategories.push(categoryObject);
-
-
               }
             }
 
@@ -131,14 +126,21 @@
             var rightSwipeArray = [];
             var usedImage, index, obj;
 
+          var counter = 0;
 
-            $scope.leftSwipeShift = function(displayObjectArray){
-              if (displayObjectArray.length > 0){
+          $scope.leftSwipeShift = function(displayObjectArray){
 
-                leftSwipeArray.push($scope.currentCategory);
-                $scope.currentCategory = displayObjectArray.shift();
+            if (displayObjectArray.length > 0){
+              counter++;
+                if (counter === 10 && rightSwipeArray.length > 0){
+                  produceResult(rightSwipeArray);
+                } else if (counter >= 15 && rightSwipeArray.length > 0){
+                  produceResult(rightSwipeArray);
+                }
 
-                if (leftSwipeArray.length = 10 && rightSwipeArray.length > 0){
+              leftSwipeArray.push($scope.currentCategory);
+              $scope.currentCategory = displayObjectArray.shift();
+              for (var s = 0; s < leftSwipeArray.length; s++){
 
                   return produceResult(rightSwipeArray);
 
@@ -223,16 +225,32 @@
 
         };
 
-})();
+                calculateAndDisplayRoute(directionsService);
+                function calculateAndDisplayRoute(directionsService){
+                  directionsService.route(request, function(response, status){
+                    if (status === maps.DirectionsStatus.OK) {
+                      resultsObject.directions = response;
+                    } else {
+                      $scope.message = "Google route unsuccessful!";
+                    }
+                  });
+                }
+            });
+            $scope.venue = resultsObject;
+             console.log(resultsObject);
+            $state.go('results', {venue: resultsObject});
+          }
+        }
+      }
 
-function getIndexOfObjectWithAttribute (array, attr, value){
-  for (var m = 0; m < array.length; m++){
-    if (array[m][attr] === value) {
-            return m;
+  function getIndexOfObjectWithAttribute (array, attr, value){
+    for (var m = 0; m < array.length; m++){
+      if (array[m][attr] === value) {
+              return m;
+      }
     }
+    return -1;
   }
-  return -1;
-}
 
 
 function createMarker (arr, x, y, id, icon) {
@@ -248,14 +266,16 @@ function runShuffle (array){
   var currentIndex = array.length;
   var tempValue, randomIndex;
 
-  while (0 !== currentIndex) {
+    while (0 !== currentIndex) {
 
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
 
-    tempValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = tempValue;
+      tempValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = tempValue;
+    }
+    return array;
   }
-  return array;
-}
+
+})();

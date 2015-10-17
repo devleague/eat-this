@@ -17,11 +17,13 @@
         $rootScope.selectedLocation = {
           address_components: $scope.locationModal.setLocation.address_components,
           coords: {
-            latitude: $scope.locationModal.setLocation.geometry.location.J,
-            longitude: $scope.locationModal.setLocation.geometry.location.M
+            latitude: $scope.locationModal.setLocation.geometry.location.lat(),
+            longitude: $scope.locationModal.setLocation.geometry.location.lng()
           }
         };
+
         loadVenues($rootScope.selectedLocation);
+
         $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {
@@ -54,10 +56,10 @@
           } else {
             showAlert();
           }
-      })
-      .catch(function(error){
-        showAlert();
-      });
+        })
+        .catch(function(error){
+          showAlert();
+        });
     }
 
     function showAlert (){
