@@ -1,17 +1,12 @@
 <ion-view view-title="Help Me">
   <ion-content class="padding">
-    <h1>This is Help Me!</h1>
+    <h3 style="text-align: center;">Would you Eat This?</h3>
 
-      <div class="card" on-swipe-left="leftSwipeShift(displayObjectArray)" on-swipe-right="rightSwipeShift(displayObjectArray)">
+    <div class="card" on-swipe-left="leftSwipeShift(displayObjectArray)" on-swipe-right="rightSwipeShift(displayObjectArray)">
 
-        <div class="item item-image item-img-box" style="background-image: url({{ categoryImage }});"></div>
+      <div class="item item-image item-img-box" style="background-image: url({{ categoryImage }});"></div>
 
-        <div class="item item-text-wrap">
-          <ul ng-controller="helpMeController">
-            <li ng-repeat="swipe in rightSwipArray">{{swipe.venue}}</li>
-          </ul>
-        </div>
-      </div>
+    </div>
 
   </ion-content>
 </ion-view>
