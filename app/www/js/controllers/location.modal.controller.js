@@ -6,12 +6,18 @@
         '$state',
         '$ionicPopup',
         '$ionicModal',
+        'counter',
         'VenueService',
         'uiGmapGoogleMapApi',
          locationModal
       ]);
 
-  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, VenueService, googleMaps) {
+  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, counter, VenueService, googleMaps) {
+
+    $scope.count = function() {
+      $scope.total = counter.incrementCount();
+    };
+
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
         $rootScope.selectedLocation = {
@@ -21,9 +27,7 @@
             longitude: $scope.locationModal.setLocation.geometry.location.lng()
           }
         };
-
         loadVenues($rootScope.selectedLocation);
-
         $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {

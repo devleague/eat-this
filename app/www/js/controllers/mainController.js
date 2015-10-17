@@ -5,13 +5,14 @@
         '$scope',
         '$state',
         '$ionicPopup',
+        'counter',
         'VenueService',
         'Geolocator',
         'uiGmapGoogleMapApi',
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $state, $ionicPopup, VenueService, geolocation, googleMaps) {
+  function mainController ($rootScope, $scope, $state, $ionicPopup, counter, VenueService, geolocation, googleMaps) {
     $scope.place = null;
     $scope.venueMarkers = [];
 
@@ -27,6 +28,8 @@
         });
     }
 
+    $scope.counter = counter;
+
     $scope.openModal = function (){
       $rootScope.$emit('openModal');
     };
@@ -37,6 +40,7 @@
       VenueService
         .getVenues(position.coords.latitude, position.coords.longitude)
         .then(function(venues){
+          console.log(venues);
           if(venues.length !== 0){
             googleMaps
             .then(function(maps){
@@ -53,7 +57,6 @@
               for (var i = 0; i < venues.length; i++){
                 createMarker(markers, venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i);
               }
-              console.log(markers);
               $scope.venueMarkers = markers;
               });
           } else {
