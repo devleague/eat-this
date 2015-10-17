@@ -12,8 +12,6 @@
       ]);
 
   function getRestaurantsByCategory ($rootScope, $scope, geolocation, CategoryService, VenueService, $state, googleMaps) {
-    $scope.byline = 'LETS GET SOMETHING TO EAT';
-
     $scope.currentVenue;
 
     if($rootScope.selectedLocation) {
@@ -204,33 +202,35 @@
                 }
             });
             $scope.venue = resultsObject;
+             console.log(resultsObject);
             $state.go('results', {venue: resultsObject});
           }
         }
       }
-})();
 
-function getIndexOfObjectWithAttribute (array, attr, value){
-  for (var m = 0; m < array.length; m++){
-    if (array[m][attr] === value) {
-            return m;
+  function getIndexOfObjectWithAttribute (array, attr, value){
+    for (var m = 0; m < array.length; m++){
+      if (array[m][attr] === value) {
+              return m;
+      }
     }
+    return -1;
   }
-  return -1;
-}
 
-function runShuffle (array){
-  var currentIndex = array.length;
-  var tempValue, randomIndex;
+  function runShuffle (array){
+    var currentIndex = array.length;
+    var tempValue, randomIndex;
 
-  while (0 !== currentIndex) {
+    while (0 !== currentIndex) {
 
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
 
-    tempValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = tempValue;
+      tempValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = tempValue;
+    }
+    return array;
   }
-  return array;
-}
+
+})();
