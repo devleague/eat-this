@@ -7,21 +7,23 @@
         '$ionicPopup',
         '$ionicModal',
         'VenueService',
+        'uiGmapGoogleMapApi',
          locationModal
       ]);
 
-  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, VenueService) {
+  function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, VenueService, googleMaps) {
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
         $rootScope.selectedLocation = {
           address_components: $scope.locationModal.setLocation.address_components,
           coords: {
-            latitude: $scope.locationModal.setLocation.geometry.location.J,
-            longitude: $scope.locationModal.setLocation.geometry.location.M
+            latitude: $scope.locationModal.setLocation.geometry.location.lat(),
+            longitude: $scope.locationModal.setLocation.geometry.location.lng()
           }
         };
+
         loadVenues($rootScope.selectedLocation);
-        console.log($scope.locationModal.setLocation);
+
         $scope.locationModal.setLocation = null;
         $scope.modal.hide();
       } else {
@@ -54,19 +56,18 @@
           } else {
             showAlert();
           }
-      })
-      .catch(function(error){
-        showAlert();
-      });
+        })
+        .catch(function(error){
+          showAlert();
+        });
     }
 
     function showAlert (){
       var myPopup = $ionicPopup.alert({
         title: '<b>UH OH!</b>',
-        template: 'Sorry. Our app does not work in your location yet.',
+        template: 'Sorry. Our app does not work the selected location yet. Please select another location.',
       });
       myPopup.then(function(res){
-        console.log('You clicked Set Location!');
         myPopup.close();
         return $rootScope.$emit('openModal');
       });

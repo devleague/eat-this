@@ -1,15 +1,36 @@
 <ion-view view-title="Eat This">
   <ion-nav-buttons side="secondary">
-    <div class="button button-clear" ng-click="openModal()"><span class="icon ion-search"></span></div>
+    <div class="button button-clear" ng-click="openModal()"><span class="icon ion-map"></span></div>
   </ion-nav-buttons>
-  <ion-content class="padding">
+  <ion-content scroll="false">
 
-    <button class="button button-full button-positive" ui-sref="fetch">
-      Fetch
-   </button>
-   <button class="button button-full button-positive" ui-sref="help-me">
-      Help Me
-   </button>
+  <div id="map_canvas" class="front-map">
+    <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="map.options">
+      <ui-gmap-markers models="venueMarkers" coords="'self'" fit="true" icon="'icon'" idKey="'id'">
+      </ui-gmap-markers>
+    </ui-gmap-google-map>
+  </div>
+
+     <h3 class="starving">I'm Starving!</h3>
+
+    <div class="row">
+      <div class="col">
+        <button class="action" ui-sref="fetch">
+          <img src="img/food.svg">
+            <div class="clear"></div>
+          <p>FETCH ME FOOD</p>
+         </button>
+      </div>
+      <div class="col">
+        <button class="action" ui-sref="help-me">
+          <img src="img/restaurants.svg">
+            <div class="clear"></div>
+          <p>HELP ME SHIT</p>
+         </button>
+      </div>
+    </div>
 
   </ion-content>
 </ion-view>
+
+

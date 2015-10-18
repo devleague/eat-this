@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="22px" height="33px" viewBox="0 0 22 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
+    <title>black-pin</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="17.7933673%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#000000" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.629613904" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1" in="SourceGraphic" result="blur"></feGaussianBlur>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.35 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Homepage" sketch:type="MSArtboardGroup" transform="translate(-209.000000, -275.000000)">
+            <g id="black-pin" sketch:type="MSLayerGroup" transform="translate(209.000000, 275.000000)">
+                <path d="M15.6521452,23.9893035 C15.6521452,27.3868433 9.82607258,31.0394537 9.82607258,31.0394537 C9.82607258,31.0394537 4,27.5092772 4,23.9893035 C4,21.9548608 6.60801476,20 9.82607258,20 C13.0441304,20 15.6521452,21.9548608 15.6521452,23.9893035 L15.6521452,23.9893035 Z" id="Shape-Copy-10" fill="url(#linearGradient-1)" filter="url(#filter-2)" sketch:type="MSShapeGroup"></path>
+                <path d="M21.0892313,11.4208995 C21.0892313,21.1476502 10.5446156,31.6046374 10.5446156,31.6046374 C10.5446156,31.6046374 0,21.4981637 0,11.4208995 C0,5.59653284 4.72024899,0 10.5446156,0 C16.3689823,0 21.0892313,5.59653284 21.0892313,11.4208995 L21.0892313,11.4208995 Z" id="Shape-Copy-8" fill="#4A4A4A" sketch:type="MSShapeGroup"></path>
+                <circle id="Oval-76" fill="#FFFFFF" filter="url(#filter-3)" sketch:type="MSShapeGroup" cx="10.5" cy="10.5" r="6.5"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

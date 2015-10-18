@@ -12,149 +12,121 @@
       ]);
 
   function getRestaurantsByCategory ($rootScope, $scope, geolocation, CategoryService, VenueService, $state, googleMaps) {
-    $scope.byline = 'LETS GET SOMETHING TO EAT';
-
     $scope.currentVenue;
 
-    $rootScope.userLocation
-      .then(function(position){
-        $scope.position = position;
-        $scope.latitude = position.coords.latitude;
-        $scope.longitude = position.coords.longitude;
+    if($rootScope.selectedLocation) {
+      loadCategories($rootScope.selectedLocation);
+    } else {
+      $rootScope.userLocation
+        .then(function(position){
+          loadCategories(position);
+        })
+        .catch(function(error){
+          console.log(error);
+        });
+    }
 
-        //create map with user position as center
-        $scope.map = {
-          center: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          },
-          zoom: 15,
-          control: {}
-        };
+    function loadCategories(position) {
+      VenueService
+        .getVenues(position.coords.latitude, position.coords.longitude)
+        .then(function(venues){
+          $scope.venues = venues;
 
-        //create user position marker
-        var markers = [];
-        createMarker(markers, position.coords.latitude, position.coords.longitude, 0);
-        $scope.markers = markers;
-        return markers;
-      }, function(reason){
-        $scope.message = "Could not be determined";
-      })
+          //fetching keywords for help me function
+          var foodCategories = [];
+          var singleCategory, name, rating, phone;
+          var categoryVenue;
+          var categoryObject = {};
 
-      .then(function(markers) {
-
-        VenueService
-          .getVenues($scope.latitude, $scope.longitude)
-          .then(function(venues){
-
-            $scope.venues = venues;
-            //fetching keywords for help me function
-            var foodCategories = [];
-            var singleCategory, name, rating, phone;
-            var categoryVenue;
-            var categoryObject = {};
-
-            for (var i = 0; i < venues.length; i++){
-
-              for (var j = 0; j < venues[i].categories.length; j++){
-
-                singleCategory = venues[i].categories[j][0];
-                categoryVenue = venues[i].id;
-                name = venues[i].name;
-                rating = venues[i].rating;
-                phone = venues[i].phone;
-                image = venues[i].image_url
-
-                  categoryObject = {
-                  "category": singleCategory,
-                  "venue" : categoryVenue,
-                  "name": name,
-                  "rating": rating,
-                  "phone": phone,
-                  "image": image
-                };
-                  foodCategories.push(categoryObject);
-              }
+          for (var i = 0; i < venues.length; i++){
+            for (var j = 0; j < venues[i].categories.length; j++){
+              singleCategory = venues[i].categories[j][0];
+              categoryVenue = venues[i].id;
+              name = venues[i].name;
+              rating = venues[i].rating;
+              phone = venues[i].phone;
+              image = venues[i].image_url;
+                categoryObject = {
+                "category": singleCategory,
+                "venue" : categoryVenue,
+                "name": name,
+                "rating": rating,
+                "phone": phone,
+                "image": image
+              };
+                foodCategories.push(categoryObject);
             }
-
-            runShuffle(foodCategories);
-            $scope.foodCategories = foodCategories;
+          }
+          runShuffle(foodCategories);
+          $scope.foodCategories = foodCategories;
 
           CategoryService
             .getCategories()
             .then(function (data){
-                //loop through image array and check if is also present in other array
 
-              var dataCat, dataImage1, dataImage2, venueCat, venueName;
-              var displayObjectArray = [];
+                var dataCat, dataImage1, dataImage2, venueCat, venueName;
+                var displayObjectArray = [];
 
-              for (var x = 0; x < data.length; x++){
-                dataCat = data[x].category;
-                dataImage1 = data[x].primary_image;
-                dataImage2 = data[x].secondary_image;
+                for (var x = 0; x < data.length; x++){
+                  dataCat = data[x].category;
+                  dataImage1 = data[x].primary_image;
+                  dataImage2 = data[x].secondary_image;
+                  for (var y = 0; y < foodCategories.length; y++){
+                    venueCat = foodCategories[y].category;
+                    venueName = foodCategories[y].venue;
 
-                //hasOwnProperty function
-                for (var y = 0; y < foodCategories.length; y++){
-                  venueCat = foodCategories[y].category;
-                  venueName = foodCategories[y].venue;
-
-                  if (dataCat === venueCat){
-                    displayObjectArray.push({
-                      "category": dataCat,
-                      "venue": venueName,
-                      "primary_image": dataImage1,
-                      "secondary_image": dataImage2,
-                      "used_image": null,
-                      "count": 0
-                    });
+                    if (dataCat === venueCat){
+                      displayObjectArray.push({
+                        "category": dataCat,
+                        "venue": venueName,
+                        "primary_image": dataImage1,
+                        "secondary_image": dataImage2,
+                        "used_image": null,
+                        "count": 0
+                      });
+                    }
                   }
                 }
-              }
-              //need to shuffle array
-              $scope.displayObjectArray = displayObjectArray;
-              $scope.currentCategory = displayObjectArray.shift();
-              $scope.categoryImage = $scope.currentCategory.primary_image;
-              $scope.currentCategory.used_image = $scope.categoryImage;
-              usedImage = $scope.currentCategory.used_image;
-              //currentCategory is restaurant object with cat, venue, and images
+                //need to shuffle array
+                $scope.displayObjectArray = displayObjectArray;
+                $scope.currentCategory = displayObjectArray.shift();
+                $scope.categoryImage = $scope.currentCategory.primary_image;
+                $scope.currentCategory.used_image = $scope.categoryImage;
+                usedImage = $scope.currentCategory.used_image;
+              });
+          });
 
-              //swipe left, new venue
-              var leftSwipeArray = [];
-              var rightSwipeArray = [];
-              var usedImage, counter = 1;
+          //swipe left, new venue
+          var leftSwipeArray = [];
+          var rightSwipeArray = [];
+          var usedImage, index, obj;
 
+          var counter = 0;
 
-              $scope.leftSwipeShift = function(displayObjectArray){
-                if (displayObjectArray.length > 0){
-                  //fasterLeftResult(leftSwipeArray);
-                  counter++;
-                  if (counter >= 10 && rightSwipeArray.length > 0){
-                    return produceResult(rightSwipeArray);
-                  } else if (counter >= 15 && rightSwipeArray.length > 0){
-                    return produceResult(rightSwipeArray);
-                  }
+          $scope.leftSwipeShift = function(displayObjectArray){
 
-
+            if (displayObjectArray.length > 0){
+              counter++;
+                if (counter === 10 && rightSwipeArray.length > 0){
+                  console.log(counter, "Should be Going to Results");
+                  produceResult(rightSwipeArray);
+                } else if (counter >= 15 && rightSwipeArray.length > 0){
+                  produceResult(rightSwipeArray);
+                } else {
                   leftSwipeArray.push($scope.currentCategory);
+                  console.log("swipe left", counter);
                   $scope.currentCategory = displayObjectArray.shift();
-                  //console.log(leftSwipeArray, "left");
-
-
                   for (var s = 0; s < leftSwipeArray.length; s++){
 
                     if ($scope.currentCategory.primary_image === leftSwipeArray[s].used_image || usedImage === leftSwipeArray[s].used_image){
                       $scope.categoryImage = $scope.currentCategory.secondary_image;
                       $scope.currentCategory.used_image = $scope.categoryImage;
-                      //console.log("first if");
-
 
                     } else if ($scope.currentCategory.secondary_image === leftSwipeArray[s].used_image){
                       leftSwipeArray.push($scope.currentCategory);
                         $scope.currentCategory = displayObjectArray.shift();
                         $scope.categoryImage = $scope.currentCategory.secondary_image;
                         $scope.currentCategory.used_image = $scope.categoryImage;
-                        //console.log("second if");
-
 
                     } else {
                       $scope.categoryImage = $scope.currentCategory.primary_image;
@@ -162,99 +134,98 @@
                       usedImage = $scope.currentCategory.used_image;
                     }
                   }
-                } else {
-                  produceResult(rightSwipeArray);
                 }
-              };
-
-              $scope.rightSwipeShift = function (displayObjectArray){
-                if (displayObjectArray.length > 0){
-
-                  //get complete $scope.venues info
-                  var curVenue = $scope.currentCategory.venue;
-                  var indexB = getIndexOfObjectWithAttribute($scope.venues, "id", curVenue);
-                  var singleVenue = $scope.venues[indexB];
-                  rightSwipeArray.push(singleVenue);
-                  $scope.currentCategory = displayObjectArray.shift();
-                  console.log(rightSwipeArray, "right");
-                  for (var t = 0; t < rightSwipeArray.length; t++){
-
-                    if ($scope.currentCategory.primary_image === rightSwipeArray[t].used_image || usedImage === rightSwipeArray[t].used_image){
-                      $scope.categoryImage = $scope.currentCategory.secondary_image;
-                      $scope.currentCategory.used_image = $scope.categoryImage;
-                      //console.log("first if");
-
-                    } else if ($scope.currentCategory.secondary_image === rightSwipeArray[t].used_image){
-                        leftSwipeArray.push($scope.currentCategory);
-                        $scope.currentCategory = displayObjectArray.shift();
-                        $scope.categoryImage = $scope.currentCategory.secondary_image;
-                        $scope.currentCategory.used_image = $scope.categoryImage;
-                        //console.log("second if");
-
-                    } else {
-                      $scope.categoryImage = $scope.currentCategory.primary_image;
-                      $scope.currentCategory.used_image = $scope.categoryImage;
-                      usedImage = $scope.currentCategory.used_image;
-                    }
-                  }
-                } else {
-                  produceResult(rightSwipeArray);
-                 }
-              };
-
-              var resultsObject, resultsCategory, num;
-
-              function produceResult (rightSwipeArray){
-
-                num = Math.floor(Math.random() * (rightSwipeArray.length));
-                resultsObject = rightSwipeArray[num];
-
-                console.log(resultsObject);
-                // Send object to Route
-                return $scope.displayVenue(resultsObject);
-              }
-
-            });
-          $scope.displayVenue = function (currentVenue){
-            $state.go('results', {venue: currentVenue});
+            } else {
+              console.log("Nothing in aray");
+            }
           };
-          });
 
-        });
-  };
-})();
+          $scope.rightSwipeShift = function (displayObjectArray){
+            if (displayObjectArray.length > 0){
+              //get complete $scope.venues info
+              var aaa = $scope.currentCategory.venue;
+              var bIndex = getIndexOfObjectWithAttribute($scope.venues, "id", aaa);
+              var ccc = $scope.venues[bIndex];
+              rightSwipeArray.push(ccc);
+              $scope.currentCategory = displayObjectArray.shift();
+              console.log(rightSwipeArray, "right");
+              for (var t = 0; t < rightSwipeArray.length; t++){
 
-function getIndexOfObjectWithAttribute (array, attr, value){
-  for (var m = 0; m < array.length; m++){
-    if (array[m][attr] === value) {
-            return m;
+                if ($scope.currentCategory.primary_image === rightSwipeArray[t].used_image || usedImage === rightSwipeArray[t].used_image){
+                  $scope.categoryImage = $scope.currentCategory.secondary_image;
+                  $scope.currentCategory.used_image = $scope.categoryImage;
+
+                } else if ($scope.currentCategory.secondary_image === rightSwipeArray[t].used_image){
+                    leftSwipeArray.push($scope.currentCategory);
+                    $scope.currentCategory = displayObjectArray.shift();
+                    $scope.categoryImage = $scope.currentCategory.secondary_image;
+                    $scope.currentCategory.used_image = $scope.categoryImage;
+
+                } else {
+                  $scope.categoryImage = $scope.currentCategory.primary_image;
+                  $scope.currentCategory.used_image = $scope.categoryImage;
+                  usedImage = $scope.currentCategory.used_image;
+                }
+              }
+            } else {
+              produceResult(rightSwipeArray);
+             }
+          };
+          var resultsObject, resultsCategory, num;
+
+          function produceResult (rightSwipeArray){
+            num = Math.floor(Math.random() * (rightSwipeArray.length));
+            resultsObject = rightSwipeArray[num];
+
+            googleMaps
+              .then(function(maps) {
+                var directionsService = new maps.DirectionsService();
+                var request = {
+                  origin: position.coords.latitude + "," + position.coords.longitude,
+                  destination: resultsObject.location.coordinate.latitude + "," + resultsObject.location.coordinate.longitude,
+                  travelMode: maps.DirectionsTravelMode.DRIVING
+                };
+
+                calculateAndDisplayRoute(directionsService);
+
+                function calculateAndDisplayRoute(directionsService){
+                  directionsService.route(request, function(response, status){
+                    if (status === maps.DirectionsStatus.OK) {
+                      resultsObject.directions = response;
+                    } else {
+                      $scope.message = "Google route unsuccessful!";
+                    }
+                    $state.go('results', {venue: resultsObject});
+                  });
+                }
+              });
+          }
+        }
+      }
+
+  function getIndexOfObjectWithAttribute (array, attr, value){
+    for (var m = 0; m < array.length; m++){
+      if (array[m][attr] === value) {
+              return m;
+      }
     }
+    return -1;
   }
-  return -1;
-}
 
+  function runShuffle (array){
+    var currentIndex = array.length;
+    var tempValue, randomIndex;
 
-function createMarker (arr, x, y, id, icon) {
-  var marker = {
-    latitude: x,
-    longitude: y,
-    id: id
-  };
-  arr.push(marker);
-}
+    while (0 !== currentIndex) {
 
-function runShuffle (array){
-  var currentIndex = array.length;
-  var tempValue, randomIndex;
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
 
-  while (0 !== currentIndex) {
-
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    tempValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = tempValue;
+      tempValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = tempValue;
+    }
+    return array;
   }
-  return array;
-}
+
+})();
