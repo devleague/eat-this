@@ -35,6 +35,7 @@
         templateUrl: 'templates/default.html'
       })
       .state('fetch', {
+        cache: false,
         url: '/fetch',
         templateUrl: 'templates/fetch.html',
         controller: 'goFetchController'

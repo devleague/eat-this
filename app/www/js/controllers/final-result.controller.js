@@ -6,10 +6,11 @@
         '$stateParams',
         '$state',
         'uiGmapGoogleMapApi',
+        'uiGmapIsReady',
         finalResults
       ]);
 
-  function finalResults ($scope, VenueService, $stateParams, $state, googleMaps) {
+  function finalResults ($scope, VenueService, $stateParams, $state, googleMaps, uiGmapIsReady) {
     if ($stateParams.venue === null){
       $state.go('home');
     }
@@ -31,18 +32,25 @@
         var origin = $stateParams.venue.directions.request.origin;
         convertToIntArr(origin);
 
-        var latlng = new maps.LatLng(origin[0], origin[1]);
-        var map = new maps.Map(document.getElementById('venue_directions'), {
+        $scope.map = {
           zoom: 15,
-          center: latlng,
+          center: {
+            latitude: origin[0],
+            longitude: origin[1]
+          },
           control: {},
           options: {disableDefaultUI: true}
-        });
+        };
 
         var directionsService = new maps.DirectionsService();
         var directionsDisplay = new maps.DirectionsRenderer();
-        directionsDisplay.setMap(map);
-        directionsDisplay.setDirections($stateParams.venue.directions);
+
+        uiGmapIsReady.promise(1)
+          .then(function(map_instances){
+            var map = map_instances[0].map;
+            directionsDisplay.setMap(map);
+            directionsDisplay.setDirections($stateParams.venue.directions);
+          });
       });
     }
 })();

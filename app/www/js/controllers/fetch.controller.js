@@ -43,7 +43,6 @@
           googleMaps
             .then(function(maps) {
               //Create map with user position as center
-              var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
               $scope.map = {
                 zoom: 15,
                 center: {
@@ -56,9 +55,9 @@
 
               uiGmapIsReady.promise(1)
                 .then(function(map_instances){
-                  var map = map_instances[0].map;
                   var directionsService = new maps.DirectionsService();
                   var directionsDisplay = new maps.DirectionsRenderer();
+                  var map = map_instances[0].map;
                   directionsDisplay.setMap(map);
 
                   $scope.currentVenue = venues.shift();
