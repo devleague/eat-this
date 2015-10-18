@@ -8,6 +8,7 @@
       this.getCategories = function () {
 
         var Categories = $resource(BASE_URL + "/api/restaurants");
+        //change to img file
 
         return Categories.query().$promise;
 

@@ -26,6 +26,7 @@
     });
     cuisine = cuisine.join(', ');
     $scope.cuisine = cuisine;
+
     $scope.duration = $stateParams.venue.directions.routes[0].legs[0].duration.text;
     $scope.distance = $stateParams.venue.directions.routes[0].legs[0].distance.text;
 
