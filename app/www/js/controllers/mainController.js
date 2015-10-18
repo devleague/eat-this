@@ -5,21 +5,25 @@
         '$scope',
         '$state',
         '$ionicPopup',
+        'MarkerService',
         'VenueService',
         'Geolocator',
         'uiGmapGoogleMapApi',
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $state, $ionicPopup, VenueService, geolocation, googleMaps) {
-    $scope.place = null;
-    $rootScope.userLocation
-      .then(function(position){
-        loadVenues(position);
-      })
-      .catch(function(error){
-        $rootScope.$emit('openModal');
-      });
+  function mainController ($rootScope, $scope, $state, $ionicPopup, MarkerService, VenueService, geolocation, googleMaps) {
+    if($rootScope.selectedLocation){
+      loadVenues($rootScope.selectedLocation);
+    } else {
+      $rootScope.userLocation
+        .then(function(position){
+          loadVenues(position);
+        })
+        .catch(function(error){
+          $rootScope.$emit('openModal');
+        });
+    }
 
     $scope.openModal = function (){
       $rootScope.$emit('openModal');
@@ -32,21 +36,21 @@
         .then(function(venues){
           if(venues.length !== 0){
             googleMaps
-            .then(function(maps){
-              var geocoder = new maps.Geocoder();
-              var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
-              geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                  if (results[1]) {
-                    $rootScope.userLocation.country = results[results.length - 1].formatted_address;
-                  } else {
-                    window.alert('No results found');
-                  }
-                } else {
-                  window.alert('Geocoder failed due to: ' + status);
-                }
+              .then(function(maps){
+                $scope.map = {
+                  center: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                  },
+                  zoom: 15,
+                  options: {disableDefaultUI: true},
+                  control: {},
+                };
               });
-            });
+            for (var i = 0; i < venues.length; i++){
+              MarkerService.createMarkers(venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i+1);
+            }
+            $scope.venueMarkers = MarkerService.markers;
           } else {
             showAlert();
           }
@@ -66,6 +70,5 @@
         return $rootScope.$emit('openModal');
       });
     }
-
   }
 })();

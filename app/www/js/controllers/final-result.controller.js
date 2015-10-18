@@ -16,12 +16,17 @@
 
     $scope.venue = $stateParams.venue;
 
+    $scope.goTo = function (url) {
+      window.open(url,'_system');
+    };
+
     var cuisine = [];
     $stateParams.venue.categories.forEach(function(category){
       cuisine.push(category[0]);
     });
     cuisine = cuisine.join(', ');
     $scope.cuisine = cuisine;
+
     $scope.duration = $stateParams.venue.directions.routes[0].legs[0].duration.text;
     $scope.distance = $stateParams.venue.directions.routes[0].legs[0].distance.text;
 
@@ -35,7 +40,8 @@
         var map = new maps.Map(document.getElementById('venue_directions'), {
           zoom: 15,
           center: latlng,
-          control: {}
+          control: {},
+          options: {disableDefaultUI: true}
         });
 
         var directionsService = new maps.DirectionsService();
@@ -44,11 +50,12 @@
         directionsDisplay.setDirections($stateParams.venue.directions);
       });
     }
-})();
 
-function convertToIntArr(str){
-  str = str.split(",");
-  for (var i = 0; i < str.length; i++){
-    str[i] = parseInt(str[i]);
+  function convertToIntArr(str){
+    str = str.split(",");
+    for (var i = 0; i < str.length; i++){
+      str[i] = parseInt(str[i]);
+    }
   }
-}
+
+})();

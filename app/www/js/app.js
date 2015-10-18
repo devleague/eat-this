@@ -30,6 +30,7 @@
 
     $stateProvider
       .state('app', {
+        cache: false,
         url: '/',
         templateUrl: 'templates/default.html'
       })
@@ -42,10 +43,6 @@
         url: '/help-me',
         templateUrl: 'templates/help-me.html',
         controller: 'helpMeController'
-      })
-      .state('help-me.list', {
-        templateUrl: 'templates/help-list.html',
-        controller: 'helpMeListController'
       })
       .state('results', {
         url: '/results',

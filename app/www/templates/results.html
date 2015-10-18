@@ -1,7 +1,7 @@
 <ion-view title="{{venue.name}}">
   <ion-content>
     <div class="card">
-      <div class="item item-text-wrap">
+      <div class="item item-text-wrap no-padding">
         <div class="item item-image item-img-box" style="background-image: url({{venue.image_url}});">
         </div>
         <a class="item item-icon-right" href="tel:{{venue.display_phone}}">
@@ -9,15 +9,19 @@
           Call
         </a>
          <a class="item item-icon-right" href="#">
-          <i class="icon ion-beer"></i>
-          {{venue.rating}}
-        </a>
-         <a class="item item-icon-right" href="#">
-          <i class="icon ion-beer"></i>
+          <i class="icon ion-quote"></i>
           {{cuisine}}
         </a>
-        <div id="venue_directions">
-          <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
+         <a class="item item-icon-right" href="#" ng-click="goTo(venue.url)">
+          <i class="icon ion-link"></i>
+          Yelp Link
+        </a>
+        <a class="item item-icon-right" href="#">
+          <i class="icon ion-star"></i>
+          {{venue.rating}}
+        </a>
+        <div id="venue_directions" class="small-map">
+          <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom" options="map.options">
             <ui-gmap-markers models="markers" coords="'self'" fit="true">
             </ui-gmap-markers>
           </ui-gmap-google-map>
