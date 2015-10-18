@@ -7,10 +7,11 @@
         'VenueService',
         '$state',
         'uiGmapGoogleMapApi',
+        'uiGmapIsReady',
         goFetch
       ]);
 
-  function goFetch ($rootScope, $scope, geolocation, VenueService, $state, googleMaps) {
+  function goFetch ($rootScope, $scope, geolocation, VenueService, $state, googleMaps, uiGmapIsReady) {
     var deniedVenues = [];
     $scope.currentVenue;
 
@@ -43,50 +44,58 @@
             .then(function(maps) {
               //Create map with user position as center
               var latlng = new maps.LatLng(position.coords.latitude, position.coords.longitude);
-              var map = new maps.Map(document.getElementById('map_canvas'), {
+              $scope.map = {
                 zoom: 15,
-                center: latlng,
-                control: {}
-              });
-
-              var directionsService = new maps.DirectionsService();
-              var directionsDisplay = new maps.DirectionsRenderer();
-              directionsDisplay.setMap(map);
-
-              $scope.currentVenue = venues.shift();
-
-              var request = {
-                origin: position.coords.latitude + "," + position.coords.longitude,
-                destination: $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude,
-                travelMode: maps.DirectionsTravelMode.DRIVING
+                center: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                  },
+                control: {},
+                options: {disableDefaultUI: true}
               };
 
-              calculateAndDisplayRoute(directionsService, directionsDisplay);
+              uiGmapIsReady.promise(1)
+                .then(function(map_instances){
+                  var map = map_instances[0].map;
+                  var directionsService = new maps.DirectionsService();
+                  var directionsDisplay = new maps.DirectionsRenderer();
+                  directionsDisplay.setMap(map);
 
-              //Swipe left, new venue
-              $scope.getVenue = function(venues){
-                if (venues.length !== 0){
-                  deniedVenues.push($scope.currentVenue);
                   $scope.currentVenue = venues.shift();
-                  request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
-                  //Get directions to new venue
-                  calculateAndDisplayRoute(directionsService, directionsDisplay);
-                } else {
-                  $state.go('help-me');
-                }
-              };
 
-              function calculateAndDisplayRoute(directionsService, directionsDisplay){
-                directionsService.route(request, function(response, status){
-                  if (status === maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                    $scope.currentVenue.directions = response;
-                    $scope.duration = $scope.currentVenue.directions.routes[0].legs[0].duration.text;
-                  } else {
-                    $scope.message = "Google route unsuccessful!";
+                  var request = {
+                    origin: position.coords.latitude + "," + position.coords.longitude,
+                    destination: $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude,
+                    travelMode: maps.DirectionsTravelMode.DRIVING
+                  };
+
+                  calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+                  //Swipe left, new venue
+                  $scope.getVenue = function(venues){
+                    if (venues.length !== 0){
+                      deniedVenues.push($scope.currentVenue);
+                      $scope.currentVenue = venues.shift();
+                      request.destination = $scope.currentVenue.location.coordinate.latitude + "," + $scope.currentVenue.location.coordinate.longitude;
+                      //Get directions to new venue
+                      calculateAndDisplayRoute(directionsService, directionsDisplay);
+                    } else {
+                      $state.go('help-me');
+                    }
+                  };
+
+                  function calculateAndDisplayRoute(directionsService, directionsDisplay){
+                    directionsService.route(request, function(response, status){
+                      if (status === maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                        $scope.currentVenue.directions = response;
+                        $scope.duration = $scope.currentVenue.directions.routes[0].legs[0].duration.text;
+                      } else {
+                        $scope.message = "Google route unsuccessful!";
+                      }
+                    });
                   }
                 });
-              }
           });
         });
     }
