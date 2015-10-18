@@ -28,7 +28,6 @@
         });
     }
 
-
     function loadVenues(position) {
       $scope.position = true;
 
@@ -47,8 +46,7 @@
               var map = new maps.Map(document.getElementById('map_canvas'), {
                 zoom: 15,
                 center: latlng,
-                control: {},
-                options: {disableDefaultUI: true}
+                control: {}
               });
 
               var directionsService = new maps.DirectionsService();
