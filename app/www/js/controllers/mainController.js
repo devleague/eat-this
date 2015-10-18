@@ -5,16 +5,14 @@
         '$scope',
         '$state',
         '$ionicPopup',
+        'MarkerService',
         'VenueService',
         'Geolocator',
         'uiGmapGoogleMapApi',
          mainController
       ]);
 
-  function mainController ($rootScope, $scope, $state, $ionicPopup, VenueService, geolocation, googleMaps) {
-    $scope.place = null;
-    $scope.venueMarkers = [];
-
+  function mainController ($rootScope, $scope, $state, $ionicPopup, MarkerService, VenueService, geolocation, googleMaps) {
     if($rootScope.selectedLocation){
       loadVenues($rootScope.selectedLocation);
     } else {
@@ -33,29 +31,26 @@
 
     function loadVenues(position) {
       $scope.position = true;
-
       VenueService
         .getVenues(position.coords.latitude, position.coords.longitude)
         .then(function(venues){
           if(venues.length !== 0){
             googleMaps
-            .then(function(maps){
-              $scope.map = {
-                center: {
-                  latitude: position.coords.latitude,
-                  longitude: position.coords.longitude
-                },
-                zoom: 15,
-                options: {disableDefaultUI: true},
-                control: {},
-              };
-              var markers=[];
-              for (var i = 0; i < venues.length; i++){
-                createMarker(markers, venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i);
-              }
-              console.log(markers);
-              $scope.venueMarkers = markers;
+              .then(function(maps){
+                $scope.map = {
+                  center: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                  },
+                  zoom: 15,
+                  options: {disableDefaultUI: true},
+                  control: {},
+                };
               });
+            for (var i = 0; i < venues.length; i++){
+              MarkerService.createMarkers(venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i+1);
+            }
+            $scope.venueMarkers = MarkerService.markers;
           } else {
             showAlert();
           }
@@ -75,16 +70,5 @@
         return $rootScope.$emit('openModal');
       });
     }
-
-    function createMarker (arr, x, y, id) {
-      var marker = {
-        latitude: x,
-        longitude: y,
-        id: id,
-        title: "m" + id
-      };
-      arr.push(marker);
-    }
-
   }
 })();
