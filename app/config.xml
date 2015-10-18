@@ -2,10 +2,10 @@
 <widget id="com.ionicframework.app580919" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Eat This</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Find a place to eat right now!
     </description>
   <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+      Eat This by Devleague cohort 5: Julia Bond, Sean Nakamura, Keahi Selhourst, and Kelemete Seto.
     </author>
   <content src="index.html"/>
   <access origin="*"/>
