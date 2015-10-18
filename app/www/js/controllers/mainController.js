@@ -27,15 +27,12 @@
         });
     }
 
-    // $scope.counter = counter;
-
     $scope.openModal = function (){
       $rootScope.$emit('openModal');
     };
 
     function loadVenues(position) {
       $scope.position = true;
-
       VenueService
         .getVenues(position.coords.latitude, position.coords.longitude)
         .then(function(venues){

@@ -14,10 +14,6 @@
 
   function locationModal ($rootScope, $scope, $state, $ionicPopup, $ionicModal, MarkerService, VenueService, googleMaps) {
 
-    $scope.count = function() {
-      $scope.total = counter.incrementCount();
-    };
-
     $scope.submit = function() {
       if($scope.locationModal.setLocation) {
         $rootScope.selectedLocation = {
@@ -42,22 +38,6 @@
         .getVenues(position.coords.latitude, position.coords.longitude)
         .then(function(venues){
           if(venues.length !== 0){
-            googleMaps
-            .then(function(maps){
-              var geocoder = new maps.Geocoder();
-              var latlng = {lat: parseFloat(position.coords.latitude), lng: parseFloat(position.coords.longitude)};
-              geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                  if (results[1]) {
-                    $rootScope.userLocation.country = results[results.length - 1].formatted_address;
-                  } else {
-                    window.alert('No results found');
-                  }
-                } else {
-                  window.alert('Geocoder failed due to: ' + status);
-                }
-              });
-            });
             for (var i = 0; i < venues.length; i++){
               MarkerService.createMarkers(venues[i].location.coordinate.latitude, venues[i].location.coordinate.longitude, i+1);
             }
@@ -95,7 +75,6 @@
       };
 
       $scope.closeModal = function (){
-
         $scope.modal.hide();
       };
 
