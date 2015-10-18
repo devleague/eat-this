@@ -13,8 +13,6 @@
       ]);
 
   function mainController ($rootScope, $scope, $state, $ionicPopup, MarkerService, VenueService, geolocation, googleMaps) {
-    $scope.place = null;
-
     if($rootScope.selectedLocation){
       loadVenues($rootScope.selectedLocation);
     } else {
