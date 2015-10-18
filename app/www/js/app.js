@@ -45,10 +45,6 @@
         templateUrl: 'templates/help-me.html',
         controller: 'helpMeController'
       })
-      .state('help-me.list', {
-        templateUrl: 'templates/help-list.html',
-        controller: 'helpMeListController'
-      })
       .state('results', {
         url: '/results',
         templateUrl: 'templates/results.html',

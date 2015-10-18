@@ -8,6 +8,13 @@ $light: #FFFFFF;
 
 // Media Query Ranges
 
+$iphone4: "only screen and (min-height: 480px)";
+$nexus4: "only screen and (min-height: 567px)";
+$iphone5: "only screen and (min-height: 586px)";
+$iphone6: "only screen and (min-height: 627px)";
+$nexus6: "only screen and (min-height: 659px)";
+$sixPlus: "only screen and (min-height: 736px)";
+
 // Mixins
 
 // Styles
@@ -42,6 +49,7 @@ h1 {
 
 .nav-dark {
   background-color: $dark !important;
+  box-shadow: black 0px 0px 5px;
 }
 
 .orangeify-text {
@@ -76,6 +84,9 @@ h1 {
   font-size: 1.2rem;
   text-align: center;
   font-weight: bold;
+  @media #{$sixPlus}{
+    margin-top: 2em;
+  }
 }
 
 .top-text {
@@ -89,30 +100,9 @@ h1 {
 
 //Front Page
 
-.vertical-flex {
-  flex-direction: column;
-}
-
-.mappy {
-  height: 20em;
-  background-color: skyblue;
-}
-
-.action-area {
-  width: 100%;
-  display: flex;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2em;
-}
-
-.action-area h1, .action p {
+.action p {
   text-align: center;
   color: $orange;
-}
-
-.action p {
   font-family: 'montserrat';
   font-weight: bold;
 
@@ -120,6 +110,9 @@ h1 {
 
 .action {
   width: 12em;
+  @media #{$sixPlus}{
+    width: 15em;
+  }
   background-color: transparent;
   border-color: transparent;
 }
@@ -131,8 +124,26 @@ h1 {
   position: relative;
 }
 
-.front-map, .front-map .angular-google-map-container {
+#map_canvas, .front-map, .front-map .angular-google-map-container {
   height: 22em;
+  @media #{$iphone4}{
+    height: 12em;
+  }
+  @media #{$iphone5}{
+    height: 18em;
+  }
+  @media  #{$nexus4}{
+    height: 18em;
+  }
+  @media #{$iphone6}{
+    height: 22em;
+  }
+  @media #{$nexus6}{
+    height: 24em;
+  }
+  @media #{$sixPlus}{
+    height: 26em;
+  }
 }
 
 .small-map, .small-map .angular-google-map-container {
@@ -175,6 +186,8 @@ h1 {
   background-size: cover;
   background-position: center;
 }
+
+//Help Me
 
 //Results
 

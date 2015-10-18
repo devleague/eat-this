@@ -17,6 +17,10 @@
 
     $scope.venue = $stateParams.venue;
 
+    $scope.goTo = function (url) {
+      window.open(url,'_system');
+    };
+
     var cuisine = [];
     $stateParams.venue.categories.forEach(function(category){
       cuisine.push(category[0]);
@@ -53,11 +57,12 @@
           });
       });
     }
-})();
 
-function convertToIntArr(str){
-  str = str.split(",");
-  for (var i = 0; i < str.length; i++){
-    str[i] = parseInt(str[i]);
+  function convertToIntArr(str){
+    str = str.split(",");
+    for (var i = 0; i < str.length; i++){
+      str[i] = parseInt(str[i]);
+    }
   }
-}
+
+})();
